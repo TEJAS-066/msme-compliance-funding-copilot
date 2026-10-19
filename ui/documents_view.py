@@ -33,9 +33,9 @@ def render() -> None:
 
     samples = sorted(f for f in os.listdir(SAMPLES) if f.startswith("sample_")) if os.path.isdir(SAMPLES) else []
     if samples:
-        c1, c2 = st.columns([3, 1])
+        c1, c2 = st.columns([3, 1], vertical_alignment="bottom")
         pick = c1.selectbox(t("docs_samples", l), samples, key="sample_pick")
-        if c2.button(t("btn_process_sample", l), key="btn_sample"):
+        if c2.button(t("btn_process_sample", l), key="btn_sample", type="primary", use_container_width=True):
             with open(os.path.join(SAMPLES, pick), "rb") as f:
                 _process(f.read(), pick)
 
@@ -58,7 +58,7 @@ def render() -> None:
             if fields and d["confirmation"] == "pending":
                 decisions = []
                 for i, f in enumerate(fields):
-                    cA, cB, cC = st.columns([3, 3, 2])
+                    cA, cB, cC = st.columns([3, 3, 2], vertical_alignment="center")
                     cA.markdown(f"**{field_label(f['field'], l)}**: `{f['proposed']}`  \n{t('q_' + f['match_quality'], l)}")
                     cur = f["current"]
                     cB.markdown(f"{t('fnd_' + f['kind'], l)}" + (f"  \n→ `{cur}`" if cur and f["kind"] == "mismatch" else ""))
