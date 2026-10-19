@@ -1,0 +1,199 @@
+{
+  "catalogue_version": "0.1.0",
+  "catalogue_note": "Starter catalogue. Facts were checked on 2026-10-18 against the sources listed. 'tier' = official | secondary. Anything with review_status != verified_official MUST be re-verified by the team's Scheme-Data owner before the final demo.",
+  "sources": {
+    "pib_pmmy_2024": {
+      "title": "PIB factsheet - Pradhan Mantri MUDRA Yojana (Oct 2024)",
+      "publisher": "Press Information Bureau, Govt of India",
+      "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/oct/doc20241029426401.pdf",
+      "tier": "official",
+      "accessed": "2026-10-18",
+      "supports": "Four MUDRA loan categories (Shishu, Kishore, Tarun, Tarun Plus); loan limit expanded to Rs 20 lakh; collateral-free loans; sample loan application forms available in the MUDRA Mitra app."
+    },
+    "mudra_site": {
+      "title": "MUDRA official website",
+      "publisher": "MUDRA Ltd",
+      "url": "https://www.mudra.org.in/",
+      "tier": "official",
+      "accessed": "2026-10-18",
+      "supports": "Referenced by the PIB factsheet as the official source. Team must read it directly and confirm eligibility/documents."
+    },
+    "bs_mudra_2024": {
+      "title": "Business Standard - Centre doubles Mudra loan ceiling to Rs 20 lakh (25 Oct 2024)",
+      "publisher": "Business Standard (news)",
+      "url": "https://www.business-standard.com/amp/economy/news/centre-doubles-loan-limit-under-pradhan-mantri-mudra-yojana-to-rs-20-lakh-124102501146_1.html",
+      "tier": "secondary",
+      "accessed": "2026-10-18",
+      "supports": "Tarun Plus (above Rs 10 lakh up to Rs 20 lakh) is for entrepreneurs who previously availed and repaid a Tarun loan; scheme targets non-corporate, non-farm micro and small entrepreneurs."
+    },
+    "dcmsme_cgs": {
+      "title": "Credit Guarantee Scheme for Micro & Small Enterprises - DC-MSME",
+      "publisher": "Office of DC (MSME), Ministry of MSME",
+      "url": "https://dcmsme.gov.in/CLCS_TUS_Scheme/Credit_Guarantee_Scheme/Scheme_Guidelines.aspx",
+      "tier": "official",
+      "accessed": "2026-10-18",
+      "supports": "CGTMSE implements the credit guarantee scheme for micro and small enterprises via lending institutions, without collateral or third-party guarantee; from 01.04.2025 guarantees credit support up to Rs 10 crore; lists a circular raising guarantee extent for women-led enterprises from 85% to 90%."
+    },
+    "cgtmse_site": {
+      "title": "CGTMSE official website",
+      "publisher": "CGTMSE (Ministry of MSME + SIDBI)",
+      "url": "https://cgtmse.in",
+      "tier": "official",
+      "accessed": "2026-10-18",
+      "supports": "Referenced by the DC-MSME page as the place for detailed guidelines and circulars. Team must read it directly."
+    },
+    "paisabazaar_cgtmse": {
+      "title": "Paisabazaar - CGTMSE scheme highlights",
+      "publisher": "Paisabazaar (private finance portal)",
+      "url": "https://www.paisabazaar.com/business-loan/cgtmse-scheme",
+      "tier": "secondary",
+      "accessed": "2026-10-18",
+      "supports": "States that educational institutions, agriculture, training institutions and self-help groups are not eligible; the lending bank applies for the guarantee after sanction. Secondary source - confirm in official guidelines."
+    },
+    "msme_class_notification": {
+      "title": "Revised MSME classification effective 1 April 2025 (Notification S.O. 1364(E), 21 March 2025)",
+      "publisher": "News on AIR (All India Radio) report; notification number per law-firm summary",
+      "url": "https://newsonair.gov.in/govt-notifies-revised-criteria-for-classifying-msmes",
+      "tier": "secondary",
+      "accessed": "2026-10-18",
+      "supports": "Micro: investment up to Rs 2.5 crore AND turnover up to Rs 10 crore; Small: up to Rs 25 crore AND Rs 100 crore; Medium: up to Rs 125 crore AND Rs 500 crore. Team should attach the official gazette PDF."
+    }
+  },
+
+  "classification": {
+    "id": "msme_class_2025",
+    "effective_from": "2025-04-01",
+    "source_ids": ["msme_class_notification"],
+    "review_status": "needs_primary_gazette",
+    "limits_inr": {
+      "micro":  {"investment": 25000000,   "turnover": 100000000},
+      "small":  {"investment": 250000000,  "turnover": 1000000000},
+      "medium": {"investment": 1250000000, "turnover": 5000000000}
+    }
+  },
+
+  "schemes": [
+    {
+      "id": "pmmy_mudra",
+      "name": {"en": "Pradhan Mantri MUDRA Yojana (PMMY)", "ta": "பிரதம மந்திரி முத்ரா யோஜனா (PMMY)"},
+      "category": "loan",
+      "description": {
+        "en": "Collateral-free micro-credit for non-farm small businesses, offered through banks and other lenders in four categories by loan size.",
+        "ta": "வங்கிகள் மற்றும் பிற கடன் நிறுவனங்கள் மூலம் விவசாயம் அல்லாத சிறு தொழில்களுக்கு வழங்கப்படும் பிணையற்ற சிறுகடன்; கடன் அளவின்படி நான்கு பிரிவுகள்."
+      },
+      "keywords": ["mudra", "pmmy", "shishu", "kishor", "kishore", "tarun", "முத்ரா", "loan", "கடன்"],
+      "last_verified": "2026-10-18",
+      "data_version": "0.1.0",
+      "review_status": "partly_verified_official",
+      "source_ids": ["pib_pmmy_2024", "bs_mudra_2024", "mudra_site"],
+      "benefits": [
+        {"text": {"en": "Loan categories: Shishu (up to Rs 50,000), Kishor (Rs 50,001 to 5 lakh), Tarun (Rs 5 to 10 lakh), Tarun Plus (Rs 10 to 20 lakh).",
+                  "ta": "கடன் பிரிவுகள்: ஷிஷு (₹50,000 வரை), கிஷோர் (₹50,001 முதல் 5 லட்சம்), தருண் (₹5 முதல் 10 லட்சம்), தருண் பிளஸ் (₹10 முதல் 20 லட்சம்)."},
+         "source_ids": ["pib_pmmy_2024", "bs_mudra_2024"]},
+        {"text": {"en": "Loans under PMMY are described as collateral-free.",
+                  "ta": "PMMY கடன்கள் பிணையற்றவை (collateral-free) என்று விவரிக்கப்படுகின்றன."},
+         "source_ids": ["pib_pmmy_2024"]}
+      ],
+      "criteria": [
+        {"id": "nonfarm", "required": true,
+         "label": {"en": "Business is a non-farm activity", "ta": "தொழில் விவசாயம் அல்லாத செயல்பாடு"},
+         "field": "activity", "op": "not_in", "value": ["agriculture"],
+         "source_ids": ["bs_mudra_2024"]},
+        {"id": "noncorporate", "required": true,
+         "label": {"en": "Non-corporate business (not a registered company)", "ta": "நிறுவனம் அல்லாத (company அல்லாத) தொழில்"},
+         "field": "entity_type", "op": "not_in", "value": ["private_limited", "public_limited"],
+         "source_ids": ["bs_mudra_2024"],
+         "note": "Secondary source only. Confirm with MUDRA FAQ whether companies are excluded."},
+        {"id": "loan_cap", "required": true,
+         "label": {"en": "Loan needed is within the Rs 20 lakh PMMY ceiling", "ta": "தேவையான கடன் ₹20 லட்சம் உச்ச வரம்புக்குள்"},
+         "field": "loan_needed_inr", "op": "lte", "value": 2000000,
+         "source_ids": ["pib_pmmy_2024"]},
+        {"id": "tarun_plus_history", "required": true,
+         "label": {"en": "For loans above Rs 10 lakh: a previous Tarun loan was repaid", "ta": "₹10 லட்சத்துக்கு மேல் கடனுக்கு: முந்தைய தருண் கடன் திருப்பிச் செலுத்தப்பட்டிருக்க வேண்டும்"},
+         "field": "previous_tarun_repaid", "op": "eq", "value": "yes",
+         "applies_if": {"field": "loan_needed_inr", "op": "gt", "value": 1000000},
+         "source_ids": ["bs_mudra_2024", "pib_pmmy_2024"]}
+      ],
+      "documents": [
+        {"id": "lender_form", "doc_type": "lender_application_form", "verified": true,
+         "name": {"en": "Loan application form (from your bank / lender)", "ta": "கடன் விண்ணப்பப் படிவம் (உங்கள் வங்கி / கடன் நிறுவனத்திடமிருந்து)"},
+         "why": {"en": "PIB notes that sample loan application forms are available in the MUDRA Mitra app.", "ta": "மாதிரி கடன் விண்ணப்பப் படிவங்கள் MUDRA Mitra செயலியில் உள்ளன என PIB குறிப்பிடுகிறது."},
+         "source_ids": ["pib_pmmy_2024"]},
+        {"id": "udyam_cert", "doc_type": "udyam_certificate", "verified": false,
+         "name": {"en": "Udyam Registration certificate", "ta": "உத்யம் பதிவுச் சான்றிதழ்"},
+         "why": {"en": "Commonly requested by lenders. NOT confirmed from a scheme source - ask your bank.", "ta": "கடன் நிறுவனங்கள் பொதுவாகக் கேட்கும். திட்ட ஆதாரத்தில் உறுதி செய்யப்படவில்லை - உங்கள் வங்கியிடம் கேளுங்கள்."},
+         "source_ids": []},
+        {"id": "gst_cert", "doc_type": "gst_certificate", "verified": false,
+         "applies_if": {"field": "gst_status", "op": "eq", "value": "registered"},
+         "name": {"en": "GST registration certificate (if GST-registered)", "ta": "GST பதிவுச் சான்றிதழ் (GST பதிவு இருந்தால்)"},
+         "why": {"en": "Commonly requested by lenders. NOT confirmed from a scheme source - ask your bank.", "ta": "கடன் நிறுவனங்கள் பொதுவாகக் கேட்கும். திட்ட ஆதாரத்தில் உறுதி செய்யப்படவில்லை."},
+         "source_ids": []}
+      ],
+      "unresolved": [
+        "Which exact KYC / business documents each bank asks for is lender-specific and not stated in the sources used.",
+        "PIB factsheet mentions a 2% interest subvention for prompt repayment of Shishu loans for a limited period - current status not verified.",
+        "Whether companies (private limited) are excluded is stated only in a secondary source."
+      ]
+    },
+
+    {
+      "id": "cgtmse",
+      "name": {"en": "Credit Guarantee Scheme for Micro & Small Enterprises (CGTMSE)", "ta": "நுண் மற்றும் சிறு தொழில்களுக்கான கடன் உத்தரவாதத் திட்டம் (CGTMSE)"},
+      "category": "credit_guarantee",
+      "description": {
+        "en": "A guarantee given to banks and other lenders so they can lend to eligible micro and small enterprises without collateral or a third-party guarantee. The lender applies for the cover - not the business owner.",
+        "ta": "தகுதியுள்ள நுண் மற்றும் சிறு தொழில்களுக்கு பிணை அல்லது மூன்றாம் தரப்பு உத்தரவாதம் இல்லாமல் கடன் வழங்க வங்கிகளுக்கு அளிக்கப்படும் உத்தரவாதம். காப்பீட்டுக்கு விண்ணப்பிப்பது கடன் நிறுவனம்; தொழில் உரிமையாளர் அல்ல."
+      },
+      "keywords": ["cgtmse", "credit guarantee", "collateral", "guarantee", "உத்தரவாதம்", "பிணை"],
+      "last_verified": "2026-10-18",
+      "data_version": "0.1.0",
+      "review_status": "partly_verified_official",
+      "source_ids": ["dcmsme_cgs", "cgtmse_site", "paisabazaar_cgtmse"],
+      "benefits": [
+        {"text": {"en": "From 01.04.2025 the scheme facilitates credit guarantees for credit support up to Rs 10 crore to micro and small enterprises, extended by member lending institutions.",
+                  "ta": "01.04.2025 முதல், உறுப்பினர் கடன் நிறுவனங்கள் வழங்கும் ₹10 கோடி வரையிலான கடனுக்கு நுண்/சிறு தொழில்களுக்கு கடன் உத்தரவாதம் வழங்கப்படுகிறது."},
+         "source_ids": ["dcmsme_cgs"]},
+        {"text": {"en": "A circular listed on the DC-MSME page raises the extent of guarantee coverage for women-led enterprises from 85% to 90% - read the circular for conditions.",
+                  "ta": "DC-MSME பக்கத்தில் உள்ள ஒரு சுற்றறிக்கை, பெண்கள் தலைமையிலான தொழில்களுக்கான உத்தரவாத அளவை 85% இலிருந்து 90% ஆக உயர்த்துகிறது - நிபந்தனைகளுக்கு சுற்றறிக்கையைப் படிக்கவும்."},
+         "source_ids": ["dcmsme_cgs"]}
+      ],
+      "criteria": [
+        {"id": "size_mse", "required": true,
+         "label": {"en": "Enterprise is Micro or Small (not Medium)", "ta": "தொழில் நுண் அல்லது சிறு பிரிவு (நடுத்தரம் அல்ல)"},
+         "field": "enterprise_class", "op": "in", "value": ["micro", "small"],
+         "source_ids": ["dcmsme_cgs"]},
+        {"id": "not_agri", "required": true,
+         "label": {"en": "Activity is not agriculture", "ta": "செயல்பாடு விவசாயம் அல்ல"},
+         "field": "activity", "op": "not_in", "value": ["agriculture"],
+         "source_ids": ["paisabazaar_cgtmse"],
+         "note": "Secondary source. Sources disagree on trading/education activities - confirm with CGTMSE guidelines."},
+        {"id": "not_excluded_entity", "required": true,
+         "label": {"en": "Not a self-help group / educational or training institution", "ta": "சுய உதவிக் குழு / கல்வி, பயிற்சி நிறுவனம் அல்ல"},
+         "field": "entity_type", "op": "not_in", "value": ["shg", "educational_institution"],
+         "source_ids": ["paisabazaar_cgtmse"]},
+        {"id": "amount_cap", "required": true,
+         "label": {"en": "Credit needed is within Rs 10 crore", "ta": "தேவையான கடன் ₹10 கோடிக்குள்"},
+         "field": "loan_needed_inr", "op": "lte", "value": 100000000,
+         "source_ids": ["dcmsme_cgs"]}
+      ],
+      "documents": [
+        {"id": "udyam_cert", "doc_type": "udyam_certificate", "verified": false,
+         "name": {"en": "Udyam Registration certificate", "ta": "உத்யம் பதிவுச் சான்றிதழ்"},
+         "why": {"en": "Lenders commonly use it to confirm Micro/Small status. NOT confirmed from the scheme source - ask your bank.", "ta": "நுண்/சிறு நிலையை உறுதி செய்ய கடன் நிறுவனங்கள் பயன்படுத்துகின்றன. திட்ட ஆதாரத்தில் உறுதி செய்யப்படவில்லை."},
+         "source_ids": []}
+      ],
+      "unresolved": [
+        "Exact documents are collected by the lending institution; the sources used do not list them.",
+        "Sources conflict on whether trading and education activities are covered - needs the official guideline PDF.",
+        "Guarantee fees and exact guarantee percentages by category were not verified in this starter catalogue."
+      ]
+    }
+  ],
+
+  "unverified_backlog": [
+    {"id": "pmegp", "name": {"en": "PMEGP (Prime Minister's Employment Generation Programme)", "ta": "PMEGP"}, "review_status": "unverified", "note": "Not evaluated. Team must verify from the official portal before adding facts."},
+    {"id": "tn_needs", "name": {"en": "Tamil Nadu NEEDS (New Entrepreneur-cum-Enterprise Development Scheme)", "ta": "தமிழ்நாடு NEEDS"}, "review_status": "unverified", "note": "Not evaluated. Verify on the TN MSME department site."},
+    {"id": "tn_uyegp", "name": {"en": "Tamil Nadu UYEGP", "ta": "தமிழ்நாடு UYEGP"}, "review_status": "unverified", "note": "Not evaluated. Verify on the TN MSME department site."},
+    {"id": "clcss", "name": {"en": "Credit Linked Capital Subsidy (CLCSS)", "ta": "CLCSS"}, "review_status": "unverified", "note": "Not evaluated. Verify current status - may have changed."}
+  ]
+}

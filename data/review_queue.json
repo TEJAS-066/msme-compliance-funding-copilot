@@ -1,0 +1,14 @@
+{
+  "_label": "DEMO / SYNTHETIC curated update queue. Not a live feed from any government portal.",
+  "items": [
+    {
+      "id": "upd-demo-001",
+      "kind": "DEMO_SYNTHETIC",
+      "title": "DEMO: Hypothetical change to a scheme limit (synthetic example)",
+      "scheme_id": "cgtmse",
+      "detail": "Synthetic example to demonstrate the admin-verifies-before-notify workflow. It does not describe a real government announcement.",
+      "source_url": null,
+      "status": "pending"
+    }
+  ]
+}
