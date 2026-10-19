@@ -2,12 +2,12 @@ import streamlit as st
 
 from core import profile as P
 from core.i18n import option_label, t
-from ui.common import get_profile, lang, save_profile
+from ui.common import get_profile, lang, render_page_header, save_profile
 
 
 def render() -> None:
     l = lang()
-    st.header(t("nav_profile", l))
+    render_page_header("nav_profile", "pinfo_profile")
     st.caption(t("prof_help", l))
     p = get_profile()
     if p.get("is_demo"):

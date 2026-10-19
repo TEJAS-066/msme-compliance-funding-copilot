@@ -9,12 +9,12 @@ from core.i18n import t
 from services import notifications as N
 from services.whatsapp import handle_message
 from ui import voice
-from ui.common import get_profile, lang
+from ui.common import get_profile, lang, render_page_header
 
 
 def render() -> None:
     l = lang()
-    st.header(t("nav_channel", l))
+    render_page_header("nav_channel", "pinfo_channel")
 
     # ---- 1. honest connection status + real send attempt
     st.subheader(t("ch_status_head", l))

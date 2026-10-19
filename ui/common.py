@@ -25,73 +25,161 @@ def save_profile(p: dict) -> None:
     db.save_profile(p)
 
 
-def apply_custom_styles() -> None:
-    """Inject clean, human-crafted GovTech & Fintech portal styling (dedented to prevent code blocks)."""
-    css = textwrap.dedent("""
+def apply_custom_styles(theme: str | None = None) -> None:
+    """Inject clean, human-crafted GovTech & Fintech portal styling with Light / Dark theme support."""
+    theme = theme or st.session_state.get("theme", "light")
+    is_dark = "dark" in str(theme).lower() or "🌙" in str(theme)
+
+    if is_dark:
+        bg_main = "#0B1120"
+        card_bg = "#1E293B"
+        border_col = "#334155"
+        text_primary = "#F8FAFC"
+        text_secondary = "#94A3B8"
+        metric_bg = "#1E293B"
+    else:
+        bg_main = "#F8FAFC"
+        card_bg = "#FFFFFF"
+        border_col = "#E2E8F0"
+        text_primary = "#0F172A"
+        text_secondary = "#475569"
+        metric_bg = "#FFFFFF"
+
+    css = textwrap.dedent(f"""
     <style>
+    /* Theme root styling */
+    .stApp {{
+        background-color: {bg_main} !important;
+        color: {text_primary} !important;
+    }}
+
     /* Base typography & layout padding */
-    .main .block-container {
+    .main .block-container {{
         padding-top: 1.5rem;
         padding-bottom: 2.5rem;
         max-width: 1140px;
-    }
+    }}
     
     /* Metrics styling */
-    div[data-testid="stMetric"] {
-        background-color: #FFFFFF;
-        border: 1px solid #E2E8F0;
+    div[data-testid="stMetric"] {{
+        background-color: {metric_bg} !important;
+        border: 1px solid {border_col} !important;
         border-radius: 8px;
         padding: 12px 16px;
         box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-    }
-    div[data-testid="stMetricValue"] {
+    }}
+    div[data-testid="stMetricValue"] {{
         font-weight: 700;
-        color: #0F172A;
-    }
-    div[data-testid="stMetricLabel"] {
+        color: {text_primary} !important;
+    }}
+    div[data-testid="stMetricLabel"] {{
         font-weight: 500;
-        color: #475569;
-    }
+        color: {text_secondary} !important;
+    }}
+
+    /* Container card styling */
+    div[data-testid="stVerticalBlockBorderWrapper"] > div {{
+        background-color: {card_bg} !important;
+        border-color: {border_col} !important;
+    }}
 
     /* Clean buttons */
-    button[kind="primary"] {
+    button[kind="primary"] {{
         background-color: #0B6E4F !important;
         border-color: #0B6E4F !important;
         font-weight: 600;
-    }
-    button[kind="primary"]:hover {
+    }}
+    button[kind="primary"]:hover {{
         background-color: #085039 !important;
         border-color: #085039 !important;
-    }
+    }}
 
     /* Mobile Responsive Optimizations (< 768px) */
-    @media (max-width: 768px) {
-        .main .block-container {
+    @media (max-width: 768px) {{
+        .main .block-container {{
             padding-top: 1rem !important;
             padding-left: 0.75rem !important;
             padding-right: 0.75rem !important;
             padding-bottom: 2rem !important;
-        }
-        div[data-testid="stHorizontalBlock"] {
+        }}
+        div[data-testid="stHorizontalBlock"] {{
             flex-wrap: wrap !important;
             gap: 0.6rem !important;
-        }
-        div[data-testid="column"] {
+        }}
+        div[data-testid="column"] {{
             min-width: 100% !important;
             flex: 1 1 100% !important;
-        }
-        div[data-testid="stMetric"] {
+        }}
+        div[data-testid="stMetric"] {{
             margin-bottom: 0.5rem;
             width: 100% !important;
-        }
-        div[data-testid="stButton"] > button {
+        }}
+        div[data-testid="stButton"] > button {{
             width: 100% !important;
             margin-bottom: 0.4rem;
-        }
-    }
+        }}
+    }}
     </style>
     """).strip()
     st.html(css)
+
+
+def render_page_header(title_key: str, info_key: str) -> None:
+    """Standardized page header with title and interactive Page Guide popover."""
+    l = lang()
+    c_title, c_info = st.columns([5, 1], vertical_alignment="center")
+    c_title.header(t(title_key, l))
+    with c_info:
+        with st.popover("ℹ️ " + t("btn_page_info", l), use_container_width=True):
+            st.markdown(f"#### ℹ️ {t(title_key, l)}")
+            st.info(t(info_key, l))
+            st.caption("GovTech AI • " + t("btn_page_info", l))
+
+
+@st.dialog("🏛️ MSME Copilot — Quick Guided Tour")
+def show_onboarding_tour() -> None:
+    """Interactive multi-step onboarding tour dialog for new vendors and judges."""
+    l = lang()
+    step = st.session_state.get("tour_step", 1)
+
+    if step == 1:
+        st.markdown(f"#### 🏛️ {t('tour_step_1_title', l)}")
+        st.write(t("tour_step_1_desc", l))
+        st.info("💡 **Rules decide • AI explains • The owner acts**")
+    elif step == 2:
+        st.markdown(f"#### 🧭 {t('tour_step_2_title', l)}")
+        st.write(t("tour_step_2_desc", l))
+        st.caption("1. Understand ➔ 2. Profile ➔ 3. Match ➔ 4. Prepare ➔ 5. Track")
+    elif step == 3:
+        st.markdown(f"#### 📑 {t('tour_step_3_title', l)}")
+        st.write(t("tour_step_3_desc", l))
+        st.caption("Udyam • GSTIN Luhn Mod-36 • Anti-Hallucination Triad")
+    elif step == 4:
+        st.markdown(f"#### 📄 {t('tour_step_4_title', l)}")
+        st.write(t("tour_step_4_desc", l))
+        st.success("📄 ReportLab PDF Bank Dossier • 📱 Multilingual WhatsApp Simulator")
+
+    st.write("---")
+    c_prev, c_ind, c_next = st.columns([1.2, 1.6, 1.2], vertical_alignment="center")
+    if step > 1:
+        if c_prev.button(t("tour_btn_prev", l), key=f"t_prev_{step}", use_container_width=True):
+            st.session_state["tour_step"] = step - 1
+            st.rerun()
+    else:
+        c_prev.write("")
+
+    c_ind.markdown(f"<div style='text-align: center; font-weight: 600; color: #64748B;'>Step {step} of 4</div>", unsafe_allow_html=True)
+
+    if step < 4:
+        if c_next.button(t("tour_btn_next", l), key=f"t_next_{step}", type="primary", use_container_width=True):
+            st.session_state["tour_step"] = step + 1
+            st.rerun()
+    else:
+        if c_next.button(t("tour_btn_close", l), key="t_close", type="primary", use_container_width=True):
+            st.session_state["tour_open"] = False
+            st.session_state["tour_step"] = 1
+            st.rerun()
+
 
 
 def banner() -> None:

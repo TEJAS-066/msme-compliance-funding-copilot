@@ -5,7 +5,7 @@ import streamlit as st
 from core import db, documents as D
 from core import profile as P
 from core.i18n import field_label, option_label, t
-from ui.common import get_profile, lang, save_profile
+from ui.common import get_profile, lang, render_page_header, save_profile
 
 SAMPLES = os.path.join(os.path.dirname(os.path.dirname(__file__)), "samples")
 
@@ -22,7 +22,7 @@ def _process(data: bytes, name: str) -> None:
 
 def render() -> None:
     l = lang()
-    st.header(t("nav_documents", l))
+    render_page_header("nav_documents", "pinfo_documents")
     st.caption(t("docs_help", l))
     p = get_profile()
 

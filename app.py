@@ -5,11 +5,9 @@ from core.i18n import t
 from ui import (admin_view, channel_view, chat_view, checklist_view, dashboard,
                 documents_view, forms_view, profile_view, schemes_view,
                 tasks_view)
-from ui.common import apply_custom_styles, get_profile
+from ui.common import apply_custom_styles, get_profile, show_onboarding_tour
 
 st.set_page_config(page_title="MSME Copilot — TEJAS066", page_icon="🏛️", layout="wide")
-
-apply_custom_styles()
 
 PAGES = [
     ("nav_dashboard", dashboard.render),
@@ -34,6 +32,15 @@ with st.sidebar:
     st.session_state["lang"] = LANG_MAP.get(choice, "en")
     lang = st.session_state["lang"]
 
+    theme_choice = st.radio(t("theme_mode", lang), [t("theme_light", lang), t("theme_dark", lang)], horizontal=True, key="theme_toggle")
+    st.session_state["theme"] = "dark" if t("theme_dark", lang) in theme_choice else "light"
+    apply_custom_styles(st.session_state["theme"])
+
+    if st.button(t("btn_quick_tour", lang), use_container_width=True):
+        st.session_state["tour_open"] = True
+        st.session_state["tour_step"] = 1
+        st.rerun()
+
     st.write("")
     st.caption("NAVIGATION / வழிகாட்டி")
     page_key = st.radio("Navigate", [k for k, _ in PAGES], key="nav", format_func=lambda k: t(k, lang), label_visibility="collapsed")
@@ -43,5 +50,8 @@ with st.sidebar:
     if p.get("is_demo"):
         st.success("Demo: Lakshmi (Tiruppur)")
     st.caption("Rules decide • AI explains • Owner acts")
+
+if st.session_state.get("tour_open"):
+    show_onboarding_tour()
 
 dict(PAGES)[page_key]()

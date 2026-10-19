@@ -10,7 +10,7 @@ from core.i18n import t
 from services import monitoring
 from services.alerts import build_alerts, whatsapp_preview
 from ui.common import (banner, completeness, get_profile,
-                       lang, nba_text, render_agent_inspector, render_stepper,
+                       lang, nba_text, render_agent_inspector, render_page_header, render_stepper,
                        save_profile)
 
 
@@ -19,7 +19,7 @@ def render() -> None:
 
     # Executive Header
     st.caption("TEJAS-066 • Temenos CSR & SASTRA • SDG 9.3: Inclusive Industrial Growth")
-    st.title(f"🏛️ {t('app_title', l)}")
+    render_page_header("app_title", "pinfo_dashboard")
     st.markdown(f"*{t('tagline', l)}*")
 
     banner()

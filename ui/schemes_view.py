@@ -5,7 +5,7 @@ from core import insights
 from core import profile as P
 from core.catalogue import L, get_catalogue, get_scheme, get_source, list_schemes, unverified_backlog
 from core.i18n import field_label, option_label, t
-from ui.common import get_profile, lang
+from ui.common import get_profile, lang, render_page_header
 
 ICON = {E.PASS: "✅", E.FAIL: "❌", E.UNKNOWN: "❓", E.NA: "➖"}
 
@@ -18,7 +18,7 @@ def _val(fld, v, l="en"):
 def render() -> None:
     l = lang()
     cat = get_catalogue()
-    st.header(t("nav_schemes", l))
+    render_page_header("nav_schemes", "pinfo_schemes")
     p = get_profile()
     results = E.evaluate_all(p, cat)
     schemes = list_schemes(cat)

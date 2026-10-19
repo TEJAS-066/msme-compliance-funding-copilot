@@ -4,13 +4,13 @@ from core import db
 from core.catalogue import L, get_catalogue, get_scheme, list_schemes
 from core.checklist import build_checklist, summarize
 from core.i18n import t
-from ui.common import get_profile, lang
+from ui.common import get_profile, lang, render_page_header
 
 
 def render() -> None:
     l = lang()
     cat = get_catalogue()
-    st.header(t("nav_checklist", l))
+    render_page_header("nav_checklist", "pinfo_checklist")
     ids = [s["id"] for s in list_schemes(cat)]
     sid = st.selectbox(t("sch_pick", l), ids, key="chk_pick", format_func=lambda i: L(get_scheme(i, cat)["name"], l))
     items = build_checklist(sid, get_profile(), db.confirmed_doc_types(), db.pending_doc_types(), cat)

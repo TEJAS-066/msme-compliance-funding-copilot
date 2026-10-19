@@ -10,14 +10,13 @@ from core import profile as P
 from core.catalogue import L, get_catalogue, get_scheme, list_schemes
 from core.i18n import t
 from services.report import generate_pdf_dossier, readiness_report
-from ui.common import get_profile, lang
-
+from ui.common import get_profile, lang, render_page_header
 
 
 def render() -> None:
     l = lang()
     cat = get_catalogue()
-    st.header(t("nav_forms", l))
+    render_page_header("nav_forms", "pinfo_forms")
     st.info(t("frm_intro", l))
 
     ids = [s["id"] for s in list_schemes(cat)]

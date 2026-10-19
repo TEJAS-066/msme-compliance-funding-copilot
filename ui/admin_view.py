@@ -7,12 +7,12 @@ import streamlit as st
 from core.catalogue import L, get_scheme
 from core.i18n import t
 from services import monitoring as M
-from ui.common import lang
+from ui.common import lang, render_page_header
 
 
 def render() -> None:
     l = lang()
-    st.header(t("nav_admin", l))
+    render_page_header("nav_admin", "pinfo_admin")
     st.caption("GovTech AI Architecture Telemetry • Team TEJAS066")
 
     # ---- 1. Hackathon Jury Evaluation Benchmarks (Promised vs Actual)

@@ -4,12 +4,12 @@ from core import db
 from core.i18n import t
 from services.copilot import answer
 from ui import voice
-from ui.common import banner, get_profile, lang
+from ui.common import banner, get_profile, lang, render_page_header
 
 
 def render() -> None:
     l = lang()
-    st.header(t("nav_copilot", l))
+    render_page_header("nav_copilot", "pinfo_copilot")
     banner()
     st.caption(t("chat_examples", l))
     with st.expander(t("v_head", l)):
