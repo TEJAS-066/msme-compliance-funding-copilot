@@ -15,7 +15,7 @@ def mk(demo, tasks=(), docs=(), updates=(), lang="en", confirmed=frozenset()):
 
 def test_demo_gets_scheme_and_missing_doc_alerts(demo):
     kinds = [a.kind for a in mk(demo)]
-    assert kinds.count("scheme_match") == 2 and "missing_docs" in kinds
+    assert kinds.count("scheme_match") == 3 and "missing_docs" in kinds
 
 
 def test_alerts_sorted_by_severity(demo):

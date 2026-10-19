@@ -13,7 +13,7 @@ def crit(res, cid):
 
 def test_demo_profile_meets_both(demo):
     r = E.evaluate_all(demo)
-    assert r["pmmy_mudra"].overall == E.MEETS and r["cgtmse"].overall == E.MEETS
+    assert r["pmmy_mudra"].overall == E.MEETS and r["cgtmse"].overall == E.MEETS and r["pmegp"].overall == E.MEETS
 
 
 def test_missing_data_is_unknown_never_pass(empty):

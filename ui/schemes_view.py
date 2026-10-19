@@ -23,7 +23,7 @@ def render() -> None:
     results = E.evaluate_all(p, cat)
     schemes = list_schemes(cat)
 
-    short = {"pmmy_mudra": "MUDRA", "cgtmse": "CGTMSE"}
+    short = {"pmmy_mudra": "MUDRA", "cgtmse": "CGTMSE", "pmegp": "PMEGP"}
     cols = st.columns(len(schemes))
     for col, s in zip(cols, schemes):
         col.metric(short.get(s["id"], s["id"].upper()), t("overall_" + results[s["id"]].overall, l).split(" — ")[0])

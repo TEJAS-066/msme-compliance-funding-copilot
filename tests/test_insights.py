@@ -8,8 +8,8 @@ from core.catalogue import get_scheme
 
 def test_unknown_impact_ranks_most_blocking_field_first(empty):
     imp = I.unknown_impact(empty)
-    assert imp[0]["field"] == "loan_needed_inr" and imp[0]["criteria_count"] == 3
-    assert set(imp[0]["schemes"]) == {"pmmy_mudra", "cgtmse"}
+    assert imp[0]["field"] == "activity" and imp[0]["criteria_count"] == 5
+    assert set(imp[0]["schemes"]) == {"pmmy_mudra", "cgtmse", "pmegp"}
 
 
 def test_unknown_impact_is_empty_when_nothing_blocks(demo):
@@ -76,7 +76,7 @@ def test_nba_overdue_task_beats_everything(empty_with_one=None):
 
 def test_nba_upload_docs_then_prepare(demo):
     assert I.next_best_action(demo, set(), [])["kind"] == "upload_docs"
-    done = {"lender_application_form", "udyam_certificate", "gst_certificate"}
+    done = {"lender_application_form", "udyam_certificate", "gst_certificate", "detailed_project_report", "category_certificate"}
     assert I.next_best_action(demo, done, [])["kind"] == "prepare"
 
 

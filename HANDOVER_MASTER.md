@@ -110,11 +110,19 @@
 |---|---|---|---|
 | **Phase 0** | Starter Foundation | **DONE** | Core rules, 224 unit tests, SQLite DB, basic Streamlit UI |
 | **Phase 1** | Human-Crafted GovTech UI & 5-Stage Stepper | **DONE** | Custom CSS design system, 5-stage workflow stepper, Lakshmi demo tour card, multi-agent status bar |
-| **Phase 2** | Scheme Catalogue Expansion | **NEXT UP** | Add PMEGP (KVIC official rules) to `data/schemes.json` + evaluation cases |
-| **Phase 3** | Multilingual Expansion | **PENDING** | Hindi & Telugu integration in `core/i18n.py` and UI selector |
+| **Phase 2** | Scheme Catalogue Expansion | **DONE** | Add PMEGP (KVIC official rules) to `data/schemes.json` + evaluation cases |
+| **Phase 3** | Multilingual Expansion | **NEXT UP** | Hindi & Telugu integration in `core/i18n.py` and UI selector |
 | **Phase 4** | Multi-Agent Form Generator | **PENDING** | Formal MUDRA/CGTMSE printable loan application worksheet |
 | **Phase 5** | WhatsApp & Voice Polish | **PENDING** | Native phone-bezel WhatsApp simulator + browser voice input |
 | **Phase 6** | Finals Pitch & Live KPI Dashboard | **PENDING** | One-click judge evaluation panel showing $100\%$ determinism & KPI targets |
+
+### Phase 2 Changelog (Completed)
+- **PMEGP Promoted to Verified Scheme (`data/schemes.json`)**: Added official scheme definition with primary sources (`kvic_pmegp_guidelines` & `msme_pmegp_portal`).
+- **PMEGP Rules Encoded**: Micro-enterprise restriction, non-farm activity requirement, corporate entity exclusion, ₹50L manufacturing / ₹20L service cost ceilings, and Special Category subsidies (up to 35% margin money & 5% own contribution for women/rural entrepreneurs like Lakshmi).
+- **Keyword Hygiene**: Cleaned generic keywords like "subsidy" to prevent intent collisions with unverified backlog schemes.
+- **UI Schemes View (`ui/schemes_view.py`)**: Added `PMEGP` metric chip and interactive criteria inspection across all 3 schemes.
+- **Evaluation Benchmark Expansion (`evaluation/cases.json`)**: Scaled eligibility benchmark from 34 to 55 test cases, achieving **100% (55/55)** accuracy.
+- **Test Suite Updates**: 225 unit/integration tests passing (`python -m pytest -q`).
 
 ### Phase 1 Changelog (Completed & Hardened)
 - **UI Code-Leak Hardening**: Diagnosed and eliminated markdown-it code-block leakage where 4-space indented HTML/CSS strings were parsed as `<pre><code>`. Migrated custom cards and components to 100% native Streamlit components (`st.container(border=True)`, `st.columns`, `st.caption`) and `st.html()` for CSS injection.

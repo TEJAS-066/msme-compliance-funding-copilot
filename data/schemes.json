@@ -57,77 +57,216 @@
       "tier": "secondary",
       "accessed": "2026-10-18",
       "supports": "Micro: investment up to Rs 2.5 crore AND turnover up to Rs 10 crore; Small: up to Rs 25 crore AND Rs 100 crore; Medium: up to Rs 125 crore AND Rs 500 crore. Team should attach the official gazette PDF."
+    },
+    "kvic_pmegp_guidelines": {
+      "title": "KVIC PMEGP Scheme Guidelines - Ministry of MSME",
+      "publisher": "Khadi and Village Industries Commission (KVIC), Ministry of MSME, Govt of India",
+      "url": "https://www.kviconline.gov.in/pmegp/pmegpweb/docs/common/PMEGPschemeGuidelines.pdf",
+      "tier": "official",
+      "accessed": "2026-10-19",
+      "supports": "Manufacturing project ceiling up to Rs 50 lakh; Service sector up to Rs 20 lakh; Margin money subsidy 15%-25% for general category, 25%-35% for special categories (women, SC/ST, OBC, minorities, rural); non-farm activities; age 18+; min 8th standard pass for manufacturing projects above Rs 10 lakh and service projects above Rs 5 lakh."
+    },
+    "msme_pmegp_portal": {
+      "title": "Ministry of MSME - Prime Minister's Employment Generation Programme",
+      "publisher": "Ministry of MSME, Govt of India",
+      "url": "https://msme.gov.in/schemes-and-initiatives/prime-ministers-employment-generation-programme-pmegp",
+      "tier": "official",
+      "accessed": "2026-10-19",
+      "supports": "Credit-linked subsidy programme implemented through KVIC, KVIBs and DICs; non-corporate micro enterprises; EDP training mandatory before subsidy release."
     }
   },
-
   "classification": {
     "id": "msme_class_2025",
     "effective_from": "2025-04-01",
-    "source_ids": ["msme_class_notification"],
+    "source_ids": [
+      "msme_class_notification"
+    ],
     "review_status": "needs_primary_gazette",
     "limits_inr": {
-      "micro":  {"investment": 25000000,   "turnover": 100000000},
-      "small":  {"investment": 250000000,  "turnover": 1000000000},
-      "medium": {"investment": 1250000000, "turnover": 5000000000}
+      "micro": {
+        "investment": 25000000,
+        "turnover": 100000000
+      },
+      "small": {
+        "investment": 250000000,
+        "turnover": 1000000000
+      },
+      "medium": {
+        "investment": 1250000000,
+        "turnover": 5000000000
+      }
     }
   },
-
   "schemes": [
     {
       "id": "pmmy_mudra",
-      "name": {"en": "Pradhan Mantri MUDRA Yojana (PMMY)", "ta": "பிரதம மந்திரி முத்ரா யோஜனா (PMMY)"},
+      "name": {
+        "en": "Pradhan Mantri MUDRA Yojana (PMMY)",
+        "ta": "பிரதம மந்திரி முத்ரா யோஜனா (PMMY)"
+      },
       "category": "loan",
       "description": {
         "en": "Collateral-free micro-credit for non-farm small businesses, offered through banks and other lenders in four categories by loan size.",
         "ta": "வங்கிகள் மற்றும் பிற கடன் நிறுவனங்கள் மூலம் விவசாயம் அல்லாத சிறு தொழில்களுக்கு வழங்கப்படும் பிணையற்ற சிறுகடன்; கடன் அளவின்படி நான்கு பிரிவுகள்."
       },
-      "keywords": ["mudra", "pmmy", "shishu", "kishor", "kishore", "tarun", "முத்ரா", "loan", "கடன்"],
+      "keywords": [
+        "mudra",
+        "pmmy",
+        "shishu",
+        "kishor",
+        "kishore",
+        "tarun",
+        "முத்ரா"
+      ],
       "last_verified": "2026-10-18",
       "data_version": "0.1.0",
       "review_status": "partly_verified_official",
-      "source_ids": ["pib_pmmy_2024", "bs_mudra_2024", "mudra_site"],
+      "source_ids": [
+        "pib_pmmy_2024",
+        "bs_mudra_2024",
+        "mudra_site"
+      ],
       "benefits": [
-        {"text": {"en": "Loan categories: Shishu (up to Rs 50,000), Kishor (Rs 50,001 to 5 lakh), Tarun (Rs 5 to 10 lakh), Tarun Plus (Rs 10 to 20 lakh).",
-                  "ta": "கடன் பிரிவுகள்: ஷிஷு (₹50,000 வரை), கிஷோர் (₹50,001 முதல் 5 லட்சம்), தருண் (₹5 முதல் 10 லட்சம்), தருண் பிளஸ் (₹10 முதல் 20 லட்சம்)."},
-         "source_ids": ["pib_pmmy_2024", "bs_mudra_2024"]},
-        {"text": {"en": "Loans under PMMY are described as collateral-free.",
-                  "ta": "PMMY கடன்கள் பிணையற்றவை (collateral-free) என்று விவரிக்கப்படுகின்றன."},
-         "source_ids": ["pib_pmmy_2024"]}
+        {
+          "text": {
+            "en": "Loan categories: Shishu (up to Rs 50,000), Kishor (Rs 50,001 to 5 lakh), Tarun (Rs 5 to 10 lakh), Tarun Plus (Rs 10 to 20 lakh).",
+            "ta": "கடன் பிரிவுகள்: ஷிஷு (₹50,000 வரை), கிஷோர் (₹50,001 முதல் 5 லட்சம்), தருண் (₹5 முதல் 10 லட்சம்), தருண் பிளஸ் (₹10 முதல் 20 லட்சம்)."
+          },
+          "source_ids": [
+            "pib_pmmy_2024",
+            "bs_mudra_2024"
+          ]
+        },
+        {
+          "text": {
+            "en": "Loans under PMMY are described as collateral-free.",
+            "ta": "PMMY கடன்கள் பிணையற்றவை (collateral-free) என்று விவரிக்கப்படுகின்றன."
+          },
+          "source_ids": [
+            "pib_pmmy_2024"
+          ]
+        }
       ],
       "criteria": [
-        {"id": "nonfarm", "required": true,
-         "label": {"en": "Business is a non-farm activity", "ta": "தொழில் விவசாயம் அல்லாத செயல்பாடு"},
-         "field": "activity", "op": "not_in", "value": ["agriculture"],
-         "source_ids": ["bs_mudra_2024"]},
-        {"id": "noncorporate", "required": true,
-         "label": {"en": "Non-corporate business (not a registered company)", "ta": "நிறுவனம் அல்லாத (company அல்லாத) தொழில்"},
-         "field": "entity_type", "op": "not_in", "value": ["private_limited", "public_limited"],
-         "source_ids": ["bs_mudra_2024"],
-         "note": "Secondary source only. Confirm with MUDRA FAQ whether companies are excluded."},
-        {"id": "loan_cap", "required": true,
-         "label": {"en": "Loan needed is within the Rs 20 lakh PMMY ceiling", "ta": "தேவையான கடன் ₹20 லட்சம் உச்ச வரம்புக்குள்"},
-         "field": "loan_needed_inr", "op": "lte", "value": 2000000,
-         "source_ids": ["pib_pmmy_2024"]},
-        {"id": "tarun_plus_history", "required": true,
-         "label": {"en": "For loans above Rs 10 lakh: a previous Tarun loan was repaid", "ta": "₹10 லட்சத்துக்கு மேல் கடனுக்கு: முந்தைய தருண் கடன் திருப்பிச் செலுத்தப்பட்டிருக்க வேண்டும்"},
-         "field": "previous_tarun_repaid", "op": "eq", "value": "yes",
-         "applies_if": {"field": "loan_needed_inr", "op": "gt", "value": 1000000},
-         "source_ids": ["bs_mudra_2024", "pib_pmmy_2024"]}
+        {
+          "id": "nonfarm",
+          "required": true,
+          "label": {
+            "en": "Business is a non-farm activity",
+            "ta": "தொழில் விவசாயம் அல்லாத செயல்பாடு"
+          },
+          "field": "activity",
+          "op": "not_in",
+          "value": [
+            "agriculture"
+          ],
+          "source_ids": [
+            "bs_mudra_2024"
+          ]
+        },
+        {
+          "id": "noncorporate",
+          "required": true,
+          "label": {
+            "en": "Non-corporate business (not a registered company)",
+            "ta": "நிறுவனம் அல்லாத (company அல்லாத) தொழில்"
+          },
+          "field": "entity_type",
+          "op": "not_in",
+          "value": [
+            "private_limited",
+            "public_limited"
+          ],
+          "source_ids": [
+            "bs_mudra_2024"
+          ],
+          "note": "Secondary source only. Confirm with MUDRA FAQ whether companies are excluded."
+        },
+        {
+          "id": "loan_cap",
+          "required": true,
+          "label": {
+            "en": "Loan needed is within the Rs 20 lakh PMMY ceiling",
+            "ta": "தேவையான கடன் ₹20 லட்சம் உச்ச வரம்புக்குள்"
+          },
+          "field": "loan_needed_inr",
+          "op": "lte",
+          "value": 2000000,
+          "source_ids": [
+            "pib_pmmy_2024"
+          ]
+        },
+        {
+          "id": "tarun_plus_history",
+          "required": true,
+          "label": {
+            "en": "For loans above Rs 10 lakh: a previous Tarun loan was repaid",
+            "ta": "₹10 லட்சத்துக்கு மேல் கடனுக்கு: முந்தைய தருண் கடன் திருப்பிச் செலுத்தப்பட்டிருக்க வேண்டும்"
+          },
+          "field": "previous_tarun_repaid",
+          "op": "eq",
+          "value": "yes",
+          "applies_if": {
+            "field": "loan_needed_inr",
+            "op": "gt",
+            "value": 1000000
+          },
+          "source_ids": [
+            "bs_mudra_2024",
+            "pib_pmmy_2024"
+          ]
+        }
       ],
       "documents": [
-        {"id": "lender_form", "doc_type": "lender_application_form", "verified": true,
-         "name": {"en": "Loan application form (from your bank / lender)", "ta": "கடன் விண்ணப்பப் படிவம் (உங்கள் வங்கி / கடன் நிறுவனத்திடமிருந்து)"},
-         "why": {"en": "PIB notes that sample loan application forms are available in the MUDRA Mitra app.", "ta": "மாதிரி கடன் விண்ணப்பப் படிவங்கள் MUDRA Mitra செயலியில் உள்ளன என PIB குறிப்பிடுகிறது."},
-         "source_ids": ["pib_pmmy_2024"]},
-        {"id": "udyam_cert", "doc_type": "udyam_certificate", "verified": false,
-         "name": {"en": "Udyam Registration certificate", "ta": "உத்யம் பதிவுச் சான்றிதழ்"},
-         "why": {"en": "Commonly requested by lenders. NOT confirmed from a scheme source - ask your bank.", "ta": "கடன் நிறுவனங்கள் பொதுவாகக் கேட்கும். திட்ட ஆதாரத்தில் உறுதி செய்யப்படவில்லை - உங்கள் வங்கியிடம் கேளுங்கள்."},
-         "source_ids": []},
-        {"id": "gst_cert", "doc_type": "gst_certificate", "verified": false,
-         "applies_if": {"field": "gst_status", "op": "eq", "value": "registered"},
-         "name": {"en": "GST registration certificate (if GST-registered)", "ta": "GST பதிவுச் சான்றிதழ் (GST பதிவு இருந்தால்)"},
-         "why": {"en": "Commonly requested by lenders. NOT confirmed from a scheme source - ask your bank.", "ta": "கடன் நிறுவனங்கள் பொதுவாகக் கேட்கும். திட்ட ஆதாரத்தில் உறுதி செய்யப்படவில்லை."},
-         "source_ids": []}
+        {
+          "id": "lender_form",
+          "doc_type": "lender_application_form",
+          "verified": true,
+          "name": {
+            "en": "Loan application form (from your bank / lender)",
+            "ta": "கடன் விண்ணப்பப் படிவம் (உங்கள் வங்கி / கடன் நிறுவனத்திடமிருந்து)"
+          },
+          "why": {
+            "en": "PIB notes that sample loan application forms are available in the MUDRA Mitra app.",
+            "ta": "மாதிரி கடன் விண்ணப்பப் படிவங்கள் MUDRA Mitra செயலியில் உள்ளன என PIB குறிப்பிடுகிறது."
+          },
+          "source_ids": [
+            "pib_pmmy_2024"
+          ]
+        },
+        {
+          "id": "udyam_cert",
+          "doc_type": "udyam_certificate",
+          "verified": false,
+          "name": {
+            "en": "Udyam Registration certificate",
+            "ta": "உத்யம் பதிவுச் சான்றிதழ்"
+          },
+          "why": {
+            "en": "Commonly requested by lenders. NOT confirmed from a scheme source - ask your bank.",
+            "ta": "கடன் நிறுவனங்கள் பொதுவாகக் கேட்கும். திட்ட ஆதாரத்தில் உறுதி செய்யப்படவில்லை - உங்கள் வங்கியிடம் கேளுங்கள்."
+          },
+          "source_ids": []
+        },
+        {
+          "id": "gst_cert",
+          "doc_type": "gst_certificate",
+          "verified": false,
+          "applies_if": {
+            "field": "gst_status",
+            "op": "eq",
+            "value": "registered"
+          },
+          "name": {
+            "en": "GST registration certificate (if GST-registered)",
+            "ta": "GST பதிவுச் சான்றிதழ் (GST பதிவு இருந்தால்)"
+          },
+          "why": {
+            "en": "Commonly requested by lenders. NOT confirmed from a scheme source - ask your bank.",
+            "ta": "கடன் நிறுவனங்கள் பொதுவாகக் கேட்கும். திட்ட ஆதாரத்தில் உறுதி செய்யப்படவில்லை."
+          },
+          "source_ids": []
+        }
       ],
       "unresolved": [
         "Which exact KYC / business documents each bank asks for is lender-specific and not stated in the sources used.",
@@ -135,65 +274,373 @@
         "Whether companies (private limited) are excluded is stated only in a secondary source."
       ]
     },
-
     {
       "id": "cgtmse",
-      "name": {"en": "Credit Guarantee Scheme for Micro & Small Enterprises (CGTMSE)", "ta": "நுண் மற்றும் சிறு தொழில்களுக்கான கடன் உத்தரவாதத் திட்டம் (CGTMSE)"},
+      "name": {
+        "en": "Credit Guarantee Scheme for Micro & Small Enterprises (CGTMSE)",
+        "ta": "நுண் மற்றும் சிறு தொழில்களுக்கான கடன் உத்தரவாதத் திட்டம் (CGTMSE)"
+      },
       "category": "credit_guarantee",
       "description": {
         "en": "A guarantee given to banks and other lenders so they can lend to eligible micro and small enterprises without collateral or a third-party guarantee. The lender applies for the cover - not the business owner.",
         "ta": "தகுதியுள்ள நுண் மற்றும் சிறு தொழில்களுக்கு பிணை அல்லது மூன்றாம் தரப்பு உத்தரவாதம் இல்லாமல் கடன் வழங்க வங்கிகளுக்கு அளிக்கப்படும் உத்தரவாதம். காப்பீட்டுக்கு விண்ணப்பிப்பது கடன் நிறுவனம்; தொழில் உரிமையாளர் அல்ல."
       },
-      "keywords": ["cgtmse", "credit guarantee", "collateral", "guarantee", "உத்தரவாதம்", "பிணை"],
+      "keywords": [
+        "cgtmse",
+        "credit guarantee",
+        "collateral",
+        "guarantee",
+        "உத்தரவாதம்",
+        "பிணை"
+      ],
       "last_verified": "2026-10-18",
       "data_version": "0.1.0",
       "review_status": "partly_verified_official",
-      "source_ids": ["dcmsme_cgs", "cgtmse_site", "paisabazaar_cgtmse"],
+      "source_ids": [
+        "dcmsme_cgs",
+        "cgtmse_site",
+        "paisabazaar_cgtmse"
+      ],
       "benefits": [
-        {"text": {"en": "From 01.04.2025 the scheme facilitates credit guarantees for credit support up to Rs 10 crore to micro and small enterprises, extended by member lending institutions.",
-                  "ta": "01.04.2025 முதல், உறுப்பினர் கடன் நிறுவனங்கள் வழங்கும் ₹10 கோடி வரையிலான கடனுக்கு நுண்/சிறு தொழில்களுக்கு கடன் உத்தரவாதம் வழங்கப்படுகிறது."},
-         "source_ids": ["dcmsme_cgs"]},
-        {"text": {"en": "A circular listed on the DC-MSME page raises the extent of guarantee coverage for women-led enterprises from 85% to 90% - read the circular for conditions.",
-                  "ta": "DC-MSME பக்கத்தில் உள்ள ஒரு சுற்றறிக்கை, பெண்கள் தலைமையிலான தொழில்களுக்கான உத்தரவாத அளவை 85% இலிருந்து 90% ஆக உயர்த்துகிறது - நிபந்தனைகளுக்கு சுற்றறிக்கையைப் படிக்கவும்."},
-         "source_ids": ["dcmsme_cgs"]}
+        {
+          "text": {
+            "en": "From 01.04.2025 the scheme facilitates credit guarantees for credit support up to Rs 10 crore to micro and small enterprises, extended by member lending institutions.",
+            "ta": "01.04.2025 முதல், உறுப்பினர் கடன் நிறுவனங்கள் வழங்கும் ₹10 கோடி வரையிலான கடனுக்கு நுண்/சிறு தொழில்களுக்கு கடன் உத்தரவாதம் வழங்கப்படுகிறது."
+          },
+          "source_ids": [
+            "dcmsme_cgs"
+          ]
+        },
+        {
+          "text": {
+            "en": "A circular listed on the DC-MSME page raises the extent of guarantee coverage for women-led enterprises from 85% to 90% - read the circular for conditions.",
+            "ta": "DC-MSME பக்கத்தில் உள்ள ஒரு சுற்றறிக்கை, பெண்கள் தலைமையிலான தொழில்களுக்கான உத்தரவாத அளவை 85% இலிருந்து 90% ஆக உயர்த்துகிறது - நிபந்தனைகளுக்கு சுற்றறிக்கையைப் படிக்கவும்."
+          },
+          "source_ids": [
+            "dcmsme_cgs"
+          ]
+        }
       ],
       "criteria": [
-        {"id": "size_mse", "required": true,
-         "label": {"en": "Enterprise is Micro or Small (not Medium)", "ta": "தொழில் நுண் அல்லது சிறு பிரிவு (நடுத்தரம் அல்ல)"},
-         "field": "enterprise_class", "op": "in", "value": ["micro", "small"],
-         "source_ids": ["dcmsme_cgs"]},
-        {"id": "not_agri", "required": true,
-         "label": {"en": "Activity is not agriculture", "ta": "செயல்பாடு விவசாயம் அல்ல"},
-         "field": "activity", "op": "not_in", "value": ["agriculture"],
-         "source_ids": ["paisabazaar_cgtmse"],
-         "note": "Secondary source. Sources disagree on trading/education activities - confirm with CGTMSE guidelines."},
-        {"id": "not_excluded_entity", "required": true,
-         "label": {"en": "Not a self-help group / educational or training institution", "ta": "சுய உதவிக் குழு / கல்வி, பயிற்சி நிறுவனம் அல்ல"},
-         "field": "entity_type", "op": "not_in", "value": ["shg", "educational_institution"],
-         "source_ids": ["paisabazaar_cgtmse"]},
-        {"id": "amount_cap", "required": true,
-         "label": {"en": "Credit needed is within Rs 10 crore", "ta": "தேவையான கடன் ₹10 கோடிக்குள்"},
-         "field": "loan_needed_inr", "op": "lte", "value": 100000000,
-         "source_ids": ["dcmsme_cgs"]}
+        {
+          "id": "size_mse",
+          "required": true,
+          "label": {
+            "en": "Enterprise is Micro or Small (not Medium)",
+            "ta": "தொழில் நுண் அல்லது சிறு பிரிவு (நடுத்தரம் அல்ல)"
+          },
+          "field": "enterprise_class",
+          "op": "in",
+          "value": [
+            "micro",
+            "small"
+          ],
+          "source_ids": [
+            "dcmsme_cgs"
+          ]
+        },
+        {
+          "id": "not_agri",
+          "required": true,
+          "label": {
+            "en": "Activity is not agriculture",
+            "ta": "செயல்பாடு விவசாயம் அல்ல"
+          },
+          "field": "activity",
+          "op": "not_in",
+          "value": [
+            "agriculture"
+          ],
+          "source_ids": [
+            "paisabazaar_cgtmse"
+          ],
+          "note": "Secondary source. Sources disagree on trading/education activities - confirm with CGTMSE guidelines."
+        },
+        {
+          "id": "not_excluded_entity",
+          "required": true,
+          "label": {
+            "en": "Not a self-help group / educational or training institution",
+            "ta": "சுய உதவிக் குழு / கல்வி, பயிற்சி நிறுவனம் அல்ல"
+          },
+          "field": "entity_type",
+          "op": "not_in",
+          "value": [
+            "shg",
+            "educational_institution"
+          ],
+          "source_ids": [
+            "paisabazaar_cgtmse"
+          ]
+        },
+        {
+          "id": "amount_cap",
+          "required": true,
+          "label": {
+            "en": "Credit needed is within Rs 10 crore",
+            "ta": "தேவையான கடன் ₹10 கோடிக்குள்"
+          },
+          "field": "loan_needed_inr",
+          "op": "lte",
+          "value": 100000000,
+          "source_ids": [
+            "dcmsme_cgs"
+          ]
+        }
       ],
       "documents": [
-        {"id": "udyam_cert", "doc_type": "udyam_certificate", "verified": false,
-         "name": {"en": "Udyam Registration certificate", "ta": "உத்யம் பதிவுச் சான்றிதழ்"},
-         "why": {"en": "Lenders commonly use it to confirm Micro/Small status. NOT confirmed from the scheme source - ask your bank.", "ta": "நுண்/சிறு நிலையை உறுதி செய்ய கடன் நிறுவனங்கள் பயன்படுத்துகின்றன. திட்ட ஆதாரத்தில் உறுதி செய்யப்படவில்லை."},
-         "source_ids": []}
+        {
+          "id": "udyam_cert",
+          "doc_type": "udyam_certificate",
+          "verified": false,
+          "name": {
+            "en": "Udyam Registration certificate",
+            "ta": "உத்யம் பதிவுச் சான்றிதழ்"
+          },
+          "why": {
+            "en": "Lenders commonly use it to confirm Micro/Small status. NOT confirmed from the scheme source - ask your bank.",
+            "ta": "நுண்/சிறு நிலையை உறுதி செய்ய கடன் நிறுவனங்கள் பயன்படுத்துகின்றன. திட்ட ஆதாரத்தில் உறுதி செய்யப்படவில்லை."
+          },
+          "source_ids": []
+        }
       ],
       "unresolved": [
         "Exact documents are collected by the lending institution; the sources used do not list them.",
         "Sources conflict on whether trading and education activities are covered - needs the official guideline PDF.",
         "Guarantee fees and exact guarantee percentages by category were not verified in this starter catalogue."
       ]
+    },
+    {
+      "id": "pmegp",
+      "name": {
+        "en": "Prime Minister's Employment Generation Programme (PMEGP)",
+        "ta": "பிரதம மந்திரி வேலைவாய்ப்பு உருவாக்கத் திட்டம் (PMEGP)"
+      },
+      "category": "subsidy_and_loan",
+      "description": {
+        "en": "Credit-linked capital subsidy programme to set up new micro-enterprises in non-farm manufacturing and service sectors, administered by KVIC with bank financing.",
+        "ta": "KVIC மற்றும் வங்கிகள் மூலம் விவசாயம் அல்லாத உற்பத்தி மற்றும் சேவைத் துறைகளில் புதிய நுண் தொழில்களைத் தொடங்க கடன் மற்றும் அரசு மானியம் (Margin Money) வழங்கும் திட்டம்."
+      },
+      "keywords": [
+        "pmegp",
+        "kvic",
+        "kvib",
+        "dic",
+        "margin money",
+        "வேலைவாய்ப்பு"
+      ],
+      "last_verified": "2026-10-19",
+      "data_version": "0.1.0",
+      "review_status": "partly_verified_official",
+      "source_ids": [
+        "kvic_pmegp_guidelines",
+        "msme_pmegp_portal"
+      ],
+      "benefits": [
+        {
+          "text": {
+            "en": "Project cost ceiling: up to Rs 50 lakh for manufacturing units and up to Rs 20 lakh for service sector units.",
+            "ta": "திட்டச் செலவு வரம்பு: உற்பத்தித் துறைக்கு ₹50 லட்சம் வரை மற்றும் சேவைத் துறைக்கு ₹20 லட்சம் வரை."
+          },
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        },
+        {
+          "text": {
+            "en": "Capital subsidy (Margin Money): 15% (Urban) to 25% (Rural) for General Category; 25% (Urban) to 35% (Rural) for Special Categories including Women-led enterprises.",
+            "ta": "அரசு மூலதன மானியம்: பொதுப் பிரிவினருக்கு 15% (நகர்ப்புறம்) முதல் 25% (கிராமப்புறம்); பெண்கள் தலைமையிலான தொழில்களுக்கு 25% (நகர்ப்புறம்) முதல் 35% (கிராமப்புறம்)."
+          },
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        },
+        {
+          "text": {
+            "en": "Beneficiary own contribution is only 10% for General Category, reduced to 5% for Special Categories including Women-led units.",
+            "ta": "பயனாளியின் சொந்த முதலீடு: பொதுப் பிரிவினருக்கு 10%, பெண்கள் மற்றும் சிறப்புப் பிரிவினருக்கு வெறும் 5% மட்டுமே."
+          },
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        }
+      ],
+      "criteria": [
+        {
+          "id": "size_micro",
+          "required": true,
+          "label": {
+            "en": "Enterprise is a Micro enterprise",
+            "ta": "தொழில் நுண் (Micro) தொழில் பிரிவில் அடங்குகிறது"
+          },
+          "field": "enterprise_class",
+          "op": "in",
+          "value": [
+            "micro"
+          ],
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        },
+        {
+          "id": "non_farm",
+          "required": true,
+          "label": {
+            "en": "Activity is non-farm manufacturing or services",
+            "ta": "செயல்பாடு விவசாயம் அல்லாத உற்பத்தி அல்லது சேவை"
+          },
+          "field": "activity",
+          "op": "not_in",
+          "value": [
+            "agriculture"
+          ],
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        },
+        {
+          "id": "eligible_entity",
+          "required": true,
+          "label": {
+            "en": "Eligible entity type (Proprietorship, Partnership, or SHG; not a registered company)",
+            "ta": "தகுதியான அமைப்பு (தனியுரிமை, கூட்டாண்மை, அல்லது SHG; நிறுவனம் அல்ல)"
+          },
+          "field": "entity_type",
+          "op": "not_in",
+          "value": [
+            "private_limited",
+            "public_limited",
+            "educational_institution"
+          ],
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        },
+        {
+          "id": "manufacturing_cost_ceiling",
+          "required": true,
+          "label": {
+            "en": "For manufacturing: project loan needed is within Rs 50 lakh ceiling",
+            "ta": "உற்பத்தித் துறைக்கு: தேவையான கடன் ₹50 லட்சம் உச்ச வரம்புக்குள் உள்ளது"
+          },
+          "field": "loan_needed_inr",
+          "op": "lte",
+          "value": 5000000,
+          "applies_if": {
+            "field": "activity",
+            "op": "eq",
+            "value": "manufacturing"
+          },
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        },
+        {
+          "id": "services_cost_ceiling",
+          "required": true,
+          "label": {
+            "en": "For services: project loan needed is within Rs 20 lakh ceiling",
+            "ta": "சேவைத் துறைக்கு: தேவையான கடன் ₹20 லட்சம் உச்ச வரம்புக்குள் உள்ளது"
+          },
+          "field": "loan_needed_inr",
+          "op": "lte",
+          "value": 2000000,
+          "applies_if": {
+            "field": "activity",
+            "op": "eq",
+            "value": "services"
+          },
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "id": "project_report",
+          "doc_type": "detailed_project_report",
+          "verified": true,
+          "name": {
+            "en": "Detailed Project Report (DPR) / Project Profile",
+            "ta": "விரிவான திட்ட அறிக்கை (DPR) / திட்ட விவரக்குறிப்பு"
+          },
+          "why": {
+            "en": "Mandatory under KVIC guidelines describing proposed machinery, working capital and employment.",
+            "ta": "இயந்திரங்கள், செயல்பாட்டு மூலதனம் மற்றும் வேலைவாய்ப்பை விவரிக்கும் KVIC கட்டாய ஆவணம்."
+          },
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        },
+        {
+          "id": "special_category_proof",
+          "doc_type": "category_certificate",
+          "verified": true,
+          "applies_if": {
+            "field": "women_led",
+            "op": "eq",
+            "value": "yes"
+          },
+          "name": {
+            "en": "Women Enterprise / Special Category proof",
+            "ta": "பெண் தொழில்முனைவோர் / சிறப்புப் பிரிவு சான்று"
+          },
+          "why": {
+            "en": "Required to claim higher 25%-35% margin money subsidy and lower 5% promoter contribution.",
+            "ta": "25%-35% கூடுதல் மானியம் மற்றும் 5% குறைந்த முதலீட்டுச் சலுகை பெறத் தேவை."
+          },
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ]
+        },
+        {
+          "id": "udyam_cert",
+          "doc_type": "udyam_certificate",
+          "verified": false,
+          "name": {
+            "en": "Udyam Registration certificate",
+            "ta": "உத்யம் பதிவுச் சான்றிதழ்"
+          },
+          "why": {
+            "en": "Commonly requested by financing banks for MSME identity.",
+            "ta": "வங்கி நிதியுதவிக்கு பொதுவாகக் கேட்கப்படும் ஆவணம்."
+          },
+          "source_ids": []
+        }
+      ],
+      "unresolved": [
+        "Online EDP training (minimum 5-10 days depending on project size) is mandatory before subsidy disbursal.",
+        "Educational qualification of minimum 8th standard pass is required for manufacturing projects above Rs 10 lakh and services above Rs 5 lakh."
+      ]
     }
   ],
-
   "unverified_backlog": [
-    {"id": "pmegp", "name": {"en": "PMEGP (Prime Minister's Employment Generation Programme)", "ta": "PMEGP"}, "review_status": "unverified", "note": "Not evaluated. Team must verify from the official portal before adding facts."},
-    {"id": "tn_needs", "name": {"en": "Tamil Nadu NEEDS (New Entrepreneur-cum-Enterprise Development Scheme)", "ta": "தமிழ்நாடு NEEDS"}, "review_status": "unverified", "note": "Not evaluated. Verify on the TN MSME department site."},
-    {"id": "tn_uyegp", "name": {"en": "Tamil Nadu UYEGP", "ta": "தமிழ்நாடு UYEGP"}, "review_status": "unverified", "note": "Not evaluated. Verify on the TN MSME department site."},
-    {"id": "clcss", "name": {"en": "Credit Linked Capital Subsidy (CLCSS)", "ta": "CLCSS"}, "review_status": "unverified", "note": "Not evaluated. Verify current status - may have changed."}
+    {
+      "id": "tn_needs",
+      "name": {
+        "en": "Tamil Nadu NEEDS (New Entrepreneur-cum-Enterprise Development Scheme)",
+        "ta": "தமிழ்நாடு NEEDS"
+      },
+      "review_status": "unverified",
+      "note": "Not evaluated. Verify on the TN MSME department site."
+    },
+    {
+      "id": "tn_uyegp",
+      "name": {
+        "en": "Tamil Nadu UYEGP",
+        "ta": "தமிழ்நாடு UYEGP"
+      },
+      "review_status": "unverified",
+      "note": "Not evaluated. Verify on the TN MSME department site."
+    },
+    {
+      "id": "clcss",
+      "name": {
+        "en": "Credit Linked Capital Subsidy (CLCSS)",
+        "ta": "CLCSS"
+      },
+      "review_status": "unverified",
+      "note": "Not evaluated. Verify current status - may have changed."
+    }
   ]
 }

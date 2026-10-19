@@ -33,9 +33,15 @@ def test_out_of_scope_question_is_refused_not_invented(demo):
 
 
 def test_unverified_scheme_gets_no_facts(demo):
-    a = copilot.answer("Tell me about PMEGP subsidy", "en", demo)
-    assert a.refused and "not verified" in a.text.lower() or "have not verified" in a.text
+    a = copilot.answer("Tell me about CLCSS subsidy", "en", demo)
+    assert a.refused and ("not verified" in a.text.lower() or "have not verified" in a.text.lower())
     assert "lakh" not in a.text.lower() and "%" not in a.text
+
+
+def test_pmegp_verified_facts_quoted(demo):
+    a = copilot.answer("Tell me about PMEGP subsidy", "en", demo)
+    assert not a.refused
+    assert "50 lakh" in a.text.lower() or "35%" in a.text or "margin money" in a.text.lower()
 
 
 def test_deadline_question_does_not_invent_a_date(demo):
