@@ -395,6 +395,20 @@ TR: dict[str, tuple[str, str]] = {
                     "காலக்கெடு, திட்ட விண்ணப்ப நிலைகள் ஆகியவற்றைக் கண்காணித்து, வாட்ஸ்அப் நினைவூட்டல் முன்னோட்டத்தைப் பார்க்கவும்."),
     "pinfo_admin": ("Review queued policy revisions from the Monitoring Agent and inspect live jury benchmark KPIs (100% accuracy, 0% hallucinations).",
                     "கண்காணிப்பு முகவரின் மாற்றங்களை மதிப்பாய்வு செய்யவும், 100% துல்லியமான நடுவர் குழு தரவுகளையும் பார்வையிடவும்."),
+
+    # Component Demonstrator UI
+    "btn_guide_open": ("Component Tour", "அமைப்புகள் உலா"),
+    "btn_guide_close": ("Close Tour", "உலாவை மூடு"),
+    "btn_launch_demonstrator": ("Launch Component Tour", "அமைப்புகள் உலாவைத் தொடங்கு"),
+    "guide_badge": ("Interactive Component Demonstrator", "ஊடாடும் அமைப்புகள் வழிகாட்டி"),
+    "guide_what_head": ("What this component does:", "இந்த அமைப்பின் செயல்பாடு:"),
+    "guide_tip_head": ("Presenter tip for jury:", "நடுவர் விளக்கக் குறிப்பு:"),
+    "guide_engine_head": ("Engine:", "இயந்திரம்:"),
+    "guide_btn_next": ("Next Component ➔", "அடுத்த அமைப்பு ➔"),
+    "guide_btn_prev": ("⬅ Previous", "⬅ முந்தையது"),
+    "guide_btn_finish": ("Got it! Finish Tour ✓", "புரிந்தது! நிறைவு செய் ✓"),
+    "guide_btn_replay": ("🔄 Replay Tour", "🔄 மீண்டும் இயக்கு"),
+    "guide_btn_dismiss": ("✕ Dismiss", "✕ மூடு"),
 }
 
 from core.i18n_hi import TR_HI
