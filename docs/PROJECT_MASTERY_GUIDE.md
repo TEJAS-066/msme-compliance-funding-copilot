@@ -163,5 +163,45 @@ python run_pipeline.py --launch
 #### Q4: "Do you actually submit the loan to the bank portal?"
 > **Winning Answer**: "No, and that is an intentional GovTech ethical design choice. Direct API submission to Udyam or MUDRA portals requires licensed intermediary accreditation and bank integration. Claiming an application is 'submitted' inside an unaccredited prototype is deceptive. We respect the human owner: we generate bank-standard preparation dossiers, calculate tipping points, and guide them to CSCs or branch managers with 100% verified documentation."
 
+#### Q5: "What if the document is a poor-quality photo or scanned without a text layer?"
+> **Winning Answer**: "Our Document Agent strictly decouples upload status from extraction status from human confirmation. If a scanned PDF or image lacks embedded text, we attempt Tesseract OCR. If OCR fails or is unavailable, the system never invents fake data or claims success; it transparently tags the status as 'ocr_not_available', alerts the owner to provide a clean copy, and keeps unconfirmed fields in their safe 'unknown' state."
+
+#### Q6: "How do you scale this from Tamil Nadu to all 28 states of India?"
+> **Winning Answer**: "Because our architecture separates pure logic (`core/`) from data contracts (`data/schemes.json`), expanding to a new state (e.g., Karnataka, Maharashtra, or Uttar Pradesh) does not require rewriting the application. We simply add the state's scheme definitions with primary gazette citations to the catalogue. Our retrieval engine, document parser, and multi-script channel adapter automatically support the new state."
+
+#### Q7: "How will this be deployed in the real world? Who pays for it?"
+> **Winning Answer**: "Our solution has two viable deployment models:
+> 1. **B2G / CSR Model (Temenos / SASTRA Alignment)**: Deployed as public digital infrastructure at Common Service Centres (CSCs) and District Industries Centres (DICs), funded through CSR and MSME promotion grants under SDG 9.3.
+> 2. **B2B FinTech / Bank Partnership**: Commercial banks (SBI, Canara, BoB) sponsor the copilot because it slashes loan application processing costs and delivers pre-verified, document-complete loan leads, dropping rejection rates by over 40%."
+
+#### Q8: "What is your roadmap for future enhancements?"
+> **Winning Answer**: "Our production roadmap includes:
+> 1. **Account Aggregator (AA) Integration**: Automatically pulling GST returns and bank statements via NBFC-AA consent architecture for instant financial twin verification.
+> 2. **Interactive Voice Response (IVR)**: Extending our Web Speech voice engine to telephone IVR for non-smartphone users in rural artisan clusters.
+> 3. **Automated Gazette Scraping with Human-in-the-Loop**: Enhancing the Monitoring Agent with automated RSS/gazette scrapers feeding directly into the Admin review queue."
+
+---
+
+## 9. Mobile Responsiveness & Multi-Device Testing
+Our UI is optimized with native responsive media queries (`@media (max-width: 768px)`):
+- Multi-column layouts dynamically wrap into clean, full-width touch cards.
+- Stepper stages adapt comfortably to smartphone screens without horizontal overflow.
+- Metric tiles stack neatly with high-contrast GovTech typography.
+- Touch-friendly buttons and prompt chips span full container widths for effortless thumb interaction.
+
+---
+
+## 10. Team TEJAS066 — Presentation Distribution
+To present like a unified, professional championship team in front of the jury:
+
+| Speaker | Section / Responsibility | Key Talking Points |
+|---|---|---|
+| **Nivashini K** *(Leader)* | **The Hook & Problem Statement** | 30s elevator pitch, 63M MSMEs credit gap, SDG 9.3 alignment, and the core slogan: *"From 'I need help' to 'I know what to do next.'"* |
+| **Sabarish R** | **Architecture & 100% Determinism** | *"Rules decide, AI explains, owner acts."* Why LLMs fail in lending, master pipeline orchestrator (`run_pipeline.py`), and offline SQLite Digital Twin. |
+| **Harshini S** | **Lakshmi Persona & Document Agent** | Lakshmi's Tiruppur journey, 1-click Document Agent demo, Luhn Mod-36 GSTIN verification, and Udyam checksum validation. |
+| **Lohitha R** | **Multilingual & Channel Simulator** | Full 4-language parity (English, தமிழ், हिन्दी, తెలుగు), native WhatsApp simulator, prompt chips, and browser voice dictation. |
+| **Nandhini Chelladurai** | **Forms Dossier, Telemetry & Closing** | Bank-ready ReportLab PDF dossier generation, 100% KPI benchmark proof on Admin telemetry page, and CSR / Bank B2B future roadmap. |
+
 ---
 *Prepared with pride by Team TEJAS066 for the TEJAS 2026 Hackathon Finals.*
+
