@@ -285,7 +285,20 @@ def main() -> int:
     parser.add_argument("--demo", action="store_true", help="Run interactive Lakshmi demo journey")
     parser.add_argument("--wa", action="store_true", help="Start interactive WhatsApp terminal simulator")
     parser.add_argument("--docker", action="store_true", help="Build and run containerized application via Docker Compose")
+    parser.add_argument("--react", action="store_true", help="Launch the React Enterprise Web Frontend on port 8000")
     args = parser.parse_args()
+
+    if args.react:
+        print_banner()
+        print("⚛️ Launching React Enterprise Web Frontend on http://localhost:8000 ...")
+        print("👉 Complete with Comic Speech Bubble Component Tour & REST APIs.")
+        try:
+            import webbrowser
+            webbrowser.open("http://localhost:8000")
+        except Exception:
+            pass
+        os.system(f"{sys.executable} -m services.api_server 8000")
+        return 0
 
     if args.docker:
         print_banner()

@@ -45,7 +45,37 @@ class CopilotApiHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path.rstrip("/")
 
-        if path in ("", "/health"):
+        frontend_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
+
+        # Serve React Single Page Application Shell
+        if path in ("", "/"):
+            html_path = os.path.join(frontend_dir, "index.html")
+            if os.path.exists(html_path):
+                with open(html_path, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self._send_cors_headers()
+                self.end_headers()
+                self.wfile.write(content)
+                return
+
+        # Serve React JSX Application
+        if path == "/app.jsx":
+            jsx_path = os.path.join(frontend_dir, "app.jsx")
+            if os.path.exists(jsx_path):
+                with open(jsx_path, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/javascript; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self._send_cors_headers()
+                self.end_headers()
+                self.wfile.write(content)
+                return
+
+        if path == "/health":
             self._send_json(200, {
                 "status": "operational",
                 "service": "msme-compliance-funding-copilot-api",
@@ -144,8 +174,8 @@ class CopilotApiHandler(BaseHTTPRequestHandler):
 def run_server(port: int = 8000) -> None:
     server_address = ("", port)
     httpd = HTTPServer(server_address, CopilotApiHandler)
-    print(f"🚀 MSME Copilot Headless REST API Server running on http://localhost:{port}")
-    print(f"📡 Ready to accept React / Next.js / Mobile requests.")
+    print(f"[REACT API SERVER] MSME Copilot REST API Server running on http://localhost:{port}")
+    print(f"[STATUS] Ready to serve React SPA and handle API requests.")
     httpd.serve_forever()
 
 

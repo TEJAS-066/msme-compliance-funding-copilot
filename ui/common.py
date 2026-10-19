@@ -698,19 +698,12 @@ def render_page_component_demonstrator(title_key: str) -> None:
                 st.rerun()
 
 
-def render_page_header(title_key: str, info_key: str) -> None:
-    """Standardized page header with title, component guide toggle, Day/Night toggle bar, and circular info button."""
+def render_page_header(title_key: str, info_key: str = "") -> None:
+    """Clean, high-contrast page header with title and Day/Night toggle bar (no intrusive banners or i buttons)."""
     l = lang()
-    c_title, c_guide, c_toggle, c_info = st.columns([3.8, 1.5, 1.4, 0.5], vertical_alignment="center")
+    c_title, c_toggle = st.columns([5.0, 1.4], vertical_alignment="center")
     with c_title:
         st.header(t(title_key, l))
-    with c_guide:
-        show_key = f"show_comp_guide_{title_key}"
-        is_open = st.session_state.get(show_key, True)
-        btn_label = "✕ " + t("btn_guide_close", l) if is_open else "🎯 " + t("btn_guide_open", l)
-        if st.button(btn_label, key=f"guide_hdr_btn_{title_key}", use_container_width=True):
-            st.session_state[show_key] = not is_open
-            st.rerun()
     with c_toggle:
         is_dark = st.session_state.get("dark_mode", False)
         new_val = st.toggle("🌙 Dark" if is_dark else "☀️ Light", value=is_dark, key=f"theme_toggle_{title_key}")
@@ -718,138 +711,11 @@ def render_page_header(title_key: str, info_key: str) -> None:
             st.session_state["dark_mode"] = new_val
             st.session_state["theme"] = "dark" if new_val else "light"
             st.rerun()
-    with c_info:
-        with st.popover("ℹ️", help=t("btn_page_info", l), use_container_width=True):
-            st.markdown(f"#### ℹ️ {t(title_key, l)}")
-            st.info(t(info_key, l))
-            if st.button("▶️ " + t("btn_launch_demonstrator", l), key=f"pop_guide_btn_{title_key}", use_container_width=True):
-                st.session_state[f"show_comp_guide_{title_key}"] = True
-                st.session_state[f"step_idx_{title_key}"] = 0
-                st.rerun()
-            st.caption("GovTech AI • " + t("btn_page_info", l))
-
-    render_page_component_demonstrator(title_key)
 
 
 def render_spotlight_tour() -> None:
-    """Inject interactive client-side spotlight tour that points directly to screen components."""
-    force_js = "window.__FORCE_TOUR = true;" if st.session_state.get("trigger_spotlight") else "window.__FORCE_TOUR = false;"
-    if st.session_state.get("trigger_spotlight"):
-        st.session_state["trigger_spotlight"] = False
-
-    tour_html = f"""
-    <div id="msme-spotlight-overlay" style="display: none; position: fixed; inset: 0; z-index: 999999; pointer-events: auto; background: rgba(0, 0, 0, 0.75);">
-      <div id="msme-spotlight-box" style="position: absolute; border: 3px solid #10B981; border-radius: 8px; box-shadow: 0 0 25px rgba(16, 185, 129, 0.7), inset 0 0 15px rgba(16, 185, 129, 0.3); transition: all 0.35s ease; pointer-events: none;"></div>
-      <div id="msme-spotlight-card" style="position: absolute; width: 340px; max-width: 90vw; background: #0F172A; color: #FFFFFF; border: 1px solid #334155; border-radius: 12px; padding: 18px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); transition: all 0.35s ease; font-family: sans-serif;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span id="msme-spotlight-step" style="font-size: 0.8rem; font-weight: 700; color: #10B981; text-transform: uppercase; letter-spacing: 0.05em;">Step 1 of 4</span>
-          <button onclick="window.msmeTourDone()" style="background: none; border: none; color: #94A3B8; font-size: 1.1rem; cursor: pointer; padding: 0;">✕</button>
-        </div>
-        <h4 id="msme-spotlight-title" style="margin: 0 0 8px 0; font-size: 1.05rem; color: #FFFFFF;"></h4>
-        <p id="msme-spotlight-desc" style="margin: 0 0 16px 0; font-size: 0.88rem; color: #CBD5E1; line-height: 1.45;"></p>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <button id="msme-spotlight-prev" onclick="window.msmeTourPrev()" style="background: #1E293B; border: 1px solid #475569; color: #FFFFFF; border-radius: 6px; padding: 6px 14px; font-size: 0.85rem; cursor: pointer;">⬅ Back</button>
-          <button id="msme-spotlight-next" onclick="window.msmeTourNext()" style="background: #059669; border: none; color: #FFFFFF; border-radius: 6px; padding: 6px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Next ➔</button>
-        </div>
-      </div>
-    </div>
-    <script>
-    (function() {{
-      {force_js}
-      const steps = [
-        {{
-          selector: 'section[data-testid="stSidebar"]',
-          title: '1. Navigation & Languages',
-          desc: 'Access all 10 specialized GovTech views and switch seamlessly between English, தமிழ், हिन्दी, and తెలుగు.'
-        }},
-        {{
-          selector: 'div[data-testid="stHorizontalBlock"]',
-          title: '2. Day/Night Toggle & Circular ℹ️ Guide',
-          desc: 'Toggle between ☀️ Light / 🌙 Dark modes at the top, and click the circular ℹ️ button on any page for instant guidance.'
-        }},
-        {{
-          selector: 'div[data-testid="stVerticalBlockBorderWrapper"]',
-          title: '3. Stepper & Lakshmi Tour',
-          desc: 'Follow the 5-Stage Stepper and run the Document Agent in 1 click on Lakshmi\\'s Tiruppur micro-textiles scenario.'
-        }},
-        {{
-          selector: 'div[data-testid="stMetric"]',
-          title: '4. Executive Metrics & AI Agents',
-          desc: 'All 6 AI agents operate with 100% deterministic rules, zero hallucinations, and bank-ready PDF dossier generation.'
-        }}
-      ];
-
-      let currentStep = 0;
-      const overlay = document.getElementById('msme-spotlight-overlay');
-      const box = document.getElementById('msme-spotlight-box');
-      const card = document.getElementById('msme-spotlight-card');
-      const stepLabel = document.getElementById('msme-spotlight-step');
-      const titleEl = document.getElementById('msme-spotlight-title');
-      const descEl = document.getElementById('msme-spotlight-desc');
-      const prevBtn = document.getElementById('msme-spotlight-prev');
-      const nextBtn = document.getElementById('msme-spotlight-next');
-
-      function updatePosition() {{
-        const s = steps[currentStep];
-        const el = document.querySelector(s.selector) || document.body;
-        const rect = el.getBoundingClientRect();
-
-        box.style.top = Math.max(0, rect.top - 6) + 'px';
-        box.style.left = Math.max(0, rect.left - 6) + 'px';
-        box.style.width = Math.min(window.innerWidth - rect.left, rect.width + 12) + 'px';
-        box.style.height = Math.min(window.innerHeight - rect.top, rect.height + 12) + 'px';
-
-        let cardTop = rect.bottom + 16;
-        let cardLeft = Math.max(16, rect.left);
-        if (cardTop + 240 > window.innerHeight) {{
-          cardTop = Math.max(16, rect.top - 240);
-        }}
-        if (cardLeft + 360 > window.innerWidth) {{
-          cardLeft = window.innerWidth - 370;
-        }}
-        card.style.top = Math.max(16, cardTop) + 'px';
-        card.style.left = Math.max(16, cardLeft) + 'px';
-
-        stepLabel.innerText = `Step ${{currentStep + 1}} of ${{steps.length}}`;
-        titleEl.innerText = s.title;
-        descEl.innerText = s.desc;
-        prevBtn.style.visibility = currentStep === 0 ? 'hidden' : 'visible';
-        nextBtn.innerText = currentStep === steps.length - 1 ? 'Finish ✓' : 'Next ➔';
-      }}
-
-      window.msmeTourNext = function() {{
-        if (currentStep < steps.length - 1) {{
-          currentStep++;
-          updatePosition();
-        }} else {{
-          window.msmeTourDone();
-        }}
-      }};
-
-      window.msmeTourPrev = function() {{
-        if (currentStep > 0) {{
-          currentStep--;
-          updatePosition();
-        }}
-      }};
-
-      window.msmeTourDone = function() {{
-        if (overlay) overlay.style.display = 'none';
-        localStorage.setItem('msme_spotlight_completed', 'true');
-      }};
-
-      setTimeout(function() {{
-        if (!localStorage.getItem('msme_spotlight_completed') || window.__FORCE_TOUR) {{
-          if (overlay) {{
-            overlay.style.display = 'block';
-            updatePosition();
-          }}
-        }}
-      }}, 800);
-    }})();
-    </script>
-    """
-    st.html(tour_html)
+    """Clean no-op pass - all comic speech bubble tours are hosted in the React enterprise frontend."""
+    pass
 
 
 @st.dialog("🏛️ MSME Copilot — Quick Guided Tour")
