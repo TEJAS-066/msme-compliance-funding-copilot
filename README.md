@@ -33,6 +33,7 @@ Open http://localhost:8501 → Dashboard → **Load demo profile** → walk the 
 ```bash
 python -m pytest -q                 # 233 tests (rules, documents, copilot grounding, webhook, monitor, i18n, UI)
 python -m evaluation.run_eval       # KPI harness on synthetic sets (55 eligibility + 15 extraction)
+python scripts/check_llm.py         # LLM benchmark on 20 Indic/English queries with safety guard check
 python scripts/make_samples.py      # regenerate synthetic sample documents
 ```
 
