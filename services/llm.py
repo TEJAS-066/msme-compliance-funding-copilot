@@ -20,9 +20,13 @@ class LLMError(RuntimeError):
 def get_provider() -> str | None:
     p = (os.environ.get("LLM_PROVIDER") or "").strip().lower()
     keys = {"anthropic": "ANTHROPIC_API_KEY", "gemini": "GEMINI_API_KEY", "sarvam": "SARVAM_API_KEY"}
-    if p in keys and os.environ.get(keys[p]):
-        return p
+    if p:
+        return p if (p in keys and os.environ.get(keys[p])) else None
+    for prov, env_key in keys.items():
+        if os.environ.get(env_key):
+            return prov
     return None
+
 
 
 def complete(system: str, user: str, provider: str | None = None, post: Callable = requests.post, timeout: int = 30) -> str:

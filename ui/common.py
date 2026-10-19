@@ -63,6 +63,32 @@ def apply_custom_styles() -> None:
         background-color: #085039 !important;
         border-color: #085039 !important;
     }
+
+    /* Mobile Responsive Optimizations (< 768px) */
+    @media (max-width: 768px) {
+        .main .block-container {
+            padding-top: 1rem !important;
+            padding-left: 0.75rem !important;
+            padding-right: 0.75rem !important;
+            padding-bottom: 2rem !important;
+        }
+        div[data-testid="stHorizontalBlock"] {
+            flex-wrap: wrap !important;
+            gap: 0.6rem !important;
+        }
+        div[data-testid="column"] {
+            min-width: 100% !important;
+            flex: 1 1 100% !important;
+        }
+        div[data-testid="stMetric"] {
+            margin-bottom: 0.5rem;
+            width: 100% !important;
+        }
+        div[data-testid="stButton"] > button {
+            width: 100% !important;
+            margin-bottom: 0.4rem;
+        }
+    }
     </style>
     """).strip()
     st.html(css)
