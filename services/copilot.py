@@ -209,7 +209,7 @@ def answer(question: str, lang: str, profile: dict, confirmed_types: set[str] | 
            cat: dict | None = None, use_llm: bool = True, _llm_complete=None) -> Answer:
     cat = cat or get_catalogue()
     confirmed_types = confirmed_types or set()
-    lang = lang if lang in ("en", "ta") else "en"
+    lang = lang if lang in ("en", "ta", "hi", "te") else "en"
     q = (question or "").strip()
     if not q:
         return Answer(t("ans_empty", lang), lang, "demo_deterministic", refused=True)
@@ -232,7 +232,7 @@ def answer(question: str, lang: str, profile: dict, confirmed_types: set[str] | 
     provider = llm.get_provider() if use_llm else None
     if provider and sids and not refused and r["intent"] != "deadline":
         ctx = build_context(sids, profile, cat, confirmed_types)
-        lang_name = {"en": "English", "ta": "Tamil"}[lang]
+        lang_name = {"en": "English", "ta": "Tamil", "hi": "Hindi", "te": "Telugu"}.get(lang, "English")
         user = f"LANGUAGE: {lang_name}\nQUESTION: {q}\nCONTEXT: {json.dumps(ctx, ensure_ascii=False)}"
         try:
             text = (_llm_complete or llm.complete)(SYSTEM_PROMPT, user, provider)

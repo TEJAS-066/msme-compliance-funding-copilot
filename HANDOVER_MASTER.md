@@ -116,8 +116,15 @@
 | **Phase 5** | WhatsApp & Voice Polish | **DONE** | Native phone-bezel WhatsApp simulator with multi-script auto-detection & Web Speech locale routing |
 | **Phase 6** | Finals Pitch & Live KPI Dashboard | **DONE** | Jury Evaluation Telemetry panel on Admin page proving 100% eligibility & 100% extraction |
 | **Phase 7** | Dynamic 5-Stage Stepper & Lakshmi Simulator | **DONE** | Pure deterministic stage engine (`core/insights.py`), live Document Agent verification & WhatsApp popover |
+| **Phase 8** | Multilingual Channel Inquiries & Voice | **DONE** | 1-click prompt chips in WhatsApp simulator, voice input embedding, cross-lingual keyword matching |
+
+### Phase 8 Changelog (Completed)
+- **1-Click WhatsApp Quick Inquiries (`ui/channel_view.py`)**: Embedded 4 responsive prompt chips (*MUDRA Eligibility, CGTMSE Documents, PMEGP Subsidy, Clear Chat*) directly into the simulator, allowing jury members to test multi-turn conversations instantly in English, தமிழ், हिन्दी, or తెలుగు.
+- **Embedded Voice Recognition (`ui/channel_view.py`)**: Integrated `voice.render()` directly into the channel interface, enabling Web Speech API voice dictation mapped to `en-IN`, `ta-IN`, `hi-IN`, and `te-IN`.
+- **Cross-Lingual Intent & Keyword Matching (`data/schemes.json`, `services/copilot.py`)**: Added Hindi (`मुद्रा`, `सीजीटीएमएसई`, `पीएमईजीपी`) and Telugu (`ముద్ర`, `సిజిటిఎంఎస్ఇ`, `పిఎంఇజిపి`) keywords to verified schemes in `data/schemes.json` and unlocked 4-language deterministic explanation in `services/copilot.py:answer`.
 
 ### Phase 7 Changelog (Completed)
+
 - **Deterministic 5-Stage Stepper Engine (`core/insights.py`)**: Built `compute_active_stage(profile, confirmed_types, tasks, apps)` to dynamically transition the UI across the 5 project stages:
   - *Stage 1 (Understand)*: Uninitialized / empty digital twin.
   - *Stage 2 (Profile)*: Partial profile undergoing owner data entry.

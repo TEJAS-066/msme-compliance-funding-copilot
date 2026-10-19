@@ -290,6 +290,12 @@ TR: dict[str, tuple[str, str]] = {
     "ch_send_btn": ("Try to send", "அனுப்ப முயற்சி"),
     "ch_result": ("Result: {status} — {detail}", "முடிவு: {status} — {detail}"),
     "ch_need_task": ("Add a task first (Tasks page) to have a reminder to send.", "அனுப்ப நினைவூட்டல் இருக்க முதலில் பணியைச் சேர்க்கவும் (பணிகள் பக்கம்)."),
+    "ch_quick_prompts": ("Quick Inquiries (1-Click Demo)", "விரைவு விசாரணைகள் (1-கிளிக் டெமோ)"),
+    "ch_chip_elig": ("Am I eligible for MUDRA?", "எனக்கு MUDRA தகுதி உள்ளதா?"),
+    "ch_chip_docs": ("What documents do I need for CGTMSE?", "CGTMSE-க்கு என்ன ஆவணங்கள் வேண்டும்?"),
+    "ch_chip_subsidy": ("Tell me about PMEGP subsidy", "PMEGP மானியம் பற்றி சொல்லுங்கள்"),
+    "ch_clear_btn": ("Clear Chat", "அரட்டையை அழி"),
+
     "v_head": ("🎤 Voice input (experimental)", "🎤 குரல் உள்ளீடு (சோதனை)"),
     "v_start": ("🎤 Speak", "🎤 பேசுங்கள்"),
     "v_listening": ("Listening…", "கேட்கிறேன்…"),
