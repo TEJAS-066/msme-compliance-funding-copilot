@@ -116,3 +116,39 @@ def next_best_action(profile: dict, confirmed_types: set[str], tasks: list[dict]
     if all(r.overall == E.UNLIKELY for r in results.values()):
         return {"kind": "review_inputs"}
     return {"kind": "add_task"}
+
+
+def compute_active_stage(profile: dict, confirmed_types: set[str], tasks: list[dict],
+                         apps: dict | None = None, cat: dict | None = None) -> int:
+    """Compute the 1-5 active stage for the GovTech stepper deterministically:
+    Stage 1: Understand - empty or uninitialized profile
+    Stage 2: Profile - partial profile being entered (unknown criteria remain)
+    Stage 3: Match - profile established, matching schemes identified, missing docs to gather
+    Stage 4: Prepare - documents confirmed, readiness dossier ready for generation
+    Stage 5: Track - follow-up tasks created, deadlines monitored, or applications tracked
+    """
+    cat = cat or get_catalogue()
+    known = sum(1 for v in profile.get("fields", {}).values() if v.get("status") == "known")
+    if known == 0:
+        return 1
+
+    # Stage 5: Follow-up tasks or active application tracking
+    if apps:
+        for app in apps.values():
+            if app.get("status") in ("preparing", "submitted_by_owner", "under_review", "approved", "rejected"):
+                return 5
+    if any(t.get("status") != "done" for t in tasks):
+        return 5
+
+    # Stage 4: Documents confirmed
+    if len(confirmed_types) > 0:
+        return 4
+
+    # Stage 2: Profile isIncomplete (criteria still blocked)
+    impact = unknown_impact(profile, cat)
+    if impact or known < 5:
+        return 2
+
+    # Stage 3: Profile complete, schemes matched, documents needed
+    return 3
+

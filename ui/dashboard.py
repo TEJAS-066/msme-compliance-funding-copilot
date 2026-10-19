@@ -1,8 +1,9 @@
+import os
 from datetime import date, timedelta
 
 import streamlit as st
 
-from core import db, insights, tasks
+from core import db, documents as D, insights, tasks
 from core import profile as P
 from core.catalogue import list_schemes
 from core.i18n import t
@@ -23,11 +24,15 @@ def render() -> None:
 
     banner()
 
-    # 5-Stage Stepper (Native responsive cards)
-    render_stepper(active_stage=1)
-
     p = get_profile()
     is_demo = p.get("is_demo", False)
+    confirmed_docs = db.confirmed_doc_types()
+    active_tasks = tasks.list_tasks(include_done=False)
+    apps = tasks.list_applications()
+
+    # 5-Stage Stepper (Deterministically computed active stage)
+    active_stage = insights.compute_active_stage(p, confirmed_docs, active_tasks, apps)
+    render_stepper(active_stage=active_stage)
 
     # Lakshmi's Journey Walkthrough Card (Direct Hackathon Narrative)
     with st.container(border=True):
@@ -47,6 +52,39 @@ def render() -> None:
             st.session_state.pop("chat", None)
             st.success(t("reset_done", l))
             st.rerun()
+
+        if is_demo:
+            st.write("")
+            udyam_confirmed = "udyam_certificate" in confirmed_docs
+            sim_c1, sim_c2 = st.columns([1, 1])
+            with sim_c1:
+                if not udyam_confirmed:
+                    if st.button(t("lakshmi_sim_doc_btn", l), key="btn_sim_udyam", use_container_width=True):
+                        udyam_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "samples", "sample_udyam_lakshmi.pdf")
+                        if os.path.isfile(udyam_path):
+                            with open(udyam_path, "rb") as f:
+                                udyam_data = f.read()
+                            res = D.extract_text(udyam_data, "sample_udyam_lakshmi.pdf")
+                            dtype = D.detect_doc_type(res.text)
+                            cands = D.extract_fields(res.text)
+                            findings = D.compare_with_profile(cands, p)
+                            decisions = [{"field": f.field, "value": f.proposed, "action": "accept"} for f in findings if not f.advisory]
+                            newp = D.apply_decisions(p, decisions, "sample_udyam_lakshmi.pdf")
+                            save_profile(newp)
+                            doc_id = db.add_document("sample_udyam_lakshmi.pdf", dtype, res.upload_status, res.extraction_status, res.message, [f.__dict__ for f in findings])
+                            db.set_document_confirmation(doc_id, "confirmed")
+                            st.success(t("lakshmi_doc_verified_msg", l))
+                            st.rerun()
+                else:
+                    st.success(t("lakshmi_sim_doc_done", l))
+
+            with sim_c2:
+                with st.popover(t("lakshmi_sim_wa_btn", l), use_container_width=True):
+                    st.caption("WhatsApp Channel Simulation (Team TEJAS066)")
+                    st.markdown(f"**{t('al_wa_prefix', l)}**")
+                    st.write(t("lakshmi_wa_sample_msg", l))
+                    st.caption(f"— {t('al_preview_note', l)}")
+
 
     st.write("")
 

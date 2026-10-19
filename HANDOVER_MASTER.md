@@ -115,6 +115,20 @@
 | **Phase 4** | Multi-Agent Form Generator | **DONE** | Authentic GovTech loan application worksheet dossier in `ui/forms_view.py` and `core/forms.py` |
 | **Phase 5** | WhatsApp & Voice Polish | **DONE** | Native phone-bezel WhatsApp simulator with multi-script auto-detection & Web Speech locale routing |
 | **Phase 6** | Finals Pitch & Live KPI Dashboard | **DONE** | Jury Evaluation Telemetry panel on Admin page proving 100% eligibility & 100% extraction |
+| **Phase 7** | Dynamic 5-Stage Stepper & Lakshmi Simulator | **DONE** | Pure deterministic stage engine (`core/insights.py`), live Document Agent verification & WhatsApp popover |
+
+### Phase 7 Changelog (Completed)
+- **Deterministic 5-Stage Stepper Engine (`core/insights.py`)**: Built `compute_active_stage(profile, confirmed_types, tasks, apps)` to dynamically transition the UI across the 5 project stages:
+  - *Stage 1 (Understand)*: Uninitialized / empty digital twin.
+  - *Stage 2 (Profile)*: Partial profile undergoing owner data entry.
+  - *Stage 3 (Match)*: Digital twin established, matching schemes identified, missing documents highlighted (Lakshmi's initial state).
+  - *Stage 4 (Prepare)*: Required documents uploaded and confirmed (Udyam certificate confirmed), dossier ready.
+  - *Stage 5 (Track)*: Active tasks tracked with due dates or applications submitted outside the app.
+- **Interactive Lakshmi Simulation Actions (`ui/dashboard.py`)**:
+  - `btn_sim_udyam` (*"⚡ Run Document Agent (Verify Udyam Certificate)"*): 1-click execution that extracts `UDYAM-TN-02-0000123` from `samples/sample_udyam_lakshmi.pdf`, updates Lakshmi's profile from 12 to 15 known fields, marks Udyam as confirmed in DB, and dynamically advances the stepper to Stage 4.
+  - `btn_sim_wa` (*"📱 Preview Lakshmi's WhatsApp Notification"*): Interactive localized WhatsApp channel popover previewing Lakshmi's proactive funding notification in Tamil, Hindi, Telugu, or English.
+- **Full Multilingual Parity**: Added all 5 simulation keys to `core/i18n.py` (EN/TA), `core/i18n_hi.py` (HI), and `core/i18n_te.py` (TE) with 100% script and placeholder parity.
+- **Test Suite Updates**: Added `test_compute_active_stage` in `tests/test_insights.py`. All 232 tests passing.
 
 ### Phase 6 Changelog (Completed)
 - **Jury Evaluation Telemetry Panel (`ui/admin_view.py`)**: Built an executive evaluation card directly on the Admin page presenting automated proof of the targets pitched in Round 2:
@@ -122,6 +136,7 @@
   - Extraction Accuracy: Target $\ge 90\%$ $\rightarrow$ **100% (15/15 passed)**
   - Hallucination Rate: Target $0\%$ $\rightarrow$ **0% (100% deterministic rules)**
   - Specialized AI Agents: **6 / 6 Operational** (Document, Retrieval, Eligibility, Form, Deadline, Monitoring).
+
 
 ### Phase 5 Changelog (Completed)
 - **Multi-Script WhatsApp Routing (`services/channel.py`, `services/whatsapp.py`)**: Expanded `detect_language` to automatically identify Tamil, Devanagari (Hindi), and Telugu unicode ranges, responding automatically in the user's native script.
@@ -176,8 +191,9 @@ python run_pipeline.py --demo
 python run_pipeline.py --wa
 
 # 5. Direct test commands
-python -m pytest -q                 # 231 tests (0 failed)
+python -m pytest -q                 # 232 tests (0 failed)
 python -m evaluation.run_eval       # 100% eligibility (55/55) & 100% extraction (15/15)
+
 ```
 
 ---

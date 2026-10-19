@@ -88,3 +88,24 @@ def test_nba_review_inputs_when_all_unlikely(demo):
 def test_nba_ignores_done_and_future_tasks(demo):
     tasks = [{"title": "x", "due_date": "2020-01-01", "status": "done"}, {"title": "y", "due_date": "2999-01-01", "status": "open"}]
     assert I.next_best_action(demo, set(), tasks)["kind"] == "upload_docs"
+
+
+def test_compute_active_stage(empty, demo):
+    # Stage 1: Empty profile
+    assert I.compute_active_stage(empty, set(), []) == 1
+
+    # Stage 2: Incomplete profile being entered
+    partial = P.set_field(empty, "state", "Tamil Nadu")
+    partial = P.set_field(partial, "district", "Tiruppur")
+    assert I.compute_active_stage(partial, set(), []) == 2
+
+    # Stage 3: Demo profile loaded, schemes matched, missing docs
+    assert I.compute_active_stage(demo, set(), []) == 3
+
+    # Stage 4: Documents confirmed
+    assert I.compute_active_stage(demo, {"udyam_certificate"}, []) == 4
+
+    # Stage 5: Follow-up tasks or applications active
+    assert I.compute_active_stage(demo, {"udyam_certificate"}, [{"status": "open"}]) == 5
+    assert I.compute_active_stage(demo, {"udyam_certificate"}, [], apps={"pmmy_mudra": {"status": "submitted_by_owner"}}) == 5
+

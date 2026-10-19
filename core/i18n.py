@@ -316,6 +316,14 @@ TR: dict[str, tuple[str, str]] = {
                           "நடுவர் குழுவுக்கு வழங்கப்பட்ட அதே அனுபவம்: திருப்பூரில் உள்ள நுண் ஜவுளி உற்பத்தியாளர் லட்சுமி MUDRA & CGTMSE கடனுதவி பெறும் முழுமையான பயணம்."),
     "lakshmi_tour_btn": ("Load Lakshmi's Journey (Tiruppur Demo)", "லட்சுமியின் பயணத்தை ஏற்று (திருப்பூர் டெமோ)"),
     "lakshmi_active_badge": ("Active Persona: Lakshmi — Tiruppur Micro-Textiles (Manufacturing)", "செயலில் உள்ள சுயவிவரம்: லட்சுமி — திருப்பூர் மைக்ரோ-டெக்ஸ்டைல்ஸ் (உற்பத்தி)"),
+    "lakshmi_sim_doc_btn": ("⚡ Run Document Agent (Verify Udyam Certificate)", "⚡ ஆவண முகவரை இயக்கு (உத்யம் சான்றிதழைச் சரிபார்)"),
+    "lakshmi_sim_doc_done": ("✓ Udyam Certificate Verified & Profile Updated", "✓ உத்யம் சான்றிதழ் சரிபார்க்கப்பட்டு விவரம் புதுப்பிக்கப்பட்டது"),
+    "lakshmi_sim_wa_btn": ("📱 Preview Lakshmi's WhatsApp Notification", "📱 லட்சுமியின் WhatsApp அறிவிப்பு முன்னோட்டம்"),
+    "lakshmi_doc_verified_msg": ("Document Agent extracted UDYAM-TN-02-0000123. Profile updated & Udyam certificate confirmed!",
+                                 "ஆவண முகவர் UDYAM-TN-02-0000123 பிரித்தெடுத்தார். சுயவிவரம் புதுப்பிக்கப்பட்டு உத்யம் சான்றிதழ் உறுதி செய்யப்பட்டது!"),
+    "lakshmi_wa_sample_msg": ("Vanakkam Lakshmi! MSME Copilot found 2 eligible schemes (MUDRA Kishor ₹8L & CGTMSE). Missing document identified: Udyam Certificate. Uploaded & verified successfully! Your application dossier is now ready.",
+                              "வணக்கம் லட்சுமி! MSME Copilot 2 தகுதியான திட்டங்களைக் கண்டறிந்துள்ளது (MUDRA கிஷோர் ₹8L & CGTMSE). விடுபட்ட ஆவணம்: உத்யம் சான்றிதழ். வெற்றிகரமாக பதிவேற்றப்பட்டு சரிபார்க்கப்பட்டது! உங்கள் விண்ணப்பக் கோப்பு இப்போது தயாராக உள்ளது."),
+
 
     # ---- Multi-Agent Architecture Inspector
     "agent_inspector_title": ("Specialized Multi-Agent Architecture (Round 2 Slide 5)", "சிறப்பு மல்டி-ஏஜென்ட் கட்டமைப்பு (சுற்று 2 ஸ்லைடு 5)"),
