@@ -284,7 +284,14 @@ def main() -> int:
     parser.add_argument("--eval", action="store_true", help="Run evaluation harness only")
     parser.add_argument("--demo", action="store_true", help="Run interactive Lakshmi demo journey")
     parser.add_argument("--wa", action="store_true", help="Start interactive WhatsApp terminal simulator")
+    parser.add_argument("--docker", action="store_true", help="Build and run containerized application via Docker Compose")
     args = parser.parse_args()
+
+    if args.docker:
+        print_banner()
+        print("🐳 Starting Docker Compose container build & launch...")
+        os.system("docker compose up --build")
+        return 0
 
     if args.demo:
         run_demo_journey()

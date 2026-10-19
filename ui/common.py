@@ -117,29 +117,60 @@ def apply_custom_styles(theme: str | None = None) -> None:
         border: 1px solid {border_col} !important;
     }}
 
-    /* Primary buttons */
-    button[kind="primary"] {{
+    /* Primary buttons - Guaranteed Crisp White Text on Emerald */
+    button[data-testid="baseButton-primary"],
+    button[kind="primary"],
+    div[data-testid="stFormSubmitButton"] > button {{
         background-color: #0B6E4F !important;
+        background: #0B6E4F !important;
         border-color: #0B6E4F !important;
         color: #FFFFFF !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
     }}
+    button[data-testid="baseButton-primary"] *,
+    button[kind="primary"] *,
+    div[data-testid="stFormSubmitButton"] > button * {{
+        color: #FFFFFF !important;
+    }}
+    button[data-testid="baseButton-primary"]:hover,
     button[kind="primary"]:hover {{
         background-color: #085039 !important;
+        background: #085039 !important;
         border-color: #085039 !important;
+        color: #FFFFFF !important;
+    }}
+    button[data-testid="baseButton-primary"]:hover *,
+    button[kind="primary"]:hover * {{
+        color: #FFFFFF !important;
     }}
 
-    /* Secondary / Default Buttons - EXPLICIT HIGH CONTRAST */
-    button[kind="secondary"], div[data-testid="stButton"] > button:not([kind="primary"]) {{
+    /* Secondary / Default Buttons - EXPLICIT HIGH CONTRAST & READABLE */
+    button[data-testid="baseButton-secondary"],
+    button[kind="secondary"],
+    div[data-testid="stButton"] > button:not([data-testid="baseButton-primary"]):not([kind="primary"]) {{
         background-color: {btn_sec_bg} !important;
-        border: 1px solid {btn_sec_border} !important;
+        background: {btn_sec_bg} !important;
+        border: 1.5px solid {btn_sec_border} !important;
         color: {btn_sec_text} !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
     }}
-    button[kind="secondary"]:hover, div[data-testid="stButton"] > button:not([kind="primary"]):hover {{
-        background-color: {btn_sec_hover} !important;
-        border-color: {btn_sec_border} !important;
+    button[data-testid="baseButton-secondary"] *,
+    button[kind="secondary"] *,
+    div[data-testid="stButton"] > button:not([data-testid="baseButton-primary"]):not([kind="primary"]) * {{
         color: {btn_sec_text} !important;
+    }}
+    button[data-testid="baseButton-secondary"]:hover,
+    button[kind="secondary"]:hover,
+    div[data-testid="stButton"] > button:not([data-testid="baseButton-primary"]):not([kind="primary"]):hover {{
+        background-color: {btn_sec_hover} !important;
+        background: {btn_sec_hover} !important;
+        border-color: #0B6E4F !important;
+        color: {heading_col} !important;
+    }}
+    button[data-testid="baseButton-secondary"]:hover *,
+    button[kind="secondary"]:hover *,
+    div[data-testid="stButton"] > button:not([data-testid="baseButton-primary"]):not([kind="primary"]):hover * {{
+        color: {heading_col} !important;
     }}
 
     /* Inputs, Textareas, Selectboxes */
@@ -166,23 +197,32 @@ def apply_custom_styles(theme: str | None = None) -> None:
         color: {heading_col} !important;
     }}
 
-    /* Circular 'i' info button popover */
+    /* Pixel-Perfect Circular 'i' info button */
     div[data-testid="stPopover"] > button {{
-        border-radius: 50% !important;
+        border-radius: 9999px !important;
         width: 38px !important;
         height: 38px !important;
         min-width: 38px !important;
         max-width: 38px !important;
+        min-height: 38px !important;
+        max-height: 38px !important;
         padding: 0 !important;
+        margin: 0 !important;
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
-        font-size: 1.15rem !important;
-        font-weight: 700 !important;
-        border: 1px solid {border_col} !important;
+        border: 1.5px solid {border_col} !important;
         background-color: {card_bg} !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+        cursor: pointer !important;
+    }}
+    div[data-testid="stPopover"] > button * {{
+        font-size: 1.15rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1 !important;
         color: {heading_col} !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+        text-align: center !important;
     }}
 
     /* Mobile Responsive Optimizations (< 768px) */

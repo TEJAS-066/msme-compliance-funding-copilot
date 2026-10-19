@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  msme-copilot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: msme-compliance-copilot
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONUNBUFFERED=1
+      # Optional LLM API keys (uncomment to activate flagship models):
+      # - GEMINI_API_KEY=${GEMINI_API_KEY}
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # - SARVAM_API_KEY=${SARVAM_API_KEY}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
