@@ -1,4 +1,4 @@
-# MSME Compliance & Funding Copilot — TEJAS066 MVP (v0.2)
+# MSME Compliance & Funding Copilot — TEJAS066 MVP (v0.1)
 
 > From “I need help” to “I know what to do next.”  
 > **Rules decide. AI explains. The owner acts.**
