@@ -100,3 +100,10 @@ def test_report_lists_open_questions(demo):
 def test_report_drops_demo_banner_for_real_profile(demo):
     p = P.set_field(demo, "business_name", "My Unit")
     assert "DEMO MODE" not in R.readiness_report(p, set(), "en")
+
+
+def test_pdf_dossier_generation(demo):
+    pdf = R.generate_pdf_dossier(demo, {"udyam_certificate"}, "pmmy_mudra")
+    assert isinstance(pdf, bytes) and len(pdf) > 1000
+    assert pdf.startswith(b"%PDF")
+

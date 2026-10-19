@@ -9,8 +9,9 @@ from core import db, forms as F
 from core import profile as P
 from core.catalogue import L, get_catalogue, get_scheme, list_schemes
 from core.i18n import t
-from services.report import readiness_report
+from services.report import generate_pdf_dossier, readiness_report
 from ui.common import get_profile, lang
+
 
 
 def render() -> None:
@@ -55,14 +56,13 @@ def render() -> None:
     st.caption("Review every detail carefully before taking this worksheet to your bank or CSC. Nothing is submitted online.")
 
     # Action buttons in side-by-side columns
-    b1, b2 = st.columns(2)
+    b1, b2, b3 = st.columns(3)
     b1.download_button(
         label=f"📄 {t('btn_download', l)}",
         data=F.worksheet_text(p, L(get_scheme(sid, cat)["name"], l), l),
         file_name=f"worksheet_{sid}.txt",
         key="dl_ws",
         use_container_width=True,
-        type="primary"
     )
     b2.download_button(
         label=f"📋 {t('rep_btn', l)}",
@@ -71,3 +71,13 @@ def render() -> None:
         key="dl_report",
         use_container_width=True
     )
+    b3.download_button(
+        label=f"🏛️ {t('btn_download_pdf', l)}",
+        data=generate_pdf_dossier(p, db.confirmed_doc_types(), sid, cat=cat),
+        file_name=f"bank_dossier_{sid}.pdf",
+        mime="application/pdf",
+        key="dl_pdf",
+        type="primary",
+        use_container_width=True
+    )
+

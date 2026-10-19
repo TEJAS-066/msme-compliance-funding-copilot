@@ -117,8 +117,20 @@
 | **Phase 6** | Finals Pitch & Live KPI Dashboard | **DONE** | Jury Evaluation Telemetry panel on Admin page proving 100% eligibility & 100% extraction |
 | **Phase 7** | Dynamic 5-Stage Stepper & Lakshmi Simulator | **DONE** | Pure deterministic stage engine (`core/insights.py`), live Document Agent verification & WhatsApp popover |
 | **Phase 8** | Multilingual Channel Inquiries & Voice | **DONE** | 1-click prompt chips in WhatsApp simulator, voice input embedding, cross-lingual keyword matching |
+| **Phase 9** | Bank-Ready PDF Dossier Generator | **DONE** | In-memory ReportLab PDF generator (`services/report.py`), branch endorsement block, 1-click download in `ui/forms_view.py` |
+
+### Phase 9 Changelog (Completed)
+- **Official Bank-Ready PDF Dossier Generator (`services/report.py`)**: Built `generate_pdf_dossier()` creating a formal, publication-quality A4 PDF dossier in memory with 4 structured sections:
+  - *Section A*: Enterprise Digital Twin & Business Identity (declared vs extracted facts, 2025 MSME composite limits).
+  - *Section B*: Statutory Eligibility & Rule Evaluation (PASS / FAIL / UNKNOWN status table with exact thresholds).
+  - *Section C*: Documentation Checklist & Verification (Udyam, GST, DPR, advisory items).
+  - *Section D*: Branch Endorsement & Submission Sign-Off (Signature lines, Branch stamp block, review recommendation).
+- **1-Click PDF Download (`ui/forms_view.py`)**: Added primary action button `btn_download_pdf` alongside text worksheet downloads.
+- **Full Multilingual Parity**: Added `btn_download_pdf` to `core/i18n.py` (EN/TA), `core/i18n_hi.py` (HI), and `core/i18n_te.py` (TE).
+- **Automated Regression Suite**: Added `test_pdf_dossier_generation` in `tests/test_alerts_report.py`. **233 unit/integration tests passing**.
 
 ### Phase 8 Changelog (Completed)
+
 - **1-Click WhatsApp Quick Inquiries (`ui/channel_view.py`)**: Embedded 4 responsive prompt chips (*MUDRA Eligibility, CGTMSE Documents, PMEGP Subsidy, Clear Chat*) directly into the simulator, allowing jury members to test multi-turn conversations instantly in English, தமிழ், हिन्दी, or తెలుగు.
 - **Embedded Voice Recognition (`ui/channel_view.py`)**: Integrated `voice.render()` directly into the channel interface, enabling Web Speech API voice dictation mapped to `en-IN`, `ta-IN`, `hi-IN`, and `te-IN`.
 - **Cross-Lingual Intent & Keyword Matching (`data/schemes.json`, `services/copilot.py`)**: Added Hindi (`मुद्रा`, `सीजीटीएमएसई`, `पीएमईजीपी`) and Telugu (`ముద్ర`, `సిజిటిఎంఎస్ఇ`, `పిఎంఇజిపి`) keywords to verified schemes in `data/schemes.json` and unlocked 4-language deterministic explanation in `services/copilot.py:answer`.
@@ -198,8 +210,9 @@ python run_pipeline.py --demo
 python run_pipeline.py --wa
 
 # 5. Direct test commands
-python -m pytest -q                 # 232 tests (0 failed)
+python -m pytest -q                 # 233 tests (0 failed)
 python -m evaluation.run_eval       # 100% eligibility (55/55) & 100% extraction (15/15)
+
 
 ```
 

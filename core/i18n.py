@@ -176,7 +176,9 @@ TR: dict[str, tuple[str, str]] = {
                   "உங்கள் உறுதி செய்த விவரங்களிலிருந்து மட்டும் நிரப்பப்பட்ட தயாரிப்புப் பணித்தாள். இது வங்கியின் அதிகாரப்பூர்வ படிவம் அல்ல — கடன் நிறுவனத்திடம் எடுத்துச் சென்று ஒவ்வொரு வரியையும் சரிபாருங்கள். எதுவும் சமர்ப்பிக்கப்படாது."),
     "frm_missing": ("MISSING — please provide", "இல்லை — வழங்கவும்"),
     "btn_download": ("Download worksheet (.txt)", "பணித்தாளைப் பதிவிறக்கு (.txt)"),
+    "btn_download_pdf": ("Download Bank Dossier (.pdf)", "வங்கி விண்ணப்பக் கோப்பு (.pdf)"),
     "frm_missing_count": ("{n} item(s) still missing", "{n} விவரங்கள் இன்னும் இல்லை"),
+
 
     # ---- tasks
     "tsk_add": ("Add a task", "பணியைச் சேர்"),
