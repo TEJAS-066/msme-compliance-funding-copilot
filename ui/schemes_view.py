@@ -80,7 +80,7 @@ def render() -> None:
     st.caption(t("wi_note", l))
     fld = st.selectbox(t("wi_field", l), list(insights.NUMERIC_FIELDS), key="wi_field", format_func=lambda f: field_label(f, l))
     rows = insights.tipping_table(p, fld, cat)
-    short = {"pmmy_mudra": "MUDRA", "cgtmse": "CGTMSE"}
+    short = {"pmmy_mudra": "MUDRA", "cgtmse": "CGTMSE", "pmegp": "PMEGP"}
     table = []
     for r in rows:
         row = {t("wi_at", l): P.fmt_inr(r["at"])}

@@ -118,6 +118,17 @@
 | **Phase 7** | Dynamic 5-Stage Stepper & Lakshmi Simulator | **DONE** | Pure deterministic stage engine (`core/insights.py`), live Document Agent verification & WhatsApp popover |
 | **Phase 8** | Multilingual Channel Inquiries & Voice | **DONE** | 1-click prompt chips in WhatsApp simulator, voice input embedding, cross-lingual keyword matching |
 | **Phase 9** | Bank-Ready PDF Dossier Generator | **DONE** | In-memory ReportLab PDF generator (`services/report.py`), branch endorsement block, 1-click download in `ui/forms_view.py` |
+| **Phase 10** | Mobile Responsiveness & Master Defense Playbook | **DONE** | Responsive CSS media queries (`@media (max-width: 768px)`), LLM provider auto-detection, comprehensive jury Q&A & team distribution guide |
+
+### Phase 10 Changelog (Completed)
+- **Mobile Responsive GovTech UI (`ui/common.py`)**: Added `@media (max-width: 768px)` stylesheet ensuring seamless wrapping of multi-column layouts, touch-friendly buttons, card padding, and horizontal block responsiveness on smartphones and tablets.
+- **Top-Tier LLM Auto-Detection (`services/llm.py`)**: Upgraded `get_provider()` to automatically detect available API keys (`GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, `SARVAM_API_KEY`) with graceful fallback to offline deterministic demo mode without runtime crashes.
+- **Master Defense Manual & Presentation Playbook (`docs/PROJECT_MASTERY_GUIDE.md`)**:
+  - Documented 30s elevator pitch, core problem matrix, Lakshmi's Tiruppur journey, 5 stages, 6 agents, and live demo script.
+  - Formulated 8 hard jury questions with winning answers (LLM hallucination, data privacy, gazette policy drift, GovTech ethical non-submission, scanned doc handling, pan-India scaling, B2G/B2B business model, roadmap).
+  - Assigned 5-member team presentation distribution across Nivashini, Sabarish, Harshini, Lohitha, and Nandhini.
+- **Tipping Table Hygiene (`ui/schemes_view.py`)**: Added `pmegp` mapping to display `PMEGP` in tipping table columns.
+- **Regression Verification**: 233 passed in pytest, 100% eligibility (55/55), 100% extraction (15/15).
 
 ### Phase 9 Changelog (Completed)
 - **Official Bank-Ready PDF Dossier Generator (`services/report.py`)**: Built `generate_pdf_dossier()` creating a formal, publication-quality A4 PDF dossier in memory with 4 structured sections:
