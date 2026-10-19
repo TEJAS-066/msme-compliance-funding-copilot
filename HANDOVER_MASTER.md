@@ -116,9 +116,10 @@
 | **Phase 5** | WhatsApp & Voice Polish | **PENDING** | Native phone-bezel WhatsApp simulator + browser voice input |
 | **Phase 6** | Finals Pitch & Live KPI Dashboard | **PENDING** | One-click judge evaluation panel showing $100\%$ determinism & KPI targets |
 
-### Phase 1 Changelog (Completed)
-- **Design System (`ui/common.py`)**: Added `apply_custom_styles()` injecting clean, human-crafted GovTech CSS (Bharat/India Stack aesthetic, card containers `.gov-card`, badge pills `.badge-pill`, responsive grid).
-- **5-Stage Methodology Stepper (`ui/common.py`)**: Implemented `render_stepper()` displaying the 5 stages (*Understand ➔ Profile ➔ Match ➔ Prepare ➔ Track*) reflecting Round 2 Slide 4.
+### Phase 1 Changelog (Completed & Hardened)
+- **UI Code-Leak Hardening**: Diagnosed and eliminated markdown-it code-block leakage where 4-space indented HTML/CSS strings were parsed as `<pre><code>`. Migrated custom cards and components to 100% native Streamlit components (`st.container(border=True)`, `st.columns`, `st.caption`) and `st.html()` for CSS injection.
+- **Full 10-Page Programmatic Audit**: Verified via automated `AppTest` crawl across all 10 views (`nav_dashboard` through `nav_admin`) that **zero** raw code blocks, zero unescaped `<pre>/<code>` tags, and zero broken DOM elements exist.
+- **5-Stage Methodology Stepper (`ui/common.py`)**: Implemented responsive, native-card `render_stepper()` displaying the 5 stages (*Understand ➔ Profile ➔ Match ➔ Prepare ➔ Track*) reflecting Round 2 Slide 4.
 - **Lakshmi Demo Walkthrough (`ui/dashboard.py`)**: Added an interactive tour card allowing one-click activation of Lakshmi's Tiruppur micro-textiles scenario, matching Round 2 Slide 6.
 - **Multi-Agent Architecture Inspector (`ui/common.py`, `ui/dashboard.py`)**: Surfaced the 6 specialized AI agents (*Document, Retrieval, Eligibility, Form, Deadline, Monitoring*) with live status chips directly on the dashboard.
 - **Strict Bilingual Verification (`core/i18n.py`)**: Added all new English & Tamil keys with complete Tamil script and placeholder parity; verified by `tests/test_i18n.py`.

@@ -25,19 +25,9 @@ PAGES = [
 ]
 
 with st.sidebar:
-    st.markdown("""
-        <div style="margin-bottom: 12px;">
-            <div style="font-size: 0.72rem; font-weight: 700; color: #0B6E4F; text-transform: uppercase; letter-spacing: 0.5px;">
-                TEJAS 2026 Finals • Team TEJAS066
-            </div>
-            <div style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-top: 2px;">
-                🏛️ MSME Copilot
-            </div>
-            <div style="font-size: 0.8rem; color: #64748B;">
-                GovTech AI Decision Support
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
+    st.caption("TEJAS 2026 Finals • Team TEJAS066")
+    st.markdown("## 🏛️ MSME Copilot")
+    st.caption("GovTech AI Decision Support")
 
     choice = st.radio("Language / மொழி", ["English", "தமிழ்"], horizontal=True, key="lang_radio")
     st.session_state["lang"] = "ta" if choice == "தமிழ்" else "en"
@@ -50,11 +40,7 @@ with st.sidebar:
     st.write("---")
     p = get_profile()
     if p.get("is_demo"):
-        st.markdown("""
-            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; padding: 8px 10px; font-size: 0.78rem; color: #166534;">
-                <strong>Demo Persona:</strong> Lakshmi (Tiruppur Textiles)
-            </div>
-        """, unsafe_allow_html=True)
+        st.success("Demo: Lakshmi (Tiruppur)")
     st.caption("Rules decide • AI explains • Owner acts")
 
 dict(PAGES)[page_key]()
