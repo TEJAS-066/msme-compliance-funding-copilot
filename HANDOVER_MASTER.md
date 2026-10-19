@@ -119,13 +119,14 @@
 | **Phase 8** | Multilingual Channel Inquiries & Voice | **DONE** | 1-click prompt chips in WhatsApp simulator, voice input embedding, cross-lingual keyword matching |
 | **Phase 9** | Bank-Ready PDF Dossier Generator | **DONE** | In-memory ReportLab PDF generator (`services/report.py`), branch endorsement block, 1-click download in `ui/forms_view.py` |
 | **Phase 10** | Mobile Responsiveness & Master Defense Playbook | **DONE** | Responsive CSS media queries (`@media (max-width: 768px)`), LLM provider auto-detection, comprehensive jury Q&A & team distribution guide |
-| **Phase 11** | Theme Switcher, Onboarding Tour & Page Guides | **DONE** | Light/Dark theme toggle, interactive 4-step onboarding dialog (`show_onboarding_tour`), standardized `ℹ️ Page Guide` popovers on all 10 views, aligned task controls |
+| **Phase 11** | Theme Switcher, Spotlight Tour & Page Guides | **DONE** | Top Day/Night toggle bar, circular `ℹ️` button popovers, full-contrast dark mode (all buttons readable), component-pointing spotlight tour, aligned task controls |
 
 ### Phase 11 Changelog (Completed)
-- **Light / Dark Mode Theme Switcher (`ui/common.py`, `app.py`)**: Built dynamic CSS injection for clean GovTech paper white (`#F8FAFC`) and sleek executive dark navy (`#0B1120`), toggled via sidebar radio button.
-- **Interactive Onboarding Walkthrough Tour (`ui/common.py`, `app.py`)**: Integrated multi-step modal (`show_onboarding_tour`) using `st.dialog` explaining the core principle ("Rules decide, AI explains, owner acts"), 5-stage stepper, Digital Twin & Document Agent, and bank dossier. Re-triggerable anytime via the `💡 Guided Tour` sidebar button.
-- **Universal Page Guide (`ℹ️`) Popovers (`ui/common.py`)**: Built `render_page_header` with localized purpose, user action instructions, and loan benefits on all 10 pages across English, தமிழ், हिन्दी, and తెలుగు.
-- **Task & Application Tracking Alignment (`ui/tasks_view.py`)**: Aligned due date, scheme selectbox, and reminder preference to a single top baseline; aligned Application Tracking rows with in-line "Update" buttons using `vertical_alignment="bottom"`.
+- **Top Day ☀️ / Night 🌙 Toggle Bar (`ui/common.py:render_page_header`)**: Embedded sleek toggle switch at the top-right header of every view, allowing 1-click theme flipping without cluttering the sidebar.
+- **Full-Contrast Dark Mode Overhaul (`ui/common.py`)**: Fixed all button text and input visibility in dark mode (`button[kind="secondary"]` with `#FFFFFF` text on `#1F2937` backgrounds, `#111827` cards, `#0A0F1D` app canvas, and `#0F172A` sidebar).
+- **Circular `ℹ️` Info Popover Button (`ui/common.py`)**: Styled popover into a 38px circular badge button (`border-radius: 50%`) with localized guidance on every page across English, தமிழ், हिन्दी, and తెలుగు.
+- **Automated Component-Pointing Spotlight Tour (`ui/common.py:render_spotlight_tour`)**: Injected native client-side tour with a glowing `#10B981` pulse box pointing directly to live DOM elements (Sidebar Navigation, Top Day/Night Toggle, Stepper, and Lakshmi Card) with floating next/prev tooltips. Runs automatically on first visit or via `💡 Guided Tour` sidebar button.
+- **Task & Application Tracking Alignment (`ui/tasks_view.py`)**: Aligned due date, scheme selectbox, and reminder preference to a single top baseline; aligned Application Tracking rows with in-line "Update" buttons.
 - **Multilingual Parity**: Expanded `core/i18n.py`, `core/i18n_hi.py`, and `core/i18n_te.py` with 28 new keys (314 total keys per language).
 - **Regression Verification**: 233 passed in pytest, 100% eligibility, 100% extraction.
 

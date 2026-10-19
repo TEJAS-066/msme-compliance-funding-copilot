@@ -26,36 +26,70 @@ def save_profile(p: dict) -> None:
 
 
 def apply_custom_styles(theme: str | None = None) -> None:
-    """Inject clean, human-crafted GovTech & Fintech portal styling with Light / Dark theme support."""
+    """Inject clean, human-crafted GovTech & Fintech portal styling with full Light / Dark theme support."""
     theme = theme or st.session_state.get("theme", "light")
     is_dark = "dark" in str(theme).lower() or "🌙" in str(theme)
 
     if is_dark:
         bg_main = "#0B1120"
-        card_bg = "#1E293B"
-        border_col = "#334155"
+        sidebar_bg = "#0F172A"
+        sidebar_border = "#1E293B"
+        card_bg = "#111827"
+        border_col = "#1F2937"
         text_primary = "#F8FAFC"
         text_secondary = "#94A3B8"
-        metric_bg = "#1E293B"
+        heading_col = "#FFFFFF"
+        metric_bg = "#111827"
+        btn_sec_bg = "#1F2937"
+        btn_sec_border = "#374151"
+        btn_sec_text = "#FFFFFF"
+        btn_sec_hover = "#374151"
+        input_bg = "#1F2937"
     else:
         bg_main = "#F8FAFC"
+        sidebar_bg = "#F1F5F9"
+        sidebar_border = "#E2E8F0"
         card_bg = "#FFFFFF"
         border_col = "#E2E8F0"
         text_primary = "#0F172A"
         text_secondary = "#475569"
+        heading_col = "#0F172A"
         metric_bg = "#FFFFFF"
+        btn_sec_bg = "#FFFFFF"
+        btn_sec_border = "#CBD5E1"
+        btn_sec_text = "#0F172A"
+        btn_sec_hover = "#F1F5F9"
+        input_bg = "#FFFFFF"
 
     css = textwrap.dedent(f"""
     <style>
-    /* Theme root styling */
-    .stApp {{
+    /* Full Theme root styling */
+    .stApp, div[data-testid="stAppViewContainer"] {{
         background-color: {bg_main} !important;
         color: {text_primary} !important;
     }}
 
+    section[data-testid="stSidebar"] {{
+        background-color: {sidebar_bg} !important;
+        border-right: 1px solid {sidebar_border} !important;
+    }}
+    section[data-testid="stSidebar"] * {{
+        color: {text_primary} !important;
+    }}
+
+    /* Global Text Contrast */
+    .stApp p, .stApp span, .stApp label, .stApp li {{
+        color: {text_primary} !important;
+    }}
+
+    .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {{
+        color: {heading_col} !important;
+        font-weight: 700 !important;
+    }}
+
     /* Base typography & layout padding */
     .main .block-container {{
-        padding-top: 1.5rem;
+        padding-top: 1.2rem;
         padding-bottom: 2.5rem;
         max-width: 1140px;
     }}
@@ -70,7 +104,7 @@ def apply_custom_styles(theme: str | None = None) -> None:
     }}
     div[data-testid="stMetricValue"] {{
         font-weight: 700;
-        color: {text_primary} !important;
+        color: {heading_col} !important;
     }}
     div[data-testid="stMetricLabel"] {{
         font-weight: 500;
@@ -80,31 +114,88 @@ def apply_custom_styles(theme: str | None = None) -> None:
     /* Container card styling */
     div[data-testid="stVerticalBlockBorderWrapper"] > div {{
         background-color: {card_bg} !important;
-        border-color: {border_col} !important;
+        border: 1px solid {border_col} !important;
     }}
 
-    /* Clean buttons */
+    /* Primary buttons */
     button[kind="primary"] {{
         background-color: #0B6E4F !important;
         border-color: #0B6E4F !important;
-        font-weight: 600;
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
     }}
     button[kind="primary"]:hover {{
         background-color: #085039 !important;
         border-color: #085039 !important;
     }}
 
+    /* Secondary / Default Buttons - EXPLICIT HIGH CONTRAST */
+    button[kind="secondary"], div[data-testid="stButton"] > button:not([kind="primary"]) {{
+        background-color: {btn_sec_bg} !important;
+        border: 1px solid {btn_sec_border} !important;
+        color: {btn_sec_text} !important;
+        font-weight: 500 !important;
+    }}
+    button[kind="secondary"]:hover, div[data-testid="stButton"] > button:not([kind="primary"]):hover {{
+        background-color: {btn_sec_hover} !important;
+        border-color: {btn_sec_border} !important;
+        color: {btn_sec_text} !important;
+    }}
+
+    /* Inputs, Textareas, Selectboxes */
+    input, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {{
+        background-color: {input_bg} !important;
+        border-color: {border_col} !important;
+        color: {text_primary} !important;
+    }}
+    div[data-baseweb="select"] > div {{
+        background-color: {input_bg} !important;
+        border-color: {border_col} !important;
+        color: {text_primary} !important;
+    }}
+    div[data-baseweb="popover"], ul[role="listbox"] {{
+        background-color: {input_bg} !important;
+        border: 1px solid {border_col} !important;
+    }}
+    li[role="option"] {{
+        background-color: {input_bg} !important;
+        color: {text_primary} !important;
+    }}
+    li[role="option"]:hover, li[aria-selected="true"] {{
+        background-color: {btn_sec_hover} !important;
+        color: {heading_col} !important;
+    }}
+
+    /* Circular 'i' info button popover */
+    div[data-testid="stPopover"] > button {{
+        border-radius: 50% !important;
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        max-width: 38px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        border: 1px solid {border_col} !important;
+        background-color: {card_bg} !important;
+        color: {heading_col} !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    }}
+
     /* Mobile Responsive Optimizations (< 768px) */
     @media (max-width: 768px) {{
         .main .block-container {{
-            padding-top: 1rem !important;
+            padding-top: 0.8rem !important;
             padding-left: 0.75rem !important;
             padding-right: 0.75rem !important;
             padding-bottom: 2rem !important;
         }}
         div[data-testid="stHorizontalBlock"] {{
             flex-wrap: wrap !important;
-            gap: 0.6rem !important;
+            gap: 0.5rem !important;
         }}
         div[data-testid="column"] {{
             min-width: 100% !important;
@@ -118,6 +209,10 @@ def apply_custom_styles(theme: str | None = None) -> None:
             width: 100% !important;
             margin-bottom: 0.4rem;
         }}
+        div[data-testid="stPopover"] > button {{
+            width: 36px !important;
+            height: 36px !important;
+        }}
     }}
     </style>
     """).strip()
@@ -125,15 +220,144 @@ def apply_custom_styles(theme: str | None = None) -> None:
 
 
 def render_page_header(title_key: str, info_key: str) -> None:
-    """Standardized page header with title and interactive Page Guide popover."""
+    """Standardized page header with title, Day/Night toggle bar, and circular info button."""
     l = lang()
-    c_title, c_info = st.columns([5, 1], vertical_alignment="center")
-    c_title.header(t(title_key, l))
+    c_title, c_toggle, c_info = st.columns([4.2, 1.8, 0.6], vertical_alignment="center")
+    with c_title:
+        st.header(t(title_key, l))
+    with c_toggle:
+        is_dark = st.session_state.get("dark_mode", False)
+        new_val = st.toggle("🌙 Dark" if is_dark else "☀️ Light", value=is_dark, key=f"theme_toggle_{title_key}")
+        if new_val != is_dark:
+            st.session_state["dark_mode"] = new_val
+            st.session_state["theme"] = "dark" if new_val else "light"
+            st.rerun()
     with c_info:
-        with st.popover("ℹ️ " + t("btn_page_info", l), use_container_width=True):
+        with st.popover("ℹ️", help=t("btn_page_info", l), use_container_width=True):
             st.markdown(f"#### ℹ️ {t(title_key, l)}")
             st.info(t(info_key, l))
             st.caption("GovTech AI • " + t("btn_page_info", l))
+
+
+def render_spotlight_tour() -> None:
+    """Inject interactive client-side spotlight tour that points directly to screen components."""
+    force_js = "window.__FORCE_TOUR = true;" if st.session_state.get("trigger_spotlight") else "window.__FORCE_TOUR = false;"
+    if st.session_state.get("trigger_spotlight"):
+        st.session_state["trigger_spotlight"] = False
+
+    tour_html = f"""
+    <div id="msme-spotlight-overlay" style="display: none; position: fixed; inset: 0; z-index: 999999; pointer-events: auto; background: rgba(0, 0, 0, 0.75);">
+      <div id="msme-spotlight-box" style="position: absolute; border: 3px solid #10B981; border-radius: 8px; box-shadow: 0 0 25px rgba(16, 185, 129, 0.7), inset 0 0 15px rgba(16, 185, 129, 0.3); transition: all 0.35s ease; pointer-events: none;"></div>
+      <div id="msme-spotlight-card" style="position: absolute; width: 340px; max-width: 90vw; background: #0F172A; color: #FFFFFF; border: 1px solid #334155; border-radius: 12px; padding: 18px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); transition: all 0.35s ease; font-family: sans-serif;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span id="msme-spotlight-step" style="font-size: 0.8rem; font-weight: 700; color: #10B981; text-transform: uppercase; letter-spacing: 0.05em;">Step 1 of 4</span>
+          <button onclick="window.msmeTourDone()" style="background: none; border: none; color: #94A3B8; font-size: 1.1rem; cursor: pointer; padding: 0;">✕</button>
+        </div>
+        <h4 id="msme-spotlight-title" style="margin: 0 0 8px 0; font-size: 1.05rem; color: #FFFFFF;"></h4>
+        <p id="msme-spotlight-desc" style="margin: 0 0 16px 0; font-size: 0.88rem; color: #CBD5E1; line-height: 1.45;"></p>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <button id="msme-spotlight-prev" onclick="window.msmeTourPrev()" style="background: #1E293B; border: 1px solid #475569; color: #FFFFFF; border-radius: 6px; padding: 6px 14px; font-size: 0.85rem; cursor: pointer;">⬅ Back</button>
+          <button id="msme-spotlight-next" onclick="window.msmeTourNext()" style="background: #059669; border: none; color: #FFFFFF; border-radius: 6px; padding: 6px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Next ➔</button>
+        </div>
+      </div>
+    </div>
+    <script>
+    (function() {{
+      {force_js}
+      const steps = [
+        {{
+          selector: 'section[data-testid="stSidebar"]',
+          title: '1. Navigation & Languages',
+          desc: 'Access all 10 specialized GovTech views and switch seamlessly between English, தமிழ், हिन्दी, and తెలుగు.'
+        }},
+        {{
+          selector: 'div[data-testid="stHorizontalBlock"]',
+          title: '2. Day/Night Toggle & Circular ℹ️ Guide',
+          desc: 'Toggle between ☀️ Light / 🌙 Dark modes at the top, and click the circular ℹ️ button on any page for instant guidance.'
+        }},
+        {{
+          selector: 'div[data-testid="stVerticalBlockBorderWrapper"]',
+          title: '3. Stepper & Lakshmi Tour',
+          desc: 'Follow the 5-Stage Stepper and run the Document Agent in 1 click on Lakshmi\\'s Tiruppur micro-textiles scenario.'
+        }},
+        {{
+          selector: 'div[data-testid="stMetric"]',
+          title: '4. Executive Metrics & AI Agents',
+          desc: 'All 6 AI agents operate with 100% deterministic rules, zero hallucinations, and bank-ready PDF dossier generation.'
+        }}
+      ];
+
+      let currentStep = 0;
+      const overlay = document.getElementById('msme-spotlight-overlay');
+      const box = document.getElementById('msme-spotlight-box');
+      const card = document.getElementById('msme-spotlight-card');
+      const stepLabel = document.getElementById('msme-spotlight-step');
+      const titleEl = document.getElementById('msme-spotlight-title');
+      const descEl = document.getElementById('msme-spotlight-desc');
+      const prevBtn = document.getElementById('msme-spotlight-prev');
+      const nextBtn = document.getElementById('msme-spotlight-next');
+
+      function updatePosition() {{
+        const s = steps[currentStep];
+        const el = document.querySelector(s.selector) || document.body;
+        const rect = el.getBoundingClientRect();
+
+        box.style.top = Math.max(0, rect.top - 6) + 'px';
+        box.style.left = Math.max(0, rect.left - 6) + 'px';
+        box.style.width = Math.min(window.innerWidth - rect.left, rect.width + 12) + 'px';
+        box.style.height = Math.min(window.innerHeight - rect.top, rect.height + 12) + 'px';
+
+        let cardTop = rect.bottom + 16;
+        let cardLeft = Math.max(16, rect.left);
+        if (cardTop + 240 > window.innerHeight) {{
+          cardTop = Math.max(16, rect.top - 240);
+        }}
+        if (cardLeft + 360 > window.innerWidth) {{
+          cardLeft = window.innerWidth - 370;
+        }}
+        card.style.top = Math.max(16, cardTop) + 'px';
+        card.style.left = Math.max(16, cardLeft) + 'px';
+
+        stepLabel.innerText = `Step ${{currentStep + 1}} of ${{steps.length}}`;
+        titleEl.innerText = s.title;
+        descEl.innerText = s.desc;
+        prevBtn.style.visibility = currentStep === 0 ? 'hidden' : 'visible';
+        nextBtn.innerText = currentStep === steps.length - 1 ? 'Finish ✓' : 'Next ➔';
+      }}
+
+      window.msmeTourNext = function() {{
+        if (currentStep < steps.length - 1) {{
+          currentStep++;
+          updatePosition();
+        }} else {{
+          window.msmeTourDone();
+        }}
+      }};
+
+      window.msmeTourPrev = function() {{
+        if (currentStep > 0) {{
+          currentStep--;
+          updatePosition();
+        }}
+      }};
+
+      window.msmeTourDone = function() {{
+        if (overlay) overlay.style.display = 'none';
+        localStorage.setItem('msme_spotlight_completed', 'true');
+      }};
+
+      setTimeout(function() {{
+        if (!localStorage.getItem('msme_spotlight_completed') || window.__FORCE_TOUR) {{
+          if (overlay) {{
+            overlay.style.display = 'block';
+            updatePosition();
+          }}
+        }}
+      }}, 800);
+    }})();
+    </script>
+    """
+    st.html(tour_html)
 
 
 @st.dialog("🏛️ MSME Copilot — Quick Guided Tour")
