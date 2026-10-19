@@ -32,10 +32,14 @@ class Handler(BaseHTTPRequestHandler):
         self._send(200, "text/plain", "ok") if self.path in ("/", "/health") else self._send(404, "text/plain", "not found")
 
     def do_POST(self):
-        if self.path != "/whatsapp":
-            return self._send(404, "text/plain", "not found")
         n = int(self.headers.get("Content-Length") or 0)
+        if self.path != "/whatsapp":
+            if n > 0:
+                self.rfile.read(min(n, MAX_BODY))
+            return self._send(404, "text/plain", "not found")
         if n > MAX_BODY:
+            if n > 0:
+                self.rfile.read(min(n, MAX_BODY))
             return self._send(413, "text/plain", "too large")
         form = {k: v[0] for k, v in parse_qs(self.rfile.read(n).decode("utf-8", "replace")).items()}
         url = os.environ.get("PUBLIC_URL") or f"http://{self.headers.get('Host', '')}{self.path}"
