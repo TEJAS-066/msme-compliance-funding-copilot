@@ -46,5 +46,7 @@ else {
   };
 }
 </script>"""
-    html = html.replace("__LABELS__", json.dumps(labels, ensure_ascii=False)).replace("__LANG__", "ta-IN" if lang == "ta" else "en-IN")
+    loc_map = {"ta": "ta-IN", "hi": "hi-IN", "te": "te-IN"}
+    speech_lang = loc_map.get(lang, "en-IN")
+    html = html.replace("__LABELS__", json.dumps(labels, ensure_ascii=False)).replace("__LANG__", speech_lang)
     components.html(html, height=48)

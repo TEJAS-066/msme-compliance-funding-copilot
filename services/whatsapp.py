@@ -15,7 +15,7 @@ from xml.sax.saxutils import escape
 from core.i18n import t
 from services.channel import detect_language, handle_incoming
 
-GREETINGS = {"hi", "hello", "hey", "help", "menu", "start", "வணக்கம்", "உதவி"}
+GREETINGS = {"hi", "hello", "hey", "help", "menu", "start", "வணக்கம்", "உதவி", "नमस्ते", "प्रणाम", "నమస్కారం"}
 
 
 def twilio_signature(auth_token: str, url: str, params: dict) -> str:

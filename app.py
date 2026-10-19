@@ -29,8 +29,9 @@ with st.sidebar:
     st.markdown("## 🏛️ MSME Copilot")
     st.caption("GovTech AI Decision Support")
 
-    choice = st.radio("Language / மொழி", ["English", "தமிழ்"], horizontal=True, key="lang_radio")
-    st.session_state["lang"] = "ta" if choice == "தமிழ்" else "en"
+    LANG_MAP = {"English": "en", "தமிழ்": "ta", "हिन्दी": "hi", "తెలుగు": "te"}
+    choice = st.radio("Language / மொழி / भाषा / భాష", list(LANG_MAP.keys()), horizontal=True, key="lang_radio")
+    st.session_state["lang"] = LANG_MAP.get(choice, "en")
     lang = st.session_state["lang"]
 
     st.write("")

@@ -9,13 +9,20 @@ from __future__ import annotations
 from core.catalogue import get_catalogue, list_schemes, unverified_backlog, L
 
 INTENT_WORDS = {
-    "eligibility": ["eligible", "eligibility", "qualify", "can i get", "am i", "தகுதி", "கிடைக்குமா", "தகுதியா"],
-    "documents":   ["document", "documents", "papers", "checklist", "certificate", "what do i need", "ஆவண", "சான்றிதழ்", "என்ன வேண்டும்"],
-    "amount":      ["limit", "how much", "amount", "maximum", "benefit", "எவ்வளவு", "தொகை", "வரம்பு", "பலன்"],
-    "next_steps":  ["next", "what should i do", "steps", "how do i apply", "how to apply", "அடுத்து", "என்ன செய்ய", "எப்படி விண்ணப்ப"],
-    "deadline":    ["deadline", "due date", "last date", "reminder", "காலக்கெடு", "கடைசி தேதி"],
-    "form":        ["form", "fill", "application", "படிவம்", "விண்ணப்ப"],
-    "overview":    ["what is", "explain", "meaning", "tell me about", "என்றால் என்ன", "பற்றி"],
+    "eligibility": ["eligible", "eligibility", "qualify", "can i get", "am i", "தகுதி", "கிடைக்குமா", "தகுதியா",
+                    "पात्र", "पात्रता", "योग्यता", "क्या मुझे", "అర్హత", "దొరుకుతుందా", "నాకు వస్తుందా"],
+    "documents":   ["document", "documents", "papers", "checklist", "certificate", "what do i need", "ஆவண", "சான்றிதழ்", "என்ன வேண்டும்",
+                    "दस्तावेज़", "कागजात", "प्रमाण पत्र", "क्या चाहिए", "పత్రాలు", "దస్తావేజులు", "సర్టిఫికేట్", "ఏమి కావాలి"],
+    "amount":      ["limit", "how much", "amount", "maximum", "benefit", "எவ்வளவு", "தொகை", "வரம்பு", "பலன்",
+                    "कितना", "राशि", "अधिकतम", "लाभ", "ఎంత", "మొత్తం", "పరిమితి", "ప్రయోజనం"],
+    "next_steps":  ["next", "what should i do", "steps", "how do i apply", "how to apply", "அடுத்து", "என்ன செய்ய", "எப்படி விண்ணப்ப",
+                    "आगे क्या", "कैसे आवेदन", "आवेदन कैसे", "अगला कदम", "తరువాత ఏమి", "ఎలా దరఖాస్తు", "తదుపరి దశ"],
+    "deadline":    ["deadline", "due date", "last date", "reminder", "காலக்கெடு", "கடைசி தேதி",
+                    "अंतिम तिथि", "समय सीमा", "आखिरी तारीख", "చివరి తేదీ", "గడువు"],
+    "form":        ["form", "fill", "application", "படிவம்", "விண்ணப்ப",
+                    "फॉर्म", "आवेदन पत्र", "प्रपत्र", "ఫారమ్", "దరఖాస్తు"],
+    "overview":    ["what is", "explain", "meaning", "tell me about", "என்றால் என்ன", "பற்றி",
+                    "क्या है", "जानकारी", "के बारे में", "అంటే ఏమిటి", "గురించి", "వివరణ"],
 }
 
 

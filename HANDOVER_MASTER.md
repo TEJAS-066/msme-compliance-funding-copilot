@@ -111,10 +111,33 @@
 | **Phase 0** | Starter Foundation | **DONE** | Core rules, 224 unit tests, SQLite DB, basic Streamlit UI |
 | **Phase 1** | Human-Crafted GovTech UI & 5-Stage Stepper | **DONE** | Custom CSS design system, 5-stage workflow stepper, Lakshmi demo tour card, multi-agent status bar |
 | **Phase 2** | Scheme Catalogue Expansion | **DONE** | Add PMEGP (KVIC official rules) to `data/schemes.json` + evaluation cases |
-| **Phase 3** | Multilingual Expansion | **NEXT UP** | Hindi & Telugu integration in `core/i18n.py` and UI selector |
-| **Phase 4** | Multi-Agent Form Generator | **PENDING** | Formal MUDRA/CGTMSE printable loan application worksheet |
-| **Phase 5** | WhatsApp & Voice Polish | **PENDING** | Native phone-bezel WhatsApp simulator + browser voice input |
-| **Phase 6** | Finals Pitch & Live KPI Dashboard | **PENDING** | One-click judge evaluation panel showing $100\%$ determinism & KPI targets |
+| **Phase 3** | Multilingual Expansion (Hindi & Telugu) | **DONE** | Hindi & Telugu integration in `core/i18n.py`, `core/i18n_hi.py`, `core/i18n_te.py`, and UI selector |
+| **Phase 4** | Multi-Agent Form Generator | **DONE** | Authentic GovTech loan application worksheet dossier in `ui/forms_view.py` and `core/forms.py` |
+| **Phase 5** | WhatsApp & Voice Polish | **DONE** | Native phone-bezel WhatsApp simulator with multi-script auto-detection & Web Speech locale routing |
+| **Phase 6** | Finals Pitch & Live KPI Dashboard | **DONE** | Jury Evaluation Telemetry panel on Admin page proving 100% eligibility & 100% extraction |
+
+### Phase 6 Changelog (Completed)
+- **Jury Evaluation Telemetry Panel (`ui/admin_view.py`)**: Built an executive evaluation card directly on the Admin page presenting automated proof of the targets pitched in Round 2:
+  - Eligibility Accuracy: Target $\ge 90\%$ $\rightarrow$ **100% (55/55 passed)**
+  - Extraction Accuracy: Target $\ge 90\%$ $\rightarrow$ **100% (15/15 passed)**
+  - Hallucination Rate: Target $0\%$ $\rightarrow$ **0% (100% deterministic rules)**
+  - Specialized AI Agents: **6 / 6 Operational** (Document, Retrieval, Eligibility, Form, Deadline, Monitoring).
+
+### Phase 5 Changelog (Completed)
+- **Multi-Script WhatsApp Routing (`services/channel.py`, `services/whatsapp.py`)**: Expanded `detect_language` to automatically identify Tamil, Devanagari (Hindi), and Telugu unicode ranges, responding automatically in the user's native script.
+- **Multilingual Greetings**: Added Hindi (`नमस्ते`, `प्रणाम`) and Telugu (`నమస్కారం`) to instant greeting router.
+- **Browser Speech Recognition Locales (`ui/voice.py`)**: Mapped voice input to `en-IN`, `ta-IN`, `hi-IN`, and `te-IN`.
+
+### Phase 4 Changelog (Completed)
+- **Authentic GovTech Dossier Layout (`ui/forms_view.py`)**: Transformed raw field lists into a structured, dual-column loan application dossier with readiness score indicator (`ready_pct%`), pre-filled metrics, and clear warnings for missing fields.
+- **Multilingual Worksheets (`core/forms.py`)**: Added full English, Tamil, Hindi, and Telugu labels and hints, eliminating `KeyError` crashes on non-English locales.
+
+### Phase 3 Changelog (Completed)
+- **Multilingual Architecture (`core/i18n.py`, `core/i18n_hi.py`, `core/i18n_te.py`)**: Preserved `TR` English/Tamil tuple structure to guarantee 100% backward compatibility while integrating complete 275-key dictionaries for Hindi (`TR_HI`) and Telugu (`TR_TE`).
+- **Profile Field & Option Labels**: Added Hindi & Telugu translations for all 18 business profile fields and select options in `core/profile.py`.
+- **4-Language UI Selector (`app.py`)**: Added English, தமிழ், हिन्दी, and తెలుగు to the sidebar language switcher.
+- **Intent Recognition (`services/retrieval.py`)**: Extended `INTENT_WORDS` with Hindi and Telugu keywords for eligibility, documents, amounts, next steps, deadlines, and forms.
+- **Multilingual Unit Tests (`tests/test_i18n.py`)**: Added automated validation confirming 100% script parity and placeholder matching across all 275 keys.
 
 ### Phase 2 Changelog (Completed)
 - **PMEGP Promoted to Verified Scheme (`data/schemes.json`)**: Added official scheme definition with primary sources (`kvic_pmegp_guidelines` & `msme_pmegp_portal`).
@@ -122,7 +145,7 @@
 - **Keyword Hygiene**: Cleaned generic keywords like "subsidy" to prevent intent collisions with unverified backlog schemes.
 - **UI Schemes View (`ui/schemes_view.py`)**: Added `PMEGP` metric chip and interactive criteria inspection across all 3 schemes.
 - **Evaluation Benchmark Expansion (`evaluation/cases.json`)**: Scaled eligibility benchmark from 34 to 55 test cases, achieving **100% (55/55)** accuracy.
-- **Test Suite Updates**: 225 unit/integration tests passing (`python -m pytest -q`).
+- **Test Suite Updates**: 231 unit/integration tests passing (`python -m pytest -q`).
 
 ### Phase 1 Changelog (Completed & Hardened)
 - **UI Code-Leak Hardening**: Diagnosed and eliminated markdown-it code-block leakage where 4-space indented HTML/CSS strings were parsed as `<pre><code>`. Migrated custom cards and components to 100% native Streamlit components (`st.container(border=True)`, `st.columns`, `st.caption`) and `st.html()` for CSS injection.

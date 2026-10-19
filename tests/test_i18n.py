@@ -84,3 +84,57 @@ def test_missing_key_is_visible_not_silent():
 def test_option_labels():
     assert option_label("activity", "manufacturing", "ta") == "உற்பத்தி"
     assert option_label("activity", "education_training", "en") == "Education Training"
+    assert option_label("activity", "manufacturing", "hi") == "विनिर्माण"
+    assert option_label("activity", "manufacturing", "te") == "ఉత్పత్తి"
+
+
+HINDI = re.compile("[\u0900-\u097f]")
+TELUGU = re.compile("[\u0c00-\u0c7f]")
+
+
+def test_hindi_dictionary_present_and_valid():
+    from core.i18n_hi import TR_HI
+    assert len(TR_HI) == len(TR)
+    for k, (en, _) in TR.items():
+        assert k in TR_HI, f"Missing key in TR_HI: {k}"
+        hi_text = TR_HI[k]
+        assert set(FMT.findall(en)) == set(FMT.findall(hi_text)), f"Placeholder mismatch in Hindi for {k}"
+        # If text is not just acronyms/numbers, it should have Hindi script
+        if not re.match(r"^[\d\s\.\-—:\(\)\{\}A-Z_]+$", en):
+            assert HINDI.search(hi_text), f"Key {k} has no Devanagari script: {hi_text}"
+
+
+def test_telugu_dictionary_present_and_valid():
+    from core.i18n_te import TR_TE
+    assert len(TR_TE) == len(TR)
+    for k, (en, _) in TR.items():
+        assert k in TR_TE, f"Missing key in TR_TE: {k}"
+        te_text = TR_TE[k]
+        assert set(FMT.findall(en)) == set(FMT.findall(te_text)), f"Placeholder mismatch in Telugu for {k}"
+        if not re.match(r"^[\d\s\.\-—:\(\)\{\}A-Z_]+$", en):
+            assert TELUGU.search(te_text), f"Key {k} has no Telugu script: {te_text}"
+
+
+def test_t_hindi_and_telugu_resolution():
+    assert HINDI.search(t("app_title", "hi"))
+    assert TELUGU.search(t("app_title", "te"))
+    assert HINDI.search(t("mudra_tier_line", "hi", amount="₹50,000", tier="शिशु"))
+    assert TELUGU.search(t("mudra_tier_line", "te", amount="₹50,000", tier="శిశు"))
+
+
+def test_profile_field_labels_multilingual():
+    for f in P.FIELDS:
+        hi_lbl = field_label(f, "hi")
+        te_lbl = field_label(f, "te")
+        assert hi_lbl and te_lbl, f"Missing multilingual label for {f}"
+        if f not in ("gstin", "udyam_number"):
+            assert HINDI.search(hi_lbl), f"Field {f} missing Hindi script in label"
+            assert TELUGU.search(te_lbl), f"Field {f} missing Telugu script in label"
+
+
+def test_retrieval_intents_multilingual():
+    from services.retrieval import detect_intent
+    assert detect_intent("क्या मैं मुद्रा के लिए पात्र हूँ") == "eligibility"
+    assert detect_intent("నాకు అర్హత ఉందా") == "eligibility"
+    assert detect_intent("क्या दस्तावेज़ चाहिए") == "documents"
+    assert detect_intent("ఏమి పత్రాలు కావాలి") == "documents"

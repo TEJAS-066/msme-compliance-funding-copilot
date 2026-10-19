@@ -8,11 +8,19 @@ from __future__ import annotations
 from services.copilot import answer
 
 TAMIL_RANGE = (0x0B80, 0x0BFF)
+HINDI_RANGE = (0x0900, 0x097F)
+TELUGU_RANGE = (0x0C00, 0x0C7F)
 MAX_LEN = 1500  # WhatsApp messages are length-limited; keep headroom
 
 
 def detect_language(text: str) -> str:
-    return "ta" if any(TAMIL_RANGE[0] <= ord(ch) <= TAMIL_RANGE[1] for ch in text) else "en"
+    if any(TAMIL_RANGE[0] <= ord(ch) <= TAMIL_RANGE[1] for ch in text):
+        return "ta"
+    if any(HINDI_RANGE[0] <= ord(ch) <= HINDI_RANGE[1] for ch in text):
+        return "hi"
+    if any(TELUGU_RANGE[0] <= ord(ch) <= TELUGU_RANGE[1] for ch in text):
+        return "te"
+    return "en"
 
 
 def handle_incoming(text: str, profile: dict, confirmed_types: set[str] | None = None, lang: str | None = None) -> str:

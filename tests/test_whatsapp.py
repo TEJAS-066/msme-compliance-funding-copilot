@@ -36,6 +36,8 @@ def test_twiml_escapes_xml():
 def test_greeting_returns_menu_in_detected_language(demo):
     assert "I never submit" in W.handle_message("hi", demo)
     assert "சமர்ப்பிக்க மாட்டேன்" in W.handle_message("வணக்கம்", demo)
+    assert "जमा नहीं करता" in W.handle_message("नमस्ते", demo)
+    assert "సమర్పించను" in W.handle_message("నమస్కారం", demo)
     assert "I never submit" in W.handle_message("", demo)
 
 

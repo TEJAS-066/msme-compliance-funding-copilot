@@ -335,12 +335,22 @@ TR: dict[str, tuple[str, str]] = {
     "status_standby": ("Standby", "தயார் நிலை"),
 }
 
+from core.i18n_hi import TR_HI
+from core.i18n_te import TR_TE
+
 
 def t(key: str, lang: str = "en", **kw) -> str:
     pair = TR.get(key)
     if pair is None:
         return f"[{key}]"
-    s = pair[1] if lang == "ta" else pair[0]
+    if lang == "ta":
+        s = pair[1]
+    elif lang == "hi":
+        s = TR_HI.get(key) or pair[0]
+    elif lang == "te":
+        s = TR_TE.get(key) or pair[0]
+    else:
+        s = pair[0]
     return s.format(**kw) if kw else s
 
 
@@ -359,6 +369,20 @@ def option_label(fld: str, opt: str, lang: str = "en") -> str:
           "public_limited": "பொது நிறுவனம்", "shg": "சுய உதவிக் குழு", "educational_institution": "கல்வி நிறுவனம்", "other": "மற்றவை",
           "yes": "ஆம்", "no": "இல்லை", "registered": "பதிவு உள்ளது", "not_registered": "பதிவு இல்லை",
           "micro": "நுண்", "small": "சிறு", "medium": "நடுத்தர"}
+    hi = {"manufacturing": "विनिर्माण", "services": "सेवाएं", "trading": "व्यापार", "agriculture": "कृषि", "education_training": "शिक्षा / प्रशिक्षण",
+          "proprietorship": "एकल स्वामित्व", "partnership": "साझेदारी", "llp": "LLP", "private_limited": "प्राइवेट लिमिटेड",
+          "public_limited": "पब्लिक लिमिटेड", "shg": "स्वयं सहायता समूह", "educational_institution": "शैक्षणिक संस्थान", "other": "अन्य",
+          "yes": "हाँ", "no": "नहीं", "registered": "पंजीकृत", "not_registered": "पंजीकृत नहीं",
+          "micro": "सूक्ष्म", "small": "लघु", "medium": "मध्यम"}
+    te = {"manufacturing": "ఉత్పత్తి", "services": "సేవలు", "trading": "వాణిజ్యం", "agriculture": "వ్యవసాయం", "education_training": "విద్య / శిక్షణ",
+          "proprietorship": "వ్యక్తిగత యాజమాన్యం", "partnership": "భాగస్వామ్యం", "llp": "LLP", "private_limited": "ప్రైవేట్ లిమిటెడ్",
+          "public_limited": "పబ్లిక్ లిమిటెడ్", "shg": "స్వయం సహాయక బృందం", "educational_institution": "విద్యా సంస్థ", "other": "ఇతర",
+          "yes": "అవును", "no": "కాదు", "registered": "నమోదైంది", "not_registered": "నమోదు కాలేదు",
+          "micro": "సూక్ష్మ", "small": "చిన్న", "medium": "మధ్యతరహా"}
     if lang == "ta" and opt in ta:
         return ta[opt]
+    if lang == "hi" and opt in hi:
+        return hi[opt]
+    if lang == "te" and opt in te:
+        return te[opt]
     return opt.replace("_", " ").title() if opt not in ("llp",) else "LLP"

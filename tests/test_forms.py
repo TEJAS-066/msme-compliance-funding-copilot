@@ -21,5 +21,12 @@ def test_worksheet_tamil(demo):
     assert "அதிகாரப்பூர்வ படிவம் அல்ல" in F.worksheet_text(demo, "PMMY", "ta")
 
 
+def test_worksheet_hindi_and_telugu(demo):
+    hi_txt = F.worksheet_text(demo, "PMMY", "hi")
+    te_txt = F.worksheet_text(demo, "PMMY", "te")
+    assert "आधिकारिक फॉर्म नहीं" in hi_txt
+    assert "అధికారిక ఫారమ్ కాదు" in te_txt
+
+
 def test_amounts_formatted_in_indian_grouping(demo):
     assert "₹8,00,000" in F.worksheet_text(demo, "PMMY")
