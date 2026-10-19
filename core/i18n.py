@@ -297,6 +297,42 @@ TR: dict[str, tuple[str, str]] = {
     "v_unsupported": ("Speech recognition is not supported in this browser. Use Chrome or Edge, or type.", "இந்த உலாவியில் குரல் அறிதல் ஆதரிக்கப்படவில்லை. Chrome அல்லது Edge பயன்படுத்தவும், அல்லது தட்டச்சு செய்யவும்."),
     "v_privacy": ("Experimental and browser-dependent. Your browser’s own speech service transcribes (Chrome/Edge send audio to their cloud). This app never receives audio.",
                   "சோதனை நிலை; உலாவியைப் பொறுத்தது. உங்கள் உலாவியின் குரல் சேவை எழுத்தாக்குகிறது (Chrome/Edge ஒலியை தங்கள் கிளவுடுக்கு அனுப்பும்). இந்த செயலி ஒலியைப் பெறாது."),
+
+    # ---- 5-Stage Stepper & Human-Crafted GovTech UI
+    "stage_1_name": ("1. Understand", "1. புரிந்து கொள்ளுதல்"),
+    "stage_1_desc": ("Discover applicable schemes & guidelines", "பொருந்தக்கூடிய திட்டங்களைக் கண்டறிதல்"),
+    "stage_2_name": ("2. Profile", "2. வணிக விவரம்"),
+    "stage_2_desc": ("Build Business Digital Twin", "வணிக டிஜிட்டல் இரட்டையை உருவாக்குங்கள்"),
+    "stage_3_name": ("3. Match", "3. திட்டப் பொருத்தம்"),
+    "stage_3_desc": ("Deterministic eligibility & tipping points", "விதி அடிப்படையிலான தகுதியை சரிபாருங்கள்"),
+    "stage_4_name": ("4. Prepare", "4. ஆவணங்கள் & படிவம்"),
+    "stage_4_desc": ("Upload documents & generate worksheets", "ஆவணங்களை பதிவேற்றி மாதிரி படிவம் பெறுங்கள்"),
+    "stage_5_name": ("5. Track", "5. கண்காணிப்பு & நினைவூட்டல்"),
+    "stage_5_desc": ("Manage deadlines & WhatsApp reminders", "காலக்கெடு & நினைவூட்டல்களை நிர்வகியுங்கள்"),
+
+    # ---- Lakshmi Demo Journey Walkthrough
+    "lakshmi_tour_title": ("Guided Walkthrough: Lakshmi's Journey (TEJAS-066 Persona)", "வழிகாட்டப்பட்ட பயணம்: லட்சுமியின் கதை (TEJAS-066 மாதிரி)"),
+    "lakshmi_tour_desc": ("Experience the exact journey presented to the hackathon jury: Lakshmi, a Tiruppur textile micro-manufacturer, discovers MUDRA & CGTMSE, identifies a missing document, and prepares her bank-ready dossier.",
+                          "நடுவர் குழுவுக்கு வழங்கப்பட்ட அதே அனுபவம்: திருப்பூரில் உள்ள நுண் ஜவுளி உற்பத்தியாளர் லட்சுமி MUDRA & CGTMSE கடனுதவி பெறும் முழுமையான பயணம்."),
+    "lakshmi_tour_btn": ("Load Lakshmi's Journey (Tiruppur Demo)", "லட்சுமியின் பயணத்தை ஏற்று (திருப்பூர் டெமோ)"),
+    "lakshmi_active_badge": ("Active Persona: Lakshmi — Tiruppur Micro-Textiles (Manufacturing)", "செயலில் உள்ள சுயவிவரம்: லட்சுமி — திருப்பூர் மைக்ரோ-டெக்ஸ்டைல்ஸ் (உற்பத்தி)"),
+
+    # ---- Multi-Agent Architecture Inspector
+    "agent_inspector_title": ("Specialized Multi-Agent Architecture (Round 2 Slide 5)", "சிறப்பு மல்டி-ஏஜென்ட் கட்டமைப்பு (சுற்று 2 ஸ்லைடு 5)"),
+    "agent_doc_name": ("Document Agent", "ஆவண முகவர்"),
+    "agent_doc_desc": ("Extracts text & validates GSTIN / Udyam checksums", "உரையை பிரித்து GSTIN / Udyam சரிபார்க்கிறது"),
+    "agent_retrieval_name": ("Retrieval Agent (RAG)", "மீட்பு முகவர் (RAG)"),
+    "agent_retrieval_desc": ("Cites verified circulars & policy documents", "அரசு சுற்றறிக்கைகளில் இருந்து தகவலை மீட்டெடுக்கிறது"),
+    "agent_elig_name": ("Eligibility Engine", "தகுதி விதி இயந்திரம்"),
+    "agent_elig_desc": ("Deterministic rule matching (No LLM hallucinations)", "100% விதி அடிப்படையிலான தகுதி (AI ஊகங்கள் இல்லை)"),
+    "agent_form_name": ("Form Agent", "படிவ முகவர்"),
+    "agent_form_desc": ("Generates structured bank loan worksheets", "வங்கி கடன் விண்ணப்ப தயாரிப்பு தாள்களை உருவாக்குகிறது"),
+    "agent_deadline_name": ("Deadline & Channel Agent", "நினைவூட்டல் & தகவல் முகவர்"),
+    "agent_deadline_desc": ("Tracks tasks & dispatches WhatsApp reminders", "பணிகளைக் கண்காணித்து WhatsApp எச்சரிக்கைகளை அனுப்புகிறது"),
+    "agent_monitor_name": ("Monitoring Agent", "கண்காணிப்பு முகவர்"),
+    "agent_monitor_desc": ("Scans government portals for policy revisions", "அரசு இணையதளங்களை கண்காணித்து மாற்றங்களை கண்டறிகிறது"),
+    "status_active": ("Active", "செயலில் உள்ளது"),
+    "status_standby": ("Standby", "தயார் நிலை"),
 }
 
 
