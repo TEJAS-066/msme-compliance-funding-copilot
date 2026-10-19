@@ -608,17 +608,13 @@ PAGE_COMPONENTS: dict[str, dict] = {
 
 
 def render_page_component_demonstrator(title_key: str) -> None:
-    """Render dynamic, interactive component-by-component demonstrator for the current page."""
+    """Render dynamic, interactive component-by-component demonstrator for the current page when activated."""
     data = PAGE_COMPONENTS.get(title_key)
     if not data:
         return
 
     show_key = f"show_comp_guide_{title_key}"
-    # Default to open on first arrival to guide the user/jury immediately
-    if show_key not in st.session_state:
-        st.session_state[show_key] = True
-
-    if not st.session_state.get(show_key, True):
+    if not st.session_state.get(show_key, False):
         return
 
     l = lang()
@@ -699,9 +695,10 @@ def render_page_component_demonstrator(title_key: str) -> None:
 
 
 def render_page_header(title_key: str, info_key: str = "") -> None:
-    """Clean, high-contrast page header with title and Day/Night toggle bar (no intrusive banners or i buttons)."""
+    """Clean, high-contrast page header with title, Day/Night toggle bar, and circular info button."""
     l = lang()
-    c_title, c_toggle = st.columns([5.0, 1.4], vertical_alignment="center")
+    is_ta = (l == "ta")
+    c_title, c_toggle, c_info = st.columns([5.2, 1.3, 0.5], vertical_alignment="center")
     with c_title:
         st.header(t(title_key, l))
     with c_toggle:
@@ -711,6 +708,42 @@ def render_page_header(title_key: str, info_key: str = "") -> None:
             st.session_state["dark_mode"] = new_val
             st.session_state["theme"] = "dark" if new_val else "light"
             st.rerun()
+    with c_info:
+        tooltip = "பக்க தகவல் & வழிகாட்டி" if is_ta else "Page Information & Architecture"
+        with st.popover("ℹ️", help=tooltip):
+            st.markdown(f"#### 🏛️ {t(title_key, l)}")
+            if info_key:
+                st.info(t(info_key, l))
+
+            comp_data = PAGE_COMPONENTS.get(title_key)
+            if comp_data:
+                st.markdown("---")
+                page_title = comp_data["title"][1] if is_ta else comp_data["title"][0]
+                st.markdown(f"##### 📋 **{page_title}**")
+                for s in comp_data.get("steps", []):
+                    s_title = s["title"][1] if is_ta else s["title"][0]
+                    s_what = s["what"][1] if is_ta else s["what"][0]
+                    s_tip = s["tip"][1] if is_ta else s["tip"][0]
+                    s_engine = s["engine"][1] if is_ta else s["engine"][0]
+                    st.markdown(f"**{s_title}**")
+                    st.caption(f"{s_what}\n\n*💡 {s_tip}*\n\n`⚙️ {s_engine}`")
+
+            st.markdown("---")
+            guide_key = f"show_comp_guide_{title_key}"
+            is_guide_on = st.session_state.get(guide_key, False)
+            toggle_label = "பக்க வழிகாட்டியை மறை" if is_guide_on else ("திரையில் படி வழிகாட்டி" if is_ta else ("Hide Step Walkthrough" if is_guide_on else "Show Step Walkthrough on Page"))
+            if st.button(f"🎯 {toggle_label}", key=f"btn_toggle_guide_{title_key}", use_container_width=True):
+                st.session_state[guide_key] = not is_guide_on
+                st.rerun()
+
+            tour_label = "வழிகாட்டியைத் தொடங்கு" if is_ta else "Launch Guided Tour"
+            if st.button(f"🧭 {tour_label}", key=f"btn_pop_tour_{title_key}", use_container_width=True):
+                show_onboarding_tour()
+
+    if st.session_state.get(f"show_comp_guide_{title_key}", False):
+        render_page_component_demonstrator(title_key)
+
+
 
 
 def render_spotlight_tour() -> None:

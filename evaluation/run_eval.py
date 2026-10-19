@@ -5,7 +5,10 @@ Measures (a) eligibility-engine overall status vs hand-derived labels and
 SMALL SYNTHETIC sets - not proof of real-world accuracy.
 """
 import json
+import logging
 import os
+
+logging.getLogger("pypdf").setLevel(logging.ERROR)
 
 from core import documents as D
 from core import eligibility as E

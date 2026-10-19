@@ -45,37 +45,7 @@ class CopilotApiHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path.rstrip("/")
 
-        frontend_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
-
-        # Serve React Single Page Application Shell
-        if path in ("", "/"):
-            html_path = os.path.join(frontend_dir, "index.html")
-            if os.path.exists(html_path):
-                with open(html_path, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self._send_cors_headers()
-                self.end_headers()
-                self.wfile.write(content)
-                return
-
-        # Serve React JSX Application
-        if path == "/app.jsx":
-            jsx_path = os.path.join(frontend_dir, "app.jsx")
-            if os.path.exists(jsx_path):
-                with open(jsx_path, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/javascript; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self._send_cors_headers()
-                self.end_headers()
-                self.wfile.write(content)
-                return
-
-        if path == "/health":
+        if path in ("", "/", "/health"):
             self._send_json(200, {
                 "status": "operational",
                 "service": "msme-compliance-funding-copilot-api",

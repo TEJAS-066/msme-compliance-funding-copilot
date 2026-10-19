@@ -12,6 +12,13 @@ python run_pipeline.py             # Runs all 6 pipeline verification stages
 python run_pipeline.py --launch    # Verifies pipeline and opens Streamlit UI
 python run_pipeline.py --demo      # Lakshmi's Tiruppur journey walkthrough in CLI
 python run_pipeline.py --wa        # Interactive multi-script WhatsApp CLI simulator
+python run_pipeline.py --api       # Launches headless FastAPI REST microservice
+```
+
+### Docker Support (Containerized Run)
+```bash
+docker build -t msme-copilot .
+docker run -p 8501:8501 msme-copilot
 ```
 
 ## Run the Web Application
@@ -24,7 +31,7 @@ Open http://localhost:8501 → Dashboard → **Load demo profile** → walk the 
 
 ## Test it
 ```bash
-python -m pytest -q                 # 231 tests (rules, documents, copilot grounding, webhook, monitor, i18n, UI)
+python -m pytest -q                 # 233 tests (rules, documents, copilot grounding, webhook, monitor, i18n, UI)
 python -m evaluation.run_eval       # KPI harness on synthetic sets (55 eligibility + 15 extraction)
 python scripts/make_samples.py      # regenerate synthetic sample documents
 ```
@@ -47,9 +54,10 @@ python scripts/make_samples.py      # regenerate synthetic sample documents
 | Browser voice input (EN/TA/HI/TE) | `ui/voice.py` | Chrome/Edge Web Speech API with language routing |
 | **Master Pipeline Orchestrator** | `run_pipeline.py` | 6-stage automated health, verification, test & benchmark runner |
 | KPI harness (55 eligibility + 15 extraction cases) | `evaluation/` | 100% accuracy on synthetic benchmark sets |
+| **Enterprise UI/UX** | `ui/` | Day/Night theme toggle, circular ℹ️ component guides, mobile responsive |
 
 ## What is NOT done yet (say so in the demo)
-OCR for scans · Hindi/Telugu · more than two verified schemes · live LLM/Twilio runs (written, never executed with real keys) · per-user accounts, consent, encryption · a real pilot for the 90% / 40% targets.
+Tesseract OCR for image scans (pure PDF text extraction is active) · live SMS/Twilio telecommunication runs (written, verified with simulated HMAC webhooks, not run with paid production keys) · multi-tenant enterprise auth and cloud sync (intentionally kept local and private on encrypted SQLite) · external production banking API integrations (simulated as bank-ready printable dossiers).
 See `docs/TRACEABILITY.md` for promise-by-promise status and `docs/WHATSAPP.md` for the channel.
 
 ## Optional: turn on an LLM
