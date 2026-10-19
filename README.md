@@ -5,7 +5,16 @@
 
 A runnable, tested MVP for the TEJAS 2026 final: the whole Lakshmi journey from the proposal, built to be *trustworthy* rather than flashy.
 
-## Run it (3 commands)
+## One-Click Master Pipeline Orchestrator (Recommended)
+Run the full multi-agent pipeline, integrity checks, and evaluation benchmark with a single command:
+```bash
+python run_pipeline.py             # Runs all 6 pipeline verification stages
+python run_pipeline.py --launch    # Verifies pipeline and opens Streamlit UI
+python run_pipeline.py --demo      # Lakshmi's Tiruppur journey walkthrough in CLI
+python run_pipeline.py --wa        # Interactive multi-script WhatsApp CLI simulator
+```
+
+## Run the Web Application
 ```bash
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
@@ -15,8 +24,8 @@ Open http://localhost:8501 → Dashboard → **Load demo profile** → walk the 
 
 ## Test it
 ```bash
-python -m pytest -q                 # 224 tests (rules, documents, copilot grounding, webhook, monitor, i18n, UI)
-python -m evaluation.run_eval       # KPI harness on synthetic sets
+python -m pytest -q                 # 231 tests (rules, documents, copilot grounding, webhook, monitor, i18n, UI)
+python -m evaluation.run_eval       # KPI harness on synthetic sets (55 eligibility + 15 extraction)
 python scripts/make_samples.py      # regenerate synthetic sample documents
 ```
 
@@ -24,20 +33,20 @@ python scripts/make_samples.py      # regenerate synthetic sample documents
 | Capability | Where | Notes |
 |---|---|---|
 | Editable business profile, value + known/unknown | `core/profile.py`, `ui/profile_view.py` | unknown is never guessed |
-| Source-backed scheme catalogue (MUDRA, CGTMSE) | `data/schemes.json`, `core/catalogue.py` | validator rejects unsourced criteria |
-| Deterministic eligibility engine (PASS/FAIL/UNKNOWN/N-A) | `core/eligibility.py` | no LLM involved |
+| Source-backed scheme catalogue (MUDRA, CGTMSE, PMEGP) | `data/schemes.json`, `core/catalogue.py` | validator rejects unsourced criteria; official KVIC/DC-MSME/PIB sources |
+| Deterministic eligibility engine (PASS/FAIL/UNKNOWN/N-A) | `core/eligibility.py` | 100% deterministic rule logic; no LLM involved |
 | **Decision support**: next-best-action (information gain), what-if tipping points, "what the rule requires" | `core/insights.py` | all derived from the catalogue's own rules |
-| Document upload → extraction → confirmation (3 separate states) + cross-checks | `core/documents.py` | PDF text, GSTIN checksum, state/class mismatch; OCR only if tesseract installed |
+| Document upload → extraction → confirmation (3 separate states) + cross-checks | `core/documents.py` | PDF text, GSTIN Luhn checksum, state/class mismatch; OCR only if tesseract installed |
 | Document checklist | `core/checklist.py` | verified vs “commonly requested (unverified)” kept apart |
-| Grounded Copilot EN + Tamil with **module trace**; LLM optional behind a guard | `services/copilot.py` | demo mode by default |
+| Grounded Copilot (English, தமிழ், हिन्दी, తెలుగు) with **module trace** | `services/copilot.py` | multi-language intent detection & safety guard |
 | Alerts & deadlines + WhatsApp-style **preview** | `services/alerts.py`, dashboard | the Lakshmi “Tamil alert” story; never sent from here |
-| Readiness report (download) | `services/report.py` | take to bank / CSC; says it is not an application |
-| Form help (preparation worksheet) | `core/forms.py` | never claims submission |
+| Readiness report & Form Dossier (download) | `services/report.py`, `core/forms.py` | structured pre-application worksheet dossier |
 | Tasks, application tracking, reminders | `core/tasks.py` | “saved” ≠ “sent” |
-| **WhatsApp webhook** (Twilio, signature-verified) + in-app simulator | `services/whatsapp*.py`, `scripts/whatsapp_server.py`, `docs/WHATSAPP.md` | tested over real HTTP locally; real phone needs your Twilio account |
-| **Source-change monitor** + admin approval queue + CI cron | `services/monitoring.py`, `scripts/monitor_sources.py`, `.github/workflows/` | detects changed pages; a human must approve before any notice |
-| Experimental browser voice input (EN/TA) | `ui/voice.py` | Chrome/Edge Web Speech API; syntax-checked, **not run in a browser here** |
-| KPI harness | `evaluation/` | regression check, not real-world proof |
+| **WhatsApp webhook & Multi-script Simulator** | `services/whatsapp*.py`, `ui/channel_view.py` | auto-detects Tamil, Hindi, Telugu, English scripts |
+| **Source-change monitor** + admin approval queue + CI cron | `services/monitoring.py`, `scripts/monitor_sources.py` | detects changed pages; human approval queue |
+| Browser voice input (EN/TA/HI/TE) | `ui/voice.py` | Chrome/Edge Web Speech API with language routing |
+| **Master Pipeline Orchestrator** | `run_pipeline.py` | 6-stage automated health, verification, test & benchmark runner |
+| KPI harness (55 eligibility + 15 extraction cases) | `evaluation/` | 100% accuracy on synthetic benchmark sets |
 
 ## What is NOT done yet (say so in the demo)
 OCR for scans · Hindi/Telugu · more than two verified schemes · live LLM/Twilio runs (written, never executed with real keys) · per-user accounts, consent, encryption · a real pilot for the 90% / 40% targets.

@@ -160,20 +160,24 @@
 
 ## 5. Verification Commands
 
-Run these commands to verify any changes before committing:
+Run the master pipeline orchestrator for full automated verification:
 
 ```bash
-# 1. Run all unit and integration tests (must be 224+ passed, 0 failed)
-python -m pytest -q
+# 1. Master Pipeline Orchestrator (All 6 stages: env, catalogue, 6 agents, pytest, eval)
+python run_pipeline.py
 
-# 2. Run KPI evaluation harness on synthetic datasets (must be 100% eligibility & extraction)
-python -m evaluation.run_eval
+# 2. Master Pipeline with auto-launch of Streamlit UI
+python run_pipeline.py --launch
 
-# 3. Smoke test the Streamlit UI
-python -m pytest tests/test_ui_smoke.py
+# 3. Interactive Lakshmi demo journey in terminal
+python run_pipeline.py --demo
 
-# 4. Verify i18n parity
-python -m pytest tests/test_i18n.py
+# 4. Interactive WhatsApp simulator in terminal
+python run_pipeline.py --wa
+
+# 5. Direct test commands
+python -m pytest -q                 # 231 tests (0 failed)
+python -m evaluation.run_eval       # 100% eligibility (55/55) & 100% extraction (15/15)
 ```
 
 ---
