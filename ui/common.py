@@ -143,6 +143,14 @@ def apply_custom_styles(theme: str | None = None) -> None:
         border: 1px solid {border_col} !important;
     }}
 
+    /* 5-Stage Stepper: Ensure all 5 stage boxes are identically sized */
+    .st-key-tour_stepper div[data-testid="stColumn"] div[data-testid="stVerticalBlockBorderWrapper"] > div {{
+        min-height: 145px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }}
+
     /* Primary buttons - Guaranteed Crisp White Text on Emerald */
     button[data-testid="baseButton-primary"],
     button[kind="primary"],

@@ -320,7 +320,7 @@ TR: dict[str, tuple[str, str]] = {
     "stage_1_name": ("1. Understand", "1. புரிந்து கொள்ளுதல்"),
     "stage_1_desc": ("Discover applicable schemes & guidelines", "பொருந்தக்கூடிய திட்டங்களைக் கண்டறிதல்"),
     "stage_2_name": ("2. Profile", "2. வணிக விவரம்"),
-    "stage_2_desc": ("Build Business Digital Twin", "வணிக டிஜிட்டல் இரட்டையை உருவாக்குங்கள்"),
+    "stage_2_desc": ("Build business profile & digital twin", "வணிக சுயவிவரம் மற்றும் டிஜிட்டல் இரட்டை"),
     "stage_3_name": ("3. Match", "3. திட்டப் பொருத்தம்"),
     "stage_3_desc": ("Deterministic eligibility & tipping points", "விதி அடிப்படையிலான தகுதியை சரிபாருங்கள்"),
     "stage_4_name": ("4. Prepare", "4. ஆவணங்கள் & படிவம்"),
