@@ -286,11 +286,9 @@ def apply_custom_styles(theme: str | None = None) -> None:
 
 
 def render_page_header(title_key: str, info_key: str = "") -> None:
-    """Clean, high-contrast page header with title, Day/Night toggle bar, and circular info popover."""
-    from ui.component_guide import PAGE_COMPONENTS
+    """Clean, high-contrast page header with title and Day/Night toggle."""
     l = lang()
-    is_ta = (l == "ta")
-    c_title, c_toggle, c_info = st.columns([5.2, 1.4, 0.5], vertical_alignment="center")
+    c_title, c_toggle = st.columns([5.8, 1.2], vertical_alignment="center")
     with c_title:
         st.header(t(title_key, l))
     with c_toggle:
@@ -300,24 +298,6 @@ def render_page_header(title_key: str, info_key: str = "") -> None:
         if new_val != is_dark:
             st.session_state["theme"] = "dark" if new_val else "light"
             st.rerun()
-    with c_info:
-        tooltip = "பக்க தகவல் & வழிகாட்டி" if is_ta else "Page Information & Architecture"
-        with st.popover("ℹ️", help=tooltip):
-            st.markdown(f"#### 🏛️ {t(title_key, l)}")
-            if info_key:
-                st.info(t(info_key, l))
-            comp_data = PAGE_COMPONENTS.get(title_key)
-            if comp_data:
-                st.markdown("---")
-                page_title = comp_data["title"][1] if is_ta else comp_data["title"][0]
-                st.markdown(f"##### 📋 **{page_title}**")
-                for s in comp_data.get("steps", []):
-                    s_title = s["title"][1] if is_ta else s["title"][0]
-                    s_what = s["what"][1] if is_ta else s["what"][0]
-                    s_tip = s["tip"][1] if is_ta else s["tip"][0]
-                    s_engine = s["engine"][1] if is_ta else s["engine"][0]
-                    st.markdown(f"**{s_title}**")
-                    st.caption(f"{s_what}\n\n*💡 {s_tip}*\n\n`⚙️ {s_engine}`")
 
 
 def banner() -> None:

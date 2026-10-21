@@ -2,8 +2,8 @@
 :root{--msme-bg:#ffffff;--msme-ink:#14213d;--msme-accent:#0B6E4F;--msme-accent2:#F5B700;--msme-soft:#EEF6F1;--msme-muted:#56606b;--msme-line:#d6e0da}
 html[data-msme-theme="dark"]{--msme-bg:#161e2e;--msme-ink:#e8edf5;--msme-accent:#34d399;--msme-accent2:#fbbf24;--msme-soft:#1f2a3d;--msme-muted:#9aa7b8;--msme-line:#2b3850}
 
-/* ===== floating controls (info + theme) ===== */
-#msme-cluster{position:fixed;top:12px;right:18px;z-index:1000050;display:flex;align-items:center;gap:10px;padding:5px 8px;border-radius:999px;
+/* ===== floating controls (hidden for clean presentation) ===== */
+#msme-cluster{display:none!important;visibility:hidden!important;position:fixed;top:12px;right:18px;z-index:1000050;align-items:center;gap:10px;padding:5px 8px;border-radius:999px;
   background:var(--msme-bg);border:2px solid var(--msme-ink);box-shadow:3px 3px 0 var(--msme-accent);font-family:"Source Sans Pro","Segoe UI",system-ui,sans-serif}
 #msme-cluster button{font-family:inherit;cursor:pointer}
 .msme-i{width:32px;height:32px;border-radius:50%;border:2px solid var(--msme-ink);background:var(--msme-accent);color:#fff;font:italic 700 18px/1 Georgia,serif;display:flex;align-items:center;justify-content:center;padding:0;transition:transform .12s}
@@ -19,8 +19,8 @@ html[data-msme-theme="dark"] .msme-i{color:#06281d}
 html[data-msme-theme="dark"] .msme-menu-item{color:#06281d}
 .msme-about{margin-top:10px;font-size:13px;line-height:1.45;color:var(--msme-ink)}.msme-about p{margin:.3rem 0 0;color:var(--msme-muted)}
 
-/* ===== the tour ===== */
-#msme-tour{position:fixed;inset:0;z-index:1000100;pointer-events:none;font-family:"Source Sans Pro","Segoe UI",system-ui,sans-serif}
+/* ===== the tour (hidden for clean presentation) ===== */
+#msme-tour{display:none!important;visibility:hidden!important;position:fixed;inset:0;z-index:1000100;pointer-events:none;font-family:"Source Sans Pro","Segoe UI",system-ui,sans-serif}
 .msme-dim{position:fixed;inset:0;pointer-events:auto;background:rgba(10,16,30,.58)}
 .msme-dim.has-target{background:transparent}
 .msme-spot{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(10,16,30,.58);outline:3px solid var(--msme-accent2);outline-offset:0;pointer-events:none;transition:all .25s ease;animation:msmePulse 1.8s ease-in-out infinite}

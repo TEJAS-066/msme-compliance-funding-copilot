@@ -26,7 +26,7 @@ def page_info(nav_key: str, lang: str) -> str:
     return "" if text.startswith("[") else text
 
 
-def build_config(lang: str, nav_keys: list[str], current_nav: str, autostart: bool = True, test_mode: bool = False) -> dict:
+def build_config(lang: str, nav_keys: list[str], current_nav: str, autostart: bool = False, test_mode: bool = False) -> dict:
     return {"lang": lang, "langs": [list(x) for x in LANGS], "ui": UI, "steps": steps_for(lang), "navKeys": nav_keys,
             "currentNav": nav_keys.index(current_nav), "pageInfo": page_info(current_nav, lang),
             "autostart": autostart, "testMode": test_mode}
