@@ -145,6 +145,8 @@ def extract_text(data: bytes, filename: str) -> ExtractionResult:
 
     if ext in PDF_EXT:
         try:
+            import logging
+            logging.getLogger("pypdf").setLevel(logging.ERROR)
             from pypdf import PdfReader
             reader = PdfReader(io.BytesIO(data))
             if reader.is_encrypted:
