@@ -26,7 +26,7 @@ if config.get("MSME_MULTIUSER") == "1":          # shared deployment: every brow
 else:                                            # laptop demo: one local user (also what the WhatsApp webhook reads)
     db.set_owner("local")
 
-apply_custom_styles("light")     # base styling; dark mode is layered on top in the browser by ui/assets/shell.css
+apply_custom_styles(st.session_state.get("theme", "light"))
 
 PAGES = [
     ("nav_dashboard", dashboard.render), ("nav_profile", profile_view.render), ("nav_documents", documents_view.render),

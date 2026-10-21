@@ -17,7 +17,8 @@ def render() -> None:
     cols = st.columns(2)
     for i, (fld, meta) in enumerate(P.FIELDS.items()):
         col = cols[i % 2]
-        cur = p["fields"][fld]["value"] if p["fields"][fld]["status"] == "known" else None
+        fld_info = p.get("fields", {}).get(fld, {})
+        cur = fld_info.get("value") if fld_info.get("status") == "known" else None
         label = meta["label"].get(l) or meta["label"]["en"]
         key = f"prof_{fld}"
         if meta["kind"] == "select":

@@ -51,6 +51,25 @@ def empty_profile() -> dict:
     return {"fields": {k: {"value": None, "status": "unknown", "source": None} for k in FIELDS}}
 
 
+def ensure_profile(profile: dict | None) -> dict:
+    """Ensure profile has all fields from FIELDS initialized, backfilling missing ones safely."""
+    if not profile or not isinstance(profile, dict):
+        return empty_profile()
+    p = copy.deepcopy(profile)
+    if "fields" not in p or not isinstance(p["fields"], dict):
+        p["fields"] = {}
+    is_demo = bool(p.get("is_demo"))
+    for k in FIELDS:
+        if k not in p["fields"] or not isinstance(p["fields"][k], dict):
+            if is_demo and k == "new_project":
+                p["fields"][k] = {"value": "no", "status": "known", "source": "demo"}
+            elif is_demo and k == "previous_tarun_repaid":
+                p["fields"][k] = {"value": None, "status": "unknown", "source": None}
+            else:
+                p["fields"][k] = {"value": None, "status": "unknown", "source": None}
+    return p
+
+
 def load_demo_profile() -> dict:
     with open(os.path.join(DATA_DIR, "demo_profile.json"), encoding="utf-8") as f:
         raw = json.load(f)
@@ -59,7 +78,7 @@ def load_demo_profile() -> dict:
         if k in p["fields"]:
             p["fields"][k] = v
     p["is_demo"] = True
-    return p
+    return ensure_profile(p)
 
 
 def set_field(profile: dict, field: str, value: Any, source: str = "user") -> dict:
