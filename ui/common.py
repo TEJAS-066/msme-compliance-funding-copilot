@@ -343,7 +343,7 @@ def nba_text(nba: dict, l: str) -> str:
 
 
 def render_stepper(active_stage: int = 1) -> None:
-    """Render the 5-Stage Methodology Stepper natively using Streamlit containers (no raw HTML code leaks)."""
+    """Render the 5-Stage Methodology Stepper with mathematically equal width and height across all 5 cards."""
     l = lang()
     stages = [
         (1, t("stage_1_name", l), t("stage_1_desc", l)),
@@ -352,14 +352,46 @@ def render_stepper(active_stage: int = 1) -> None:
         (4, t("stage_4_name", l), t("stage_4_desc", l)),
         (5, t("stage_5_name", l), t("stage_5_desc", l)),
     ]
-    cols = st.columns(5)
-    for idx, (num, name, desc) in enumerate(stages):
-        with cols[idx]:
-            is_active = (num == active_stage)
-            with st.container(border=True):
-                st.caption(f":{'green' if is_active else 'grey'}[STAGE {num}]")
-                st.markdown(f"**{name}**")
-                st.caption(desc)
+
+    theme = st.session_state.get("theme", "light")
+    is_dark = ("dark" in str(theme).lower() or "🌙" in str(theme))
+
+    card_bg = "#111827" if is_dark else "#FFFFFF"
+    border_col = "#1F2937" if is_dark else "#E2E8F0"
+    active_border = "#10B981" if is_dark else "#0B6E4F"
+    active_badge_bg = "rgba(16, 185, 129, 0.15)" if is_dark else "rgba(11, 110, 79, 0.1)"
+    text_title = "#F8FAFC" if is_dark else "#0F172A"
+    text_desc = "#94A3B8" if is_dark else "#475569"
+    text_stage = "#10B981" if is_dark else "#0B6E4F"
+    inactive_stage = "#64748B"
+
+    cards_html = []
+    for num, name, desc in stages:
+        is_active = (num == active_stage)
+        b_col = active_border if is_active else border_col
+        b_width = "1.5px" if is_active else "1px"
+        badge = (
+            f'<span style="background:{active_badge_bg}; color:{text_stage}; padding:2px 6px; border-radius:4px; font-weight:700; font-size:11px; letter-spacing:0.04em;">STAGE {num} &nbsp;● ACTIVE</span>'
+            if is_active else
+            f'<span style="color:{inactive_stage}; font-weight:600; font-size:11px; letter-spacing:0.04em;">STAGE {num}</span>'
+        )
+
+        card = f"""
+        <div style="background:{card_bg}; border:{b_width} solid {b_col}; border-radius:8px; padding:12px 14px; display:flex; flex-direction:column; justify-content:flex-start; height:100%; box-sizing:border-box;">
+            <div>{badge}</div>
+            <div style="font-weight:700; color:{text_title}; font-size:13.5px; margin-top:6px; margin-bottom:4px; line-height:1.3;">{name}</div>
+            <div style="font-size:12px; color:{text_desc}; line-height:1.45; margin-top:auto;">{desc}</div>
+        </div>
+        """
+        cards_html.append(card)
+
+    all_cards = "\n".join(cards_html)
+    html = f"""
+    <div style="display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:12px; width:100%; margin-bottom:14px; align-items:stretch;">
+        {all_cards}
+    </div>
+    """
+    st.html(html)
 
 
 def render_agent_inspector() -> None:
