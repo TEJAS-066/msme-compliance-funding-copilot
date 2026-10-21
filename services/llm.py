@@ -1,4 +1,4 @@
-"""Server-side LLM adapter. Keys come from environment variables ONLY.
+"""Server-side LLM adapter. Keys come from environment variables or Streamlit secrets (core/config.py) - never from code.
 
 If no provider/key is configured, `get_provider()` returns None and the app runs in
 deterministic DEMO mode. The HTTP call is injectable (`post=`) so tests never hit the network.
@@ -12,18 +12,20 @@ from typing import Callable
 
 import requests
 
+from core import config
+
 
 class LLMError(RuntimeError):
     pass
 
 
 def get_provider() -> str | None:
-    p = (os.environ.get("LLM_PROVIDER") or "").strip().lower()
+    p = (config.get("LLM_PROVIDER") or "").strip().lower()
     keys = {"anthropic": "ANTHROPIC_API_KEY", "gemini": "GEMINI_API_KEY", "sarvam": "SARVAM_API_KEY"}
     if p:
-        return p if (p in keys and os.environ.get(keys[p])) else None
-    for prov, env_key in keys.items():
-        if os.environ.get(env_key):
+        return p if (p in keys and config.get(keys[p])) else None
+    for prov, env_key in keys.items():          # no LLM_PROVIDER set: use the first provider that has a key
+        if config.get(env_key):
             return prov
     return None
 
@@ -36,22 +38,22 @@ def complete(system: str, user: str, provider: str | None = None, post: Callable
     try:
         if provider == "anthropic":
             r = post("https://api.anthropic.com/v1/messages", timeout=timeout,
-                     headers={"x-api-key": os.environ["ANTHROPIC_API_KEY"], "anthropic-version": "2023-06-01", "content-type": "application/json"},
-                     json={"model": os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5"), "max_tokens": 700,
+                     headers={"x-api-key": config.get("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01", "content-type": "application/json"},
+                     json={"model": config.get("ANTHROPIC_MODEL", "claude-sonnet-5-5"), "max_tokens": 700,
                            "system": system, "messages": [{"role": "user", "content": user}]})
             r.raise_for_status()
             return "".join(b.get("text", "") for b in r.json()["content"] if b.get("type") == "text").strip()
         if provider == "gemini":
-            model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+            model = config.get("GEMINI_MODEL", "gemini-flash-latest")
             r = post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent", timeout=timeout,
-                     headers={"x-goog-api-key": os.environ["GEMINI_API_KEY"], "content-type": "application/json"},
+                     headers={"x-goog-api-key": config.get("GEMINI_API_KEY"), "content-type": "application/json"},
                      json={"systemInstruction": {"parts": [{"text": system}]}, "contents": [{"role": "user", "parts": [{"text": user}]}]})
             r.raise_for_status()
             return r.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
         if provider == "sarvam":
             r = post("https://api.sarvam.ai/v1/chat/completions", timeout=timeout,
-                     headers={"api-subscription-key": os.environ["SARVAM_API_KEY"], "content-type": "application/json"},
-                     json={"model": os.environ.get("SARVAM_MODEL", "sarvam-30b"),
+                     headers={"api-subscription-key": config.get("SARVAM_API_KEY"), "content-type": "application/json"},
+                     json={"model": config.get("SARVAM_MODEL", "sarvam-30b"),
                            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]})
             r.raise_for_status()
             return r.json()["choices"][0]["message"]["content"].strip()

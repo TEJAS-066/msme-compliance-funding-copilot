@@ -53,6 +53,7 @@ class ExtractionResult:
     extraction_status: str        # text_extracted | empty | corrupt | ocr_not_available | unsupported | skipped
     text: str = ""
     message: str = ""
+    method: str = ""              # text_layer | ocr
 
 
 @dataclass
@@ -75,7 +76,12 @@ class Finding:
     advisory: bool = False        # True = cross-check WARNING for human review; not an apply-able field
 
 
+OCR_MAX_PAGES = 3
+OCR_NOTE = "Read with OCR - characters can be misread. Check every value before you confirm."
+
+
 def ocr_available() -> bool:
+    """Images need: tesseract binary + pytesseract + Pillow."""
     if not shutil.which("tesseract"):
         return False
     try:
@@ -84,6 +90,41 @@ def ocr_available() -> bool:
         return True
     except ImportError:
         return False
+
+
+def pdf_ocr_available() -> bool:
+    """Scanned PDFs additionally need pypdfium2 to turn pages into images."""
+    if not ocr_available():
+        return False
+    try:
+        import pypdfium2  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
+def _ocr_lang() -> str:
+    import pytesseract
+    try:
+        langs = set(pytesseract.get_languages(config=""))
+    except Exception:
+        return "eng"
+    return "eng+tam" if "tam" in langs else "eng"
+
+
+def _ocr_image(img) -> str:
+    import pytesseract
+    return pytesseract.image_to_string(img, lang=_ocr_lang(), timeout=40).strip()
+
+
+def _ocr_pdf(data: bytes) -> str:
+    import pypdfium2 as pdfium
+    pdf = pdfium.PdfDocument(data)
+    parts = []
+    for i in range(min(len(pdf), OCR_MAX_PAGES)):
+        img = pdf[i].render(scale=2.5).to_pil().convert("L")
+        parts.append(_ocr_image(img))
+    return "\n".join(p for p in parts if p).strip()
 
 
 def extract_text(data: bytes, filename: str) -> ExtractionResult:
@@ -111,24 +152,31 @@ def extract_text(data: bytes, filename: str) -> ExtractionResult:
             text = "\n".join((pg.extract_text() or "") for pg in reader.pages).strip()
         except Exception as e:  # pypdf raises several error types for broken files
             return ExtractionResult("accepted", "corrupt", message=f"The PDF could not be read ({type(e).__name__}).")
-        if not text:
+        if text:
+            return ExtractionResult("accepted", "text_extracted", text=text, method="text_layer")
+        if not pdf_ocr_available():
             return ExtractionResult("accepted", "ocr_not_available",
-                                    message="No embedded text found - this looks like a scan. OCR is not enabled in this build.")
-        return ExtractionResult("accepted", "text_extracted", text=text)
+                                    message="No embedded text found - this looks like a scan, and OCR is not installed in this build.")
+        try:
+            text = _ocr_pdf(data)
+        except Exception as e:
+            return ExtractionResult("accepted", "corrupt", message=f"OCR failed on this PDF ({type(e).__name__}).")
+        if not text:
+            return ExtractionResult("accepted", "empty", message="OCR ran but found no readable text.", method="ocr")
+        return ExtractionResult("accepted", "text_extracted", text=text, message=OCR_NOTE, method="ocr")
 
     # images
     if not ocr_available():
         return ExtractionResult("accepted", "ocr_not_available",
                                 message="Image saved, but OCR is not installed/enabled, so nothing was extracted. Use a text-based PDF for the demo.")
     try:
-        import pytesseract
         from PIL import Image
-        text = pytesseract.image_to_string(Image.open(io.BytesIO(data))).strip()
+        text = _ocr_image(Image.open(io.BytesIO(data)).convert("L"))
     except Exception as e:
         return ExtractionResult("accepted", "corrupt", message=f"The image could not be processed ({type(e).__name__}).")
     if not text:
-        return ExtractionResult("accepted", "empty", message="OCR ran but found no text.")
-    return ExtractionResult("accepted", "text_extracted", text=text)
+        return ExtractionResult("accepted", "empty", message="OCR ran but found no text.", method="ocr")
+    return ExtractionResult("accepted", "text_extracted", text=text, message=OCR_NOTE, method="ocr")
 
 
 def detect_doc_type(text: str) -> str:
@@ -149,8 +197,9 @@ _ORG_MAP = {"proprietary": "proprietorship", "proprietorship": "proprietorship",
             "llp": "llp", "private limited": "private_limited", "public limited": "public_limited"}
 
 
-def extract_fields(text: str) -> list[Candidate]:
-    """Extract ONLY what the text supports. Nothing is guessed."""
+def extract_fields(text: str, method: str = "text_layer") -> list[Candidate]:
+    """Extract ONLY what the text supports. Nothing is guessed.
+    method="ocr" downgrades label-based reads (OCR can misread letters); checksum-validated IDs keep their strength."""
     out: list[Candidate] = []
     m = UDYAM_RE.search(text.upper())
     if m:
@@ -178,6 +227,11 @@ def extract_fields(text: str) -> list[Candidate]:
                              else "Format found but the checksum is INVALID - possible typo or fake. Review carefully."))
         if ok:
             out.append(Candidate("gst_status", "registered", "format_validated", g.group(1), "Implied by a valid-format GSTIN."))
+    if method == "ocr":
+        for c in out:
+            if c.match_quality == "label_match":
+                c.match_quality = "ocr_read"
+            c.note = ("Read by OCR. " + c.note).strip()
     return out
 
 

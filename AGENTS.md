@@ -1,3 +1,5 @@
+> **Start with HANDOVER_MASTER.md (state + roadmap) and docs/UPGRADE_PLAYBOOK.md (phases + prompts).** Verify with `python scripts/verify_phase.py`.
+
 # Instructions for AI coding agents (Antigravity / Claude Code / Cursor)
 
 Project: MSME Compliance & Funding Copilot (Python + Streamlit + SQLite). Read README.md first.

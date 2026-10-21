@@ -116,7 +116,7 @@ msme-compliance-funding-copilot/
   - If any criterion is `FAIL` $\rightarrow$ Overall = `unlikely` (Ineligible).
   - Else if any criterion is `UNKNOWN` $\rightarrow$ Overall = `potential` (Potentially eligible with gaps).
   - Else all criteria are `PASS` / `NOT_APPLICABLE` $\rightarrow$ Overall = `meets_encoded` (100% Eligible).
-- **Zero Hallucination Guarantee**: Written in standard, readable Python with zero stochastic components.
+- **No LLM in the eligibility decision**: Written in standard, readable Python with zero stochastic components.
 
 #### 4. `core/insights.py` — Next Best Action & Tipping Points
 - **Next Best Action Algorithm**: Calculates the information gain of missing fields. Identifies which missing profile field (e.g., `investment_plant_machinery`) blocks the highest number of potential funding schemes, surfacing it as the highest priority on the executive dashboard.
@@ -205,7 +205,7 @@ Executing `python run_pipeline.py` runs a 6-stage verification in under 45 secon
 [5/6] KPI Benchmark Evaluation Harness
   ✓ Eligibility Accuracy: 100.0% (55/55 cases) • Target: ≥90%
   ✓ Extraction Accuracy:  100.0% (15/15 samples) • Target: ≥90%
-  ✓ Hallucination Rate:   0.0% (Zero LLM eligibility decision)
+  ✓ LLM-decided eligibility: 0 (by design)
 
 [6/6] Final Jury Readiness Assessment
 ==============================================================================
@@ -344,4 +344,4 @@ Follow this exact sequence to demonstrate the platform to the jury:
 5. **Forms & Admin Tab**:
    - Show the pre-filled **Bank Loan Application Worksheet** (9/11 fields completed).
    - Click **Download Bank-Ready PDF Dossier**: Show the official ReportLab A4 document with endorsement blocks.
-   - Show the **Admin View**: Show the policy review queue and the live benchmark KPIs (**100% accuracy, 0% hallucinations across 233 tests**).
+   - Show the **Admin View**: Show the policy review queue and the live benchmark KPIs (**regression accuracy on synthetic sets; LLM never decides eligibility** (ns across 233 tests**).

@@ -14,6 +14,7 @@ from typing import Callable
 
 import requests
 
+from core import config
 from core.i18n import t
 
 
@@ -30,16 +31,16 @@ def preview_reminder(task: dict, lang: str = "en") -> str:
 
 
 def whatsapp_configured() -> bool:
-    return all(os.environ.get(k) for k in ("TWILIO_ACCOUNT_SID", "TWILIO_AUTH_TOKEN", "TWILIO_WHATSAPP_FROM"))
+    return all(config.get(k) for k in ("TWILIO_ACCOUNT_SID", "TWILIO_AUTH_TOKEN", "TWILIO_WHATSAPP_FROM"))
 
 
 def send_whatsapp(to_number: str, text: str, post: Callable = requests.post) -> SendResult:
     if not whatsapp_configured():
         return SendResult("NOT_CONFIGURED", "Twilio credentials are not set; nothing was sent.")
-    sid, token = os.environ["TWILIO_ACCOUNT_SID"], os.environ["TWILIO_AUTH_TOKEN"]
+    sid, token = config.get("TWILIO_ACCOUNT_SID"), config.get("TWILIO_AUTH_TOKEN")
     try:
         r = post(f"https://api.twilio.com/2010-04-01/Accounts/{sid}/Messages.json", timeout=20, auth=(sid, token),
-                 data={"From": f"whatsapp:{os.environ['TWILIO_WHATSAPP_FROM']}", "To": f"whatsapp:{to_number}", "Body": text})
+                 data={"From": f"whatsapp:{config.get('TWILIO_WHATSAPP_FROM')}", "To": f"whatsapp:{to_number}", "Body": text})
     except Exception as e:
         return SendResult("FAILED", f"{type(e).__name__}")
     if r.status_code == 201 and r.json().get("sid"):

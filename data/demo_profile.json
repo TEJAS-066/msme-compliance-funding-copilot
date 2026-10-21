@@ -1,23 +1,100 @@
 {
   "_label": "DEMO / SYNTHETIC profile for 'Lakshmi' - not a real person or business",
   "fields": {
-    "owner_name":      {"value": "Lakshmi (DEMO)", "status": "known", "source": "demo"},
-    "business_name":   {"value": "Lakshmi Garments (DEMO)", "status": "known", "source": "demo"},
-    "state":           {"value": "Tamil Nadu", "status": "known", "source": "demo"},
-    "district":        {"value": "Tiruppur", "status": "known", "source": "demo"},
-    "activity":        {"value": "manufacturing", "status": "known", "source": "demo"},
-    "sub_sector":      {"value": "Garment manufacturing", "status": "known", "source": "demo"},
-    "entity_type":     {"value": "proprietorship", "status": "known", "source": "demo"},
-    "women_led":       {"value": "yes", "status": "known", "source": "demo"},
-    "udyam_status":    {"value": null, "status": "unknown", "source": null},
-    "udyam_number":    {"value": null, "status": "unknown", "source": null},
-    "enterprise_class_declared": {"value": null, "status": "unknown", "source": null},
-    "investment_inr":  {"value": 1800000, "status": "known", "source": "demo"},
-    "turnover_inr":    {"value": 6500000, "status": "known", "source": "demo"},
-    "employees":       {"value": 9, "status": "known", "source": "demo"},
-    "gst_status":      {"value": null, "status": "unknown", "source": null},
-    "gstin":           {"value": null, "status": "unknown", "source": null},
-    "loan_needed_inr": {"value": 800000, "status": "known", "source": "demo"},
-    "previous_tarun_repaid": {"value": null, "status": "unknown", "source": null}
+    "owner_name": {
+      "value": "Lakshmi (DEMO)",
+      "status": "known",
+      "source": "demo"
+    },
+    "business_name": {
+      "value": "Lakshmi Garments (DEMO)",
+      "status": "known",
+      "source": "demo"
+    },
+    "state": {
+      "value": "Tamil Nadu",
+      "status": "known",
+      "source": "demo"
+    },
+    "district": {
+      "value": "Tiruppur",
+      "status": "known",
+      "source": "demo"
+    },
+    "activity": {
+      "value": "manufacturing",
+      "status": "known",
+      "source": "demo"
+    },
+    "sub_sector": {
+      "value": "Garment manufacturing",
+      "status": "known",
+      "source": "demo"
+    },
+    "entity_type": {
+      "value": "proprietorship",
+      "status": "known",
+      "source": "demo"
+    },
+    "women_led": {
+      "value": "yes",
+      "status": "known",
+      "source": "demo"
+    },
+    "udyam_status": {
+      "value": null,
+      "status": "unknown",
+      "source": null
+    },
+    "udyam_number": {
+      "value": null,
+      "status": "unknown",
+      "source": null
+    },
+    "enterprise_class_declared": {
+      "value": null,
+      "status": "unknown",
+      "source": null
+    },
+    "investment_inr": {
+      "value": 1800000,
+      "status": "known",
+      "source": "demo"
+    },
+    "turnover_inr": {
+      "value": 6500000,
+      "status": "known",
+      "source": "demo"
+    },
+    "employees": {
+      "value": 9,
+      "status": "known",
+      "source": "demo"
+    },
+    "gst_status": {
+      "value": null,
+      "status": "unknown",
+      "source": null
+    },
+    "gstin": {
+      "value": null,
+      "status": "unknown",
+      "source": null
+    },
+    "loan_needed_inr": {
+      "value": 800000,
+      "status": "known",
+      "source": "demo"
+    },
+    "previous_tarun_repaid": {
+      "value": null,
+      "status": "unknown",
+      "source": null
+    },
+    "new_project": {
+      "value": "no",
+      "status": "known",
+      "source": "demo"
+    }
   }
 }

@@ -1,35 +1,375 @@
 {
   "_note": "Labels were derived BY HAND from the rules in data/schemes.json and the cited sources. They are a regression check, not independent ground truth.",
   "eligibility": [
-    {"name": "base demo profile", "base": "demo", "set": {}, "expect": {"pmmy_mudra": "meets_encoded", "cgtmse": "meets_encoded", "pmegp": "meets_encoded"}},
-    {"name": "loan 15 lakh, repayment history unknown", "base": "demo", "set": {"loan_needed_inr": 1500000}, "expect": {"pmmy_mudra": "potentially_eligible", "cgtmse": "meets_encoded", "pmegp": "meets_encoded"}},
-    {"name": "loan 15 lakh, Tarun repaid", "base": "demo", "set": {"loan_needed_inr": 1500000, "previous_tarun_repaid": "yes"}, "expect": {"pmmy_mudra": "meets_encoded", "cgtmse": "meets_encoded", "pmegp": "meets_encoded"}},
-    {"name": "loan 15 lakh, Tarun NOT repaid", "base": "demo", "set": {"loan_needed_inr": 1500000, "previous_tarun_repaid": "no"}, "expect": {"pmmy_mudra": "unlikely_encoded", "cgtmse": "meets_encoded", "pmegp": "meets_encoded"}},
-    {"name": "loan 25 lakh above PMMY cap", "base": "demo", "set": {"loan_needed_inr": 2500000}, "expect": {"pmmy_mudra": "unlikely_encoded", "cgtmse": "meets_encoded", "pmegp": "meets_encoded"}},
-    {"name": "agriculture activity", "base": "demo", "set": {"activity": "agriculture"}, "expect": {"pmmy_mudra": "unlikely_encoded", "cgtmse": "unlikely_encoded", "pmegp": "unlikely_encoded"}},
-    {"name": "private limited company", "base": "demo", "set": {"entity_type": "private_limited"}, "expect": {"pmmy_mudra": "unlikely_encoded", "cgtmse": "meets_encoded", "pmegp": "unlikely_encoded"}},
-    {"name": "small enterprise by investment", "base": "demo", "set": {"investment_inr": 50000000}, "expect": {"pmmy_mudra": "meets_encoded", "cgtmse": "meets_encoded", "pmegp": "unlikely_encoded"}},
-    {"name": "medium enterprise", "base": "demo", "set": {"investment_inr": 300000000, "turnover_inr": 500000000}, "expect": {"pmmy_mudra": "meets_encoded", "cgtmse": "unlikely_encoded", "pmegp": "unlikely_encoded"}},
-    {"name": "everything unknown", "base": "empty", "set": {}, "expect": {"pmmy_mudra": "more_info_required", "cgtmse": "more_info_required", "pmegp": "more_info_required"}},
-    {"name": "only activity + entity known", "base": "empty", "set": {"activity": "manufacturing", "entity_type": "proprietorship"}, "expect": {"pmmy_mudra": "more_info_required", "cgtmse": "more_info_required", "pmegp": "more_info_required"}},
-    {"name": "declared class medium overrides", "base": "demo", "set": {"enterprise_class_declared": "medium"}, "expect": {"pmmy_mudra": "meets_encoded", "cgtmse": "unlikely_encoded", "pmegp": "unlikely_encoded"}},
-    {"name": "boundary: loan exactly 10 lakh", "base": "demo", "set": {"loan_needed_inr": 1000000}, "expect": {"pmmy_mudra": "meets_encoded", "cgtmse": "meets_encoded", "pmegp": "meets_encoded"}},
-    {"name": "boundary: loan exactly 20 lakh", "base": "demo", "set": {"loan_needed_inr": 2000000}, "expect": {"pmmy_mudra": "potentially_eligible", "cgtmse": "meets_encoded", "pmegp": "meets_encoded"}},
-    {"name": "boundary: loan exactly 10 crore", "base": "demo", "set": {"loan_needed_inr": 100000000}, "expect": {"pmmy_mudra": "unlikely_encoded", "cgtmse": "meets_encoded", "pmegp": "unlikely_encoded"}},
-    {"name": "boundary: exactly at micro limits", "base": "demo", "set": {"investment_inr": 25000000, "turnover_inr": 100000000}, "expect": {"pmmy_mudra": "meets_encoded", "cgtmse": "meets_encoded", "pmegp": "meets_encoded"}},
-    {"name": "self-help group", "base": "demo", "set": {"entity_type": "shg"}, "expect": {"pmmy_mudra": "meets_encoded", "cgtmse": "unlikely_encoded", "pmegp": "meets_encoded"}},
-    {"name": "PMEGP mfg ceiling: 50 lakh", "base": "demo", "set": {"loan_needed_inr": 5000000}, "expect": {"pmegp": "meets_encoded"}},
-    {"name": "PMEGP mfg above ceiling: 51 lakh", "base": "demo", "set": {"loan_needed_inr": 5100000}, "expect": {"pmegp": "unlikely_encoded"}},
-    {"name": "PMEGP services within ceiling: 20 lakh", "base": "demo", "set": {"activity": "services", "loan_needed_inr": 2000000}, "expect": {"pmegp": "meets_encoded"}},
-    {"name": "PMEGP services above ceiling: 21 lakh", "base": "demo", "set": {"activity": "services", "loan_needed_inr": 2100000}, "expect": {"pmegp": "unlikely_encoded"}}
+    {
+      "name": "base demo profile",
+      "base": "demo",
+      "set": {},
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "loan 15 lakh, repayment history unknown",
+      "base": "demo",
+      "set": {
+        "loan_needed_inr": 1500000
+      },
+      "expect": {
+        "pmmy_mudra": "potentially_eligible",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "loan 15 lakh, Tarun repaid",
+      "base": "demo",
+      "set": {
+        "loan_needed_inr": 1500000,
+        "previous_tarun_repaid": "yes"
+      },
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "loan 15 lakh, Tarun NOT repaid",
+      "base": "demo",
+      "set": {
+        "loan_needed_inr": 1500000,
+        "previous_tarun_repaid": "no"
+      },
+      "expect": {
+        "pmmy_mudra": "unlikely_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "loan 25 lakh above PMMY cap",
+      "base": "demo",
+      "set": {
+        "loan_needed_inr": 2500000
+      },
+      "expect": {
+        "pmmy_mudra": "unlikely_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "agriculture activity",
+      "base": "demo",
+      "set": {
+        "activity": "agriculture"
+      },
+      "expect": {
+        "pmmy_mudra": "unlikely_encoded",
+        "cgtmse": "unlikely_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "private limited company",
+      "base": "demo",
+      "set": {
+        "entity_type": "private_limited"
+      },
+      "expect": {
+        "pmmy_mudra": "unlikely_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "small enterprise by investment",
+      "base": "demo",
+      "set": {
+        "investment_inr": 50000000
+      },
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "medium enterprise",
+      "base": "demo",
+      "set": {
+        "investment_inr": 300000000,
+        "turnover_inr": 500000000
+      },
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "unlikely_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "everything unknown",
+      "base": "empty",
+      "set": {},
+      "expect": {
+        "pmmy_mudra": "more_info_required",
+        "cgtmse": "more_info_required",
+        "pmegp": "more_info_required"
+      }
+    },
+    {
+      "name": "only activity + entity known",
+      "base": "empty",
+      "set": {
+        "activity": "manufacturing",
+        "entity_type": "proprietorship"
+      },
+      "expect": {
+        "pmmy_mudra": "more_info_required",
+        "cgtmse": "more_info_required",
+        "pmegp": "more_info_required"
+      }
+    },
+    {
+      "name": "declared class medium overrides",
+      "base": "demo",
+      "set": {
+        "enterprise_class_declared": "medium"
+      },
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "unlikely_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "boundary: loan exactly 10 lakh",
+      "base": "demo",
+      "set": {
+        "loan_needed_inr": 1000000
+      },
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "boundary: loan exactly 20 lakh",
+      "base": "demo",
+      "set": {
+        "loan_needed_inr": 2000000
+      },
+      "expect": {
+        "pmmy_mudra": "potentially_eligible",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "boundary: loan exactly 10 crore",
+      "base": "demo",
+      "set": {
+        "loan_needed_inr": 100000000
+      },
+      "expect": {
+        "pmmy_mudra": "unlikely_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "boundary: exactly at micro limits",
+      "base": "demo",
+      "set": {
+        "investment_inr": 25000000,
+        "turnover_inr": 100000000
+      },
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "self-help group",
+      "base": "demo",
+      "set": {
+        "entity_type": "shg"
+      },
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "unlikely_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "PMEGP mfg ceiling: 50 lakh",
+      "base": "demo",
+      "set": {
+        "loan_needed_inr": 5000000,
+        "new_project": "yes"
+      },
+      "expect": {
+        "pmegp": "meets_encoded"
+      }
+    },
+    {
+      "name": "PMEGP mfg above ceiling: 51 lakh",
+      "base": "demo",
+      "set": {
+        "loan_needed_inr": 5100000
+      },
+      "expect": {
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "PMEGP services within ceiling: 20 lakh",
+      "base": "demo",
+      "set": {
+        "activity": "services",
+        "loan_needed_inr": 2000000,
+        "new_project": "yes"
+      },
+      "expect": {
+        "pmegp": "meets_encoded"
+      }
+    },
+    {
+      "name": "PMEGP services above ceiling: 21 lakh",
+      "base": "demo",
+      "set": {
+        "activity": "services",
+        "loan_needed_inr": 2100000
+      },
+      "expect": {
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "existing unit but marked as a NEW project",
+      "base": "demo",
+      "set": {
+        "new_project": "yes"
+      },
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "meets_encoded"
+      }
+    },
+    {
+      "name": "PMEGP boundary: manufacturing project exactly 50 lakh",
+      "base": "demo",
+      "set": {
+        "new_project": "yes",
+        "loan_needed_inr": 5000000
+      },
+      "expect": {
+        "pmmy_mudra": "unlikely_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "meets_encoded"
+      }
+    },
+    {
+      "name": "PMEGP boundary: manufacturing project 50 lakh + 1",
+      "base": "demo",
+      "set": {
+        "new_project": "yes",
+        "loan_needed_inr": 5000001
+      },
+      "expect": {
+        "pmmy_mudra": "unlikely_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "unlikely_encoded"
+      }
+    },
+    {
+      "name": "new-project status unknown",
+      "base": "demo",
+      "set": {
+        "new_project": ""
+      },
+      "expect": {
+        "pmmy_mudra": "meets_encoded",
+        "cgtmse": "meets_encoded",
+        "pmegp": "potentially_eligible"
+      }
+    }
   ],
   "extraction": [
-    {"file": "sample_udyam_lakshmi.pdf", "status": "text_extracted", "doc_type": "udyam_certificate",
-     "fields": {"udyam_number": "UDYAM-TN-02-0000123", "business_name": "Lakshmi Garments (DEMO)", "enterprise_class_declared": "micro",
-                "entity_type": "proprietorship", "activity": "manufacturing", "district": "Tiruppur", "state": "Tamil Nadu"}},
-    {"file": "sample_gst_lakshmi.pdf", "status": "text_extracted", "doc_type": "gst_certificate", "fields": {"gstin": "33ABCDE1234F1Z7", "gst_status": "registered"}},
-    {"file": "sample_gst_state_mismatch.pdf", "status": "text_extracted", "doc_type": "gst_certificate", "fields": {"gstin": "29ABCDE1234F1ZW"}},
-    {"file": "sample_scan_no_text_layer.pdf", "status": "ocr_not_available", "doc_type": "unknown", "fields": {}},
-    {"file": "sample_corrupt.pdf", "status": "corrupt", "doc_type": "unknown", "fields": {}}
+    {
+      "file": "sample_udyam_lakshmi.pdf",
+      "status": "text_extracted",
+      "doc_type": "udyam_certificate",
+      "fields": {
+        "udyam_number": "UDYAM-TN-02-0000123",
+        "business_name": "Lakshmi Garments (DEMO)",
+        "enterprise_class_declared": "micro",
+        "entity_type": "proprietorship",
+        "activity": "manufacturing",
+        "district": "Tiruppur",
+        "state": "Tamil Nadu"
+      }
+    },
+    {
+      "file": "sample_gst_lakshmi.pdf",
+      "status": "text_extracted",
+      "doc_type": "gst_certificate",
+      "fields": {
+        "gstin": "33ABCDE1234F1Z7",
+        "gst_status": "registered"
+      }
+    },
+    {
+      "file": "sample_gst_state_mismatch.pdf",
+      "status": "text_extracted",
+      "doc_type": "gst_certificate",
+      "fields": {
+        "gstin": "29ABCDE1234F1ZW"
+      }
+    },
+    {
+      "file": "sample_scan_no_text_layer.pdf",
+      "status": [
+        "ocr_not_available",
+        "empty"
+      ],
+      "doc_type": "unknown",
+      "fields": {}
+    },
+    {
+      "file": "sample_corrupt.pdf",
+      "status": "corrupt",
+      "doc_type": "unknown",
+      "fields": {}
+    },
+    {
+      "file": "sample_udyam_scan.png",
+      "requires_ocr": true,
+      "status": "text_extracted",
+      "doc_type": "udyam_certificate",
+      "fields": {
+        "udyam_number": "UDYAM-TN-02-0000123",
+        "state": "Tamil Nadu",
+        "enterprise_class_declared": "micro",
+        "activity": "manufacturing"
+      }
+    },
+    {
+      "file": "sample_udyam_scanned.pdf",
+      "requires_ocr": true,
+      "status": "text_extracted",
+      "doc_type": "udyam_certificate",
+      "fields": {
+        "udyam_number": "UDYAM-TN-02-0000123",
+        "district": "Tiruppur",
+        "entity_type": "proprietorship"
+      }
+    }
   ]
 }

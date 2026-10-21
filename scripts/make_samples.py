@@ -63,6 +63,28 @@ c = canvas.Canvas(os.path.join(OUT, "sample_scan_no_text_layer.pdf"), pagesize=A
 c.rect(50, 500, 400, 200)
 c.save()
 
+# OCR demo: the Udyam text rendered as a PICTURE (png) and as an image-only PDF (no text layer)
+from PIL import Image, ImageDraw, ImageFont  # noqa: E402
+from reportlab.lib.utils import ImageReader  # noqa: E402
+
+
+def _font(size):
+    for path in ("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "C:/Windows/Fonts/arial.ttf",
+                 "/Library/Fonts/Arial.ttf", "/System/Library/Fonts/Supplemental/Arial.ttf"):
+        if os.path.exists(path):
+            return ImageFont.truetype(path, size)
+    return ImageFont.load_default(size)
+
+
+img = Image.new("RGB", (1300, 760), "white")
+dr = ImageDraw.Draw(img)
+for i, ln in enumerate(UDYAM):
+    dr.text((40, 40 + i * 64), ln, fill="black", font=_font(34))
+img.save(os.path.join(OUT, "sample_udyam_scan.png"))
+c = canvas.Canvas(os.path.join(OUT, "sample_udyam_scanned.pdf"), pagesize=A4)
+c.drawImage(ImageReader(img), 20, 380, width=555, height=324)
+c.save()
+
 # Corrupt file
 with open(os.path.join(OUT, "sample_corrupt.pdf"), "wb") as f:
     f.write(b"%PDF-1.4 this is not really a pdf")

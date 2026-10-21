@@ -525,6 +525,21 @@
           ]
         },
         {
+          "id": "new_project",
+          "required": true,
+          "label": {
+            "en": "The project is a NEW unit (PMEGP does not fund expansion of an existing unit)",
+            "ta": "இது புதிய தொழில் அலகு (ஏற்கனவே உள்ள அலகின் விரிவாக்கத்துக்கு PMEGP உதவாது)"
+          },
+          "field": "new_project",
+          "op": "eq",
+          "value": "yes",
+          "source_ids": [
+            "kvic_pmegp_guidelines"
+          ],
+          "note": "Widely stated as 'new projects only'. Re-confirm the exact wording and any exceptions in the official guidelines."
+        },
+        {
           "id": "manufacturing_cost_ceiling",
           "required": true,
           "label": {
@@ -618,7 +633,9 @@
       ],
       "unresolved": [
         "Online EDP training (minimum 5-10 days depending on project size) is mandatory before subsidy disbursal.",
-        "Educational qualification of minimum 8th standard pass is required for manufacturing projects above Rs 10 lakh and services above Rs 5 lakh."
+        "Educational qualification of minimum 8th standard pass is required for manufacturing projects above Rs 10 lakh and services above Rs 5 lakh.",
+        "Whether trading activities are covered is not settled by the sources used; the engine only excludes agriculture.",
+        "'Loan needed' is used as a proxy for 'project cost' (the ceiling applies to project cost; the loan is project cost minus own contribution)."
       ]
     }
   ],

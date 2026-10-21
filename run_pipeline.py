@@ -285,14 +285,8 @@ def main() -> int:
     parser.add_argument("--demo", action="store_true", help="Run interactive Lakshmi demo journey")
     parser.add_argument("--wa", action="store_true", help="Start interactive WhatsApp terminal simulator")
     parser.add_argument("--docker", action="store_true", help="Build and run containerized application via Docker Compose")
-    parser.add_argument("--api", action="store_true", help="Launch the headless REST API microservice on port 8000")
     args = parser.parse_args()
 
-    if args.api:
-        print_banner()
-        print("📡 Launching MSME Copilot Headless REST API Server on http://localhost:8000 ...")
-        os.system(f"{sys.executable} -m services.api_server 8000")
-        return 0
 
     if args.docker:
         print_banner()

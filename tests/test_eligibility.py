@@ -11,9 +11,24 @@ def crit(res, cid):
     return next(c for c in res.criteria if c.id == cid)
 
 
-def test_demo_profile_meets_both(demo):
+def test_demo_profile_meets_mudra_and_cgtmse_but_not_pmegp(demo):
     r = E.evaluate_all(demo)
-    assert r["pmmy_mudra"].overall == E.MEETS and r["cgtmse"].overall == E.MEETS and r["pmegp"].overall == E.MEETS
+    assert r["pmmy_mudra"].overall == E.MEETS and r["cgtmse"].overall == E.MEETS
+    # Lakshmi is expanding an EXISTING unit; PMEGP assists new projects only -> the rule must say so
+    assert r["pmegp"].overall == E.UNLIKELY
+    assert any(c.id == "new_project" and c.status == E.FAIL for c in r["pmegp"].criteria)
+
+
+def test_pmegp_becomes_possible_for_a_new_project(demo):
+    from core import profile as P
+    r = E.evaluate_all(P.set_field(demo, "new_project", "yes"))
+    assert r["pmegp"].overall == E.MEETS
+
+
+def test_unknown_new_project_status_is_not_assumed(demo):
+    from core import profile as P
+    r = E.evaluate_all(P.set_field(demo, "new_project", ""))
+    assert r["pmegp"].overall == E.POTENTIAL and "new_project" in r["pmegp"].unknown_fields
 
 
 def test_missing_data_is_unknown_never_pass(empty):

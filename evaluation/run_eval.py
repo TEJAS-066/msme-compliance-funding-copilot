@@ -42,16 +42,20 @@ def run(cases_path: str | None = None) -> dict:
                 e_fail.append({"case": c["name"], "scheme": sid, "want": want, "got": got})
 
     x_ok = x_total = 0
-    x_fail = []
+    x_fail, x_skipped = [], []
     for c in cases["extraction"]:
+        if c.get("requires_ocr") and not D.pdf_ocr_available():
+            x_skipped.append(c["file"])          # honest: not counted, reported
+            continue
         with open(os.path.join(SAMPLES, c["file"]), "rb") as f:
             r = D.extract_text(f.read(), c["file"])
         x_total += 1
-        if r.extraction_status == c["status"]:
+        want = c["status"] if isinstance(c["status"], list) else [c["status"]]
+        if r.extraction_status in want:
             x_ok += 1
         else:
-            x_fail.append({"file": c["file"], "want": c["status"], "got": r.extraction_status})
-        got_fields = {x.field: x.value for x in D.extract_fields(r.text)} if r.text else {}
+            x_fail.append({"file": c["file"], "want": want, "got": r.extraction_status})
+        got_fields = {x.field: x.value for x in D.extract_fields(r.text, r.method)} if r.text else {}
         for k, v in c["fields"].items():
             x_total += 1
             if got_fields.get(k) == v:
@@ -60,7 +64,7 @@ def run(cases_path: str | None = None) -> dict:
                 x_fail.append({"file": c["file"], "field": k, "want": v, "got": got_fields.get(k)})
 
     return {"eligibility": {"correct": e_ok, "total": e_total, "accuracy": e_ok / e_total if e_total else 0, "failures": e_fail},
-            "extraction": {"correct": x_ok, "total": x_total, "accuracy": x_ok / x_total if x_total else 0, "failures": x_fail}}
+            "extraction": {"correct": x_ok, "total": x_total, "accuracy": x_ok / x_total if x_total else 0, "failures": x_fail, "skipped": x_skipped}}
 
 
 if __name__ == "__main__":
@@ -69,3 +73,5 @@ if __name__ == "__main__":
         print(f"{k}: {r[k]['correct']}/{r[k]['total']} = {r[k]['accuracy']:.0%}")
         for f in r[k]["failures"]:
             print("   FAIL", f)
+    if r["extraction"]["skipped"]:
+        print("   (skipped, OCR not installed:", ", ".join(r["extraction"]["skipped"]) + ")")

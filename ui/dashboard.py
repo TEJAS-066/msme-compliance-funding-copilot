@@ -32,7 +32,8 @@ def render() -> None:
 
     # 5-Stage Stepper (Deterministically computed active stage)
     active_stage = insights.compute_active_stage(p, confirmed_docs, active_tasks, apps)
-    render_stepper(active_stage=active_stage)
+    with st.container(key="tour_stepper"):
+        render_stepper(active_stage=active_stage)
 
     # Lakshmi's Journey Walkthrough Card (Direct Hackathon Narrative)
     with st.container(border=True):
@@ -98,7 +99,7 @@ def render() -> None:
 
     # Next Best Action (Deterministic Information Gain)
     nba = insights.next_best_action(p, db.confirmed_doc_types(), tasks.list_tasks())
-    with st.container(border=True):
+    with st.container(border=True, key="tour_nba"):
         col_nba_1, col_nba_2 = st.columns([4, 1])
         with col_nba_1:
             st.markdown(f"**🎯 {t('nba_head', l)}**")
@@ -134,7 +135,8 @@ def render() -> None:
 
     st.write("")
     # Specialized Multi-Agent Architecture (Round 2 Slide 5)
-    render_agent_inspector()
+    with st.container(key="tour_agents"):
+        render_agent_inspector()
 
     # Journey Steps
     st.write("")

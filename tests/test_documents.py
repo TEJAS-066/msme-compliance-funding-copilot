@@ -33,7 +33,13 @@ def test_corrupt_pdf_handled_gracefully():
 
 def test_scan_without_text_layer_is_not_a_fake_success():
     r = D.extract_text(sample("sample_scan_no_text_layer.pdf"), "x.pdf")
-    assert r.extraction_status == "ocr_not_available" and r.text == ""
+    assert r.extraction_status in ("ocr_not_available", "empty") and r.text == ""     # empty = OCR ran, saw nothing
+
+
+def test_scan_reports_ocr_unavailable_when_ocr_missing(monkeypatch):
+    monkeypatch.setattr(D, "pdf_ocr_available", lambda: False)
+    r = D.extract_text(sample("sample_udyam_scanned.pdf"), "x.pdf")
+    assert r.extraction_status == "ocr_not_available" and r.text == "" and "not installed" in r.message
 
 
 def test_upload_and_extraction_are_separate_states():
@@ -115,3 +121,44 @@ def test_overwrite_requires_explicit_action(demo):
 def test_reject_changes_nothing(demo):
     p = D.apply_decisions(demo, [{"field": "udyam_number", "value": "UDYAM-TN-02-0000123", "action": "reject"}], "u.pdf")
     assert P.get(p, "udyam_number") is None
+
+
+# ---------------- real OCR (skipped automatically on machines without tesseract) ----------------
+needs_ocr = pytest.mark.skipif(not D.pdf_ocr_available(), reason="tesseract/pytesseract/pypdfium2 not installed")
+
+
+@needs_ocr
+def test_ocr_reads_png():
+    r = D.extract_text(sample("sample_udyam_scan.png"), "s.png")
+    assert r.extraction_status == "text_extracted" and r.method == "ocr" and "OCR" in r.message
+    got = {c.field: c.value for c in D.extract_fields(r.text, r.method)}
+    assert got["udyam_number"] == "UDYAM-TN-02-0000123" and got["state"] == "Tamil Nadu"
+
+
+@needs_ocr
+def test_ocr_reads_scanned_pdf():
+    r = D.extract_text(sample("sample_udyam_scanned.pdf"), "s.pdf")
+    assert r.extraction_status == "text_extracted" and r.method == "ocr"
+    assert D.detect_doc_type(r.text) == "udyam_certificate"
+
+
+@needs_ocr
+def test_ocr_blank_image_is_empty_not_success():
+    from PIL import Image
+    import io
+    buf = io.BytesIO(); Image.new("RGB", (300, 200), "white").save(buf, "PNG")
+    assert D.extract_text(buf.getvalue(), "blank.png").extraction_status == "empty"
+
+
+@needs_ocr
+def test_ocr_corrupt_image_handled():
+    assert D.extract_text(b"\x89PNG not an image", "bad.png").extraction_status == "corrupt"
+
+
+def test_ocr_fields_are_downgraded_but_checksum_ids_keep_strength():
+    text = "UDYAM REGISTRATION CERTIFICATE\nUDYAM REGISTRATION NUMBER: UDYAM-TN-02-0000123\nSTATE: Tamil Nadu"
+    by = {c.field: c for c in D.extract_fields(text, "ocr")}
+    assert by["state"].match_quality == "ocr_read" and by["state"].note.startswith("Read by OCR")
+    assert by["udyam_number"].match_quality == "format_validated"
+    plain = {c.field: c for c in D.extract_fields(text)}
+    assert plain["state"].match_quality == "label_match"

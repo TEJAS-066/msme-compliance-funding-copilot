@@ -5,7 +5,7 @@ This app never receives audio. Chrome/Edge only; failure is visible, never silen
 """
 import json
 
-import streamlit.components.v1 as components
+from ui.embed import run_html
 
 from core.i18n import t
 
@@ -49,4 +49,4 @@ else {
     loc_map = {"ta": "ta-IN", "hi": "hi-IN", "te": "te-IN"}
     speech_lang = loc_map.get(lang, "en-IN")
     html = html.replace("__LABELS__", json.dumps(labels, ensure_ascii=False)).replace("__LANG__", speech_lang)
-    components.html(html, height=48)
+    run_html(html, height=48)

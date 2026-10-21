@@ -48,7 +48,7 @@ def test_dynamic_key_families_exist():
            + ["doc_" + s for s in ("missing", "needs_review", "confirmed", "not_applicable")]
            + ["ext_" + s for s in ("text_extracted", "empty", "corrupt", "ocr_not_available", "unsupported", "skipped")]
            + ["up_accepted", "up_rejected", "conf_pending", "conf_confirmed", "conf_rejected"]
-           + ["fnd_" + s for s in ("new", "match", "mismatch")] + ["q_format_validated", "q_label_match"]
+           + ["fnd_" + s for s in ("new", "match", "mismatch")] + ["q_format_validated", "q_label_match", "q_ocr_read"]
            + ["act_accept", "act_overwrite", "act_reject", "basis_declared", "basis_computed", "src_official", "src_secondary"]
            + ["rp_" + s for s in ("none", "in_app", "whatsapp_preview", "sms_preview")]
            + ["ts_" + s for s in ("open", "in_progress", "done")]

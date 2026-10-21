@@ -39,6 +39,9 @@ FIELDS: dict[str, dict] = {
                         "options": ["registered", "not_registered"]},
     "gstin":           {"kind": "str",    "label": {"en": "GSTIN", "ta": "GSTIN எண்", "hi": "जीएसटीआईएन (GSTIN)", "te": "జీఎస్టీఐఎన్ (GSTIN)"}},
     "loan_needed_inr": {"kind": "int",    "label": {"en": "Loan amount needed (Rs)", "ta": "தேவையான கடன் தொகை (₹)", "hi": "आवश्यक ऋण राशि (₹)", "te": "అవసరమైన రుణ మొత్తం (₹)"}},
+    "new_project":     {"kind": "select", "label": {"en": "Setting up a NEW unit (not expanding an existing one)", "ta": "புதிய தொழில் அலகு தொடக்கம் (ஏற்கனவே உள்ளதன் விரிவாக்கம் அல்ல)",
+                        "hi": "नई इकाई शुरू करना (मौजूदा का विस्तार नहीं)", "te": "కొత్త యూనిట్ ప్రారంభం (ఉన్నదాని విస్తరణ కాదు)"},
+                        "options": ["yes", "no"]},
     "previous_tarun_repaid": {"kind": "select", "label": {"en": "MUDRA Tarun loan repayment history", "ta": "MUDRA தருண் கடன் திருப்பிச் செலுத்திய வரலாறு", "hi": "मुद्रा तरुण ऋण चुकाने का इतिहास", "te": "ముద్ర తరుణ్ రుణం తిరిగి చెల్లించిన చరిత్ర"},
                         "options": ["yes", "no"]},
 }

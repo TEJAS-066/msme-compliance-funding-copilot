@@ -9,3 +9,7 @@ data/uploads/
 .streamlit/secrets.toml
 *.log
 context/
+
+tests/js/node_modules/
+verification_report.md
+data/source_hashes.json.bak

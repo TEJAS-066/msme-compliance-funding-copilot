@@ -109,3 +109,19 @@ def unverified_backlog(cat: dict | None = None) -> list[dict]:
 def freshness_days(scheme: dict, today: date | None = None) -> int:
     today = today or date.today()
     return (today - date.fromisoformat(scheme["last_verified"])).days
+
+
+def coverage(cat: dict | None = None) -> list[dict]:
+    """Per scheme: how many criteria are backed by an OFFICIAL source vs only secondary sources."""
+    cat = cat or get_catalogue()
+    out = []
+    for sc in cat["schemes"]:
+        tiers = lambda c: {cat["sources"][s]["tier"] for s in c.get("source_ids", []) if s in cat["sources"]}
+        official = [c["id"] for c in sc["criteria"] if "official" in tiers(c)]
+        secondary_only = [c["id"] for c in sc["criteria"] if tiers(c) and "official" not in tiers(c)]
+        unsourced = [c["id"] for c in sc["criteria"] if not tiers(c)]
+        unverified_docs = [d["id"] for d in sc.get("documents", []) if not d.get("verified")]
+        out.append({"scheme_id": sc["id"], "review_status": sc["review_status"], "criteria": len(sc["criteria"]),
+                    "official_backed": official, "secondary_only": secondary_only, "unsourced": unsourced,
+                    "documents_unverified": unverified_docs, "last_verified": sc["last_verified"]})
+    return out

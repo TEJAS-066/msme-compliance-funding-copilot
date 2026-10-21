@@ -16,7 +16,7 @@ def _process(data: bytes, name: str) -> None:
     findings, dtype = [], "unknown"
     if res.extraction_status == "text_extracted":
         dtype = D.detect_doc_type(res.text)
-        findings = [f.__dict__ for f in D.compare_with_profile(D.extract_fields(res.text), p)]
+        findings = [f.__dict__ for f in D.compare_with_profile(D.extract_fields(res.text, res.method), p)]
     db.add_document(name, dtype, res.upload_status, res.extraction_status, res.message, findings)
 
 
