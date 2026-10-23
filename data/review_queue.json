@@ -27,6 +27,24 @@
       "detail": "Page content changed since 2026-10-21. Affects: no scheme. A human must read the source and update data/schemes.json BEFORE anyone is notified. May be a false alarm (dynamic page).",
       "source_url": "https://newsonair.gov.in/govt-notifies-revised-criteria-for-classifying-msmes",
       "status": "pending"
+    },
+    {
+      "id": "chg-bs_mudra_2024-2026-10-23",
+      "kind": "SOURCE_CHANGED",
+      "title": "Source changed: Business Standard - Centre doubles Mudra loan ceiling to Rs 20 lakh (25 Oct 2024)",
+      "scheme_id": "pmmy_mudra",
+      "detail": "Page content changed since 2026-10-22. Affects: pmmy_mudra. A human must read the source and update data/schemes.json BEFORE anyone is notified. May be a false alarm (dynamic page).",
+      "source_url": "https://www.business-standard.com/amp/economy/news/centre-doubles-loan-limit-under-pradhan-mantri-mudra-yojana-to-rs-20-lakh-124102501146_1.html",
+      "status": "pending"
+    },
+    {
+      "id": "chg-msme_class_notification-2026-10-23",
+      "kind": "SOURCE_CHANGED",
+      "title": "Source changed: Revised MSME classification effective 1 April 2025 (Notification S.O. 1364(E), 21 March 2025)",
+      "scheme_id": null,
+      "detail": "Page content changed since 2026-10-22. Affects: no scheme. A human must read the source and update data/schemes.json BEFORE anyone is notified. May be a false alarm (dynamic page).",
+      "source_url": "https://newsonair.gov.in/govt-notifies-revised-criteria-for-classifying-msmes",
+      "status": "pending"
     }
   ]
 }
