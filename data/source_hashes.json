@@ -1,26 +1,26 @@
 {
   "pib_pmmy_2024": {
     "sha256": "c6b69f099b0ede596df875721fdbb5540bd449cf6344fcd751ff981f66ad0b7d",
-    "checked": "2026-10-23"
+    "checked": "2026-10-24"
   },
   "bs_mudra_2024": {
-    "sha256": "77baf982af82fd1fae22f6f811496ce82e0506f13caaf143dcad8c9016ff3a01",
-    "checked": "2026-10-23"
+    "sha256": "0763b84264314d697aa77b154b4f88a8fc4223ebcf0a0bb130ac951cde25a74b",
+    "checked": "2026-10-24"
   },
   "paisabazaar_cgtmse": {
     "sha256": "87ec9ad4aeddc2caf50eef7190ac2394dd4e7f7420ad60c21188d0f03d8924c2",
-    "checked": "2026-10-23"
+    "checked": "2026-10-24"
   },
   "msme_class_notification": {
-    "sha256": "17035f58f3cf043aebfb5d3271cf65824a67700db44fd8d4a99161dca8cdb33c",
-    "checked": "2026-10-23"
+    "sha256": "e6a6118780569a51fb96afdd2af0322b809b7ab1376e90b7fe858d06a9453fdb",
+    "checked": "2026-10-24"
   },
   "msme_pmegp_portal": {
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "checked": "2026-10-23"
+    "checked": "2026-10-24"
   },
   "dcmsme_cgs": {
     "sha256": "45ef82cf34534b4ca7c48cfb0cbe7972a2808a8f3af15db6787a510aa236eaa8",
-    "checked": "2026-10-23"
+    "checked": "2026-10-24"
   }
 }
