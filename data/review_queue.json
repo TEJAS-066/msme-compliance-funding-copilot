@@ -162,6 +162,24 @@
       "detail": "Page content changed since 2026-10-28. Affects: no scheme. A human must read the source and update data/schemes.json BEFORE anyone is notified. May be a false alarm (dynamic page).",
       "source_url": "https://newsonair.gov.in/govt-notifies-revised-criteria-for-classifying-msmes",
       "status": "pending"
+    },
+    {
+      "id": "chg-paisabazaar_cgtmse-2026-10-30",
+      "kind": "SOURCE_CHANGED",
+      "title": "Source changed: Paisabazaar - CGTMSE scheme highlights",
+      "scheme_id": "cgtmse",
+      "detail": "Page content changed since 2026-10-29. Affects: cgtmse. A human must read the source and update data/schemes.json BEFORE anyone is notified. May be a false alarm (dynamic page).",
+      "source_url": "https://www.paisabazaar.com/business-loan/cgtmse-scheme",
+      "status": "pending"
+    },
+    {
+      "id": "chg-msme_class_notification-2026-10-30",
+      "kind": "SOURCE_CHANGED",
+      "title": "Source changed: Revised MSME classification effective 1 April 2025 (Notification S.O. 1364(E), 21 March 2025)",
+      "scheme_id": null,
+      "detail": "Page content changed since 2026-10-29. Affects: no scheme. A human must read the source and update data/schemes.json BEFORE anyone is notified. May be a false alarm (dynamic page).",
+      "source_url": "https://newsonair.gov.in/govt-notifies-revised-criteria-for-classifying-msmes",
+      "status": "pending"
     }
   ]
 }
