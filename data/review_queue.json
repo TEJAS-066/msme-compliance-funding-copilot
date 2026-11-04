@@ -261,6 +261,15 @@
       "detail": "Page content changed since 2026-11-02. Affects: cgtmse. A human must read the source and update data/schemes.json BEFORE anyone is notified. May be a false alarm (dynamic page).",
       "source_url": "https://www.paisabazaar.com/business-loan/cgtmse-scheme",
       "status": "pending"
+    },
+    {
+      "id": "chg-bs_mudra_2024-2026-11-04",
+      "kind": "SOURCE_CHANGED",
+      "title": "Source changed: Business Standard - Centre doubles Mudra loan ceiling to Rs 20 lakh (25 Oct 2024)",
+      "scheme_id": "pmmy_mudra",
+      "detail": "Page content changed since 2026-11-03. Affects: pmmy_mudra. A human must read the source and update data/schemes.json BEFORE anyone is notified. May be a false alarm (dynamic page).",
+      "source_url": "https://www.business-standard.com/amp/economy/news/centre-doubles-loan-limit-under-pradhan-mantri-mudra-yojana-to-rs-20-lakh-124102501146_1.html",
+      "status": "pending"
     }
   ]
 }
