@@ -3,7 +3,6 @@ import streamlit as st
 from core import db
 from core.i18n import t
 from services.copilot import answer
-from ui import voice
 from ui.common import banner, get_profile, lang, render_page_header
 
 
@@ -12,9 +11,6 @@ def render() -> None:
     render_page_header("nav_copilot", "pinfo_copilot")
     banner()
     st.caption(t("chat_examples", l))
-    with st.expander(t("v_head", l)):
-        st.caption(t("v_privacy", l))
-        voice.render(l)
 
     hist = st.session_state.setdefault("chat", [])
     for m in hist:

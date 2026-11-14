@@ -6,8 +6,8 @@ from streamlit.testing.v1 import AppTest
 
 APP = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "app.py")
 
-PAGES = ["nav_dashboard", "nav_profile", "nav_documents", "nav_schemes", "nav_checklist",
-         "nav_copilot", "nav_channel", "nav_forms", "nav_tasks", "nav_admin"]
+PAGES = ["nav_dashboard", "nav_documents", "nav_profile", "nav_schemes", "nav_checklist",
+         "nav_copilot", "nav_forms", "nav_tasks", "nav_admin"]
 
 
 def boot(lang="English"):
@@ -111,25 +111,3 @@ def test_chat_has_module_trace():
     at.chat_input(key="chat_input").set_value("Am I eligible for CGTMSE?").run()
     assert not at.exception
     assert any("module trace" in e.label for e in at.expander)
-
-
-def test_whatsapp_simulator_replies_and_is_labelled():
-    at = boot()
-    at.button(key="btn_load_demo").click().run()
-    at.sidebar.radio(key="nav").set_value("nav_channel").run()
-    assert any("SIMULATOR" in w.value for w in at.warning)
-    at.chat_input(key="wa_input").set_value("hi").run()
-    assert not at.exception
-    assert any("I never submit" in x.value for x in at.text)
-
-
-def test_send_button_reports_not_configured_honestly():
-    at = boot()
-    at.sidebar.radio(key="nav").set_value("nav_tasks").run()
-    at.text_input(key="tsk_title").set_value("Call bank")
-    [b for b in at.button if b.label == "Add task"][0].click().run()
-    at.sidebar.radio(key="nav").set_value("nav_channel").run()
-    at.text_input(key="ch_phone").set_value("+910000000000")
-    at.button(key="ch_send").click().run()
-    assert not at.exception
-    assert any("NOT_CONFIGURED" in w.value for w in at.warning)

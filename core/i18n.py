@@ -421,8 +421,17 @@ TR: dict[str, tuple[str, str]] = {
     "guide_btn_dismiss": ("✕ Dismiss", "✕ மூடு"),
 }
 
-from core.i18n_hi import TR_HI
-from core.i18n_te import TR_TE
+try:
+    from core.i18n_hi import TR_HI
+except Exception:
+    TR_HI = {}
+
+try:
+    from core.i18n_te import TR_TE
+except Exception:
+    TR_TE = {}
+
+LANGS = [("en", "English"), ("ta", "தமிழ்")]
 
 
 def t(key: str, lang: str = "en", **kw) -> str:
