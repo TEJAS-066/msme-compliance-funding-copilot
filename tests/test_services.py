@@ -110,7 +110,10 @@ def test_invalid_decision_rejected():
 
 
 def test_demo_queue_item_is_labelled_synthetic():
-    assert all(i["kind"] == "DEMO_SYNTHETIC" for i in M.load_queue())
+    items = M.load_queue()
+    demo_items = [i for i in items if i["id"].startswith("upd-demo")]
+    assert demo_items and all(i["kind"] == "DEMO_SYNTHETIC" for i in demo_items)
+    assert all(i["kind"] in ("DEMO_SYNTHETIC", "SOURCE_CHANGED") for i in items)
 
 
 def test_fetch_and_hash_ok_and_failures():
